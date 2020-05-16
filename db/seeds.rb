@@ -5,16 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+puts 'hello'
 room = Room.create(name: 'PakkFlow')
-
+puts 'hello1'
+User.create(username: 'sona', password: '123456', room: room)
+puts 'hello123'
 users = User.create([
     {username: 'sona', password: '123456',  room: room },
     {username: 'toxicflower', password: '123456', room: room },
     {username: 'phoenixgold', password: '123456', room: room },
     {username: 'fudge', password: '123456', room: room }
 ])
-
+puts 'hello2'
 chatbox = Chatbox.create(room: room)
+puts 'hello3'
 messages = Message.create([
     {chatbox: chatbox, user: users[0], payload: "what's up guys?"},
     {chatbox: chatbox, user: users[1], payload: "yo what up, how you been??"},
