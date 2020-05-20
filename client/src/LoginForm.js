@@ -14,7 +14,9 @@ class LoginForm extends React.Component {
 
     submitHandler =  event => {
         event.preventDefault();
+        console.log(this.state);
         const body = JSON.stringify(this.state)
+        console.log(body);
         const options = {
             method: "POST",
             headers: {
@@ -24,7 +26,10 @@ class LoginForm extends React.Component {
             body
         }
 
-        fetch(`http://locahost:3001/authenticate`, options);
+        fetch(`http://localhost:3001/authenticate`, options)
+            .then(resp => resp.json())
+            .then(json => console.log(json));
+        fetch(`http://localhost:3001/test`);
     }
 
     render() {
