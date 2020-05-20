@@ -24,7 +24,7 @@ class LoginForm extends React.Component {
             body
         }
 
-        fetch(`/authenticate`, options);
+        fetch(`http://locahost:3001/authenticate`, options);
     }
 
     render() {

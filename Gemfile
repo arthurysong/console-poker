@@ -24,6 +24,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'foreman'
 gem 'jwt'
 gem 'simple_command'
+gem 'rack-cors'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
