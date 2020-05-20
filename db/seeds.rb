@@ -5,20 +5,19 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-puts 'hello'
+# puts 'hello'
 room = Room.create(name: 'PakkFlow')
-puts 'hello1'
-User.create(username: 'sona', password: '123456', room: room)
-puts 'hello123'
+# puts 'hello1'
+# puts 'hello123'
 users = User.create([
-    {username: 'sona', password: '123456',  room: room },
-    {username: 'toxicflower', password: '123456', room: room },
-    {username: 'phoenixgold', password: '123456', room: room },
-    {username: 'fudge', password: '123456', room: room }
+    {username: 'sona', email: 'sona@gmail.com', password: '123456',  room_id: room.id },
+    {username: 'toxicflower', email: 'toxicflower@gmail.com', password: '123456', room_id: room.id },
+    {username: 'phoenixgold', email: 'phoenixgold@gmail.com', password: '123456', room_id: room.id },
+    {username: 'fudge', email: 'fudge@gmail.com', password: '123456', room_id: room.id }
 ])
-puts 'hello2'
-chatbox = Chatbox.create(room: room)
-puts 'hello3'
+# puts 'hello2'
+chatbox = Chatbox.create(room_id: room.id)
+# puts 'hello3'
 messages = Message.create([
     {chatbox: chatbox, user: users[0], payload: "what's up guys?"},
     {chatbox: chatbox, user: users[1], payload: "yo what up, how you been??"},
