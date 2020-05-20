@@ -1,0 +1,19 @@
+current directory: /home/arthur/code/console-poker/vendor/bundle/ruby/2.7.0/gems/bcrypt-3.1.13/ext/mri
+/usr/bin/ruby2.7 -I /usr/lib/ruby/2.7.0 -r ./siteconf20200519-55796-1l6api7.rb extconf.rb
+creating Makefile
+
+current directory: /home/arthur/code/console-poker/vendor/bundle/ruby/2.7.0/gems/bcrypt-3.1.13/ext/mri
+make "DESTDIR=" clean
+
+current directory: /home/arthur/code/console-poker/vendor/bundle/ruby/2.7.0/gems/bcrypt-3.1.13/ext/mri
+make "DESTDIR="
+compiling bcrypt_ext.c
+compiling crypt_blowfish.c
+compiling crypt_gensalt.c
+compiling wrapper.c
+gcc  -D__SKIP_GNU -Wdate-time -D_FORTIFY_SOURCE=2    -c -o x86.o x86.S
+linking shared-object bcrypt_ext.so
+
+current directory: /home/arthur/code/console-poker/vendor/bundle/ruby/2.7.0/gems/bcrypt-3.1.13/ext/mri
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bcrypt_ext.so ./.gem.20200519-55796-1gp2018
