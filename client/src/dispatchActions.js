@@ -22,3 +22,9 @@ export const loginUser = (state) => {
             });
     }
 }
+
+export const setLogin = () => {
+    return dispatch => {
+        fetch(`http://localhost:3001/set`)
+    }
+}

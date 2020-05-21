@@ -3,7 +3,7 @@ import LoginForm from './LoginForm'
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.setLoginStatus();
+    this.props.setLogin();
   }
 
   render() {
@@ -17,7 +17,7 @@ class App extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setLoginStatus: () => dispatch(setLoginStatus())
+    setLogin: () => dispatch(setLogin())
   }
 }
 
