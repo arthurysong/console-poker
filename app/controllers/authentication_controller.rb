@@ -19,9 +19,11 @@ class AuthenticationController < ApplicationController
         puts request.headers['Authorization']
         puts request.headers['Authorization'].split(' ').last
         puts JWT.decode(request.headers['Authorization'].split(' ').last, Rails.application.secrets.secret_key_base)
-        
+        puts JsonWebToken.decode(request.headers['Authorization'].split(' ').last)[0]
+        puts JsonWebToken.decode(request.headers['Authorization'].split(' ').last)[0][0]
+
         puts 'decoded', JsonWebToken.decode(request.headers['Authorization'].split(' ').last)
-        # @current_user = AuthorizeApiRequest.call(request.headers).result
+        @current_user = AuthorizeApiRequest.call(request.headers).result
         # puts 'wtf'
         if @current_user 
             render json: { user: @current_user }
