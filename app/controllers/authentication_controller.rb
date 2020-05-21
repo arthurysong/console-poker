@@ -6,16 +6,18 @@ class AuthenticationController < ApplicationController
     # end
 
     def authenticate
-        puts 'test'
-        puts params
         command = AuthenticateUser.call(user_params[:email], user_params[:password])
-
         if command.success?
-            render json: { auth_token: command.result.token 
-                user: user }
+            render json: { auth_token: command.result[:token], user: command.result[:user] }
         else
             render json: { error: command.errors }, status: unauthorized
         end
+    end
+
+    def set_login
+        @current_user = AuthorizeApiRequest.call(request.headers).result
+        render json: { error: 'Not Authorized' }, status: 401 unless @current_user
+        render json: { user: @current_user }
     end
 
     def user_params

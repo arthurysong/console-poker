@@ -1,4 +1,6 @@
 import React from 'react';
+import { loginUser } from './dispatchActions';
+import { connect } from 'react-redux';
 
 class LoginForm extends React.Component {
     state = {
@@ -15,24 +17,8 @@ class LoginForm extends React.Component {
     submitHandler =  event => {
         event.preventDefault();
         console.log(this.state);
-        const body = JSON.stringify(this.state)
-        console.log(body);
-        const options = {
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body
-        }
-
-        fetch(`http://localhost:3001/authenticate`, options)
-            .then(resp => resp.json())
-            .then(json => {
-                console.log(json);
-                localStorage.setItem("token", json.auth_token);
-            });
-        // fetch(`http://localhost:3001/test`);
+        this.props.loginUser(this.state);
+        console.log('hello');
     }
 
     render() {
@@ -48,4 +34,10 @@ class LoginForm extends React.Component {
     }
 }
 
-export default LoginForm;
+const mapDispatchToProps = dispatch => {
+    return {
+        loginUser: state => dispatch(loginUser(state))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(LoginForm);

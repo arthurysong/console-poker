@@ -1,12 +1,24 @@
 import React from 'react';
 import LoginForm from './LoginForm'
 
-function App() {
-  return (
-    <div className="App">
-      <LoginForm/>      
-    </div>
-  );
+class App extends React.Component {
+  componentDidMount() {
+    this.props.setLoginStatus();
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <LoginForm/>      
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    setLoginStatus: () => dispatch(setLoginStatus())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App);
