@@ -28,8 +28,11 @@ class LoginForm extends React.Component {
 
         fetch(`http://localhost:3001/authenticate`, options)
             .then(resp => resp.json())
-            .then(json => console.log(json));
-        fetch(`http://localhost:3001/test`);
+            .then(json => {
+                console.log(json);
+                localStorage.setItem("token", json.auth_token);
+            });
+        // fetch(`http://localhost:3001/test`);
     }
 
     render() {
