@@ -1,5 +1,7 @@
 import React from 'react';
 import LoginForm from './LoginForm'
+import { connect } from 'react-redux';
+import { setLogin } from './dispatchActions';
 
 class App extends React.Component {
   componentDidMount() {

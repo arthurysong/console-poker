@@ -25,6 +25,10 @@ export const loginUser = (state) => {
 
 export const setLogin = () => {
     return dispatch => {
-        fetch(`http://localhost:3001/set`)
+        fetch(`http://localhost:3001/set_login`)
+            .then(resp => resp.json())
+            .then(json => {
+                console.log(json);
+            })
     }
 }
