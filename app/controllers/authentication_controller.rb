@@ -15,9 +15,21 @@ class AuthenticationController < ApplicationController
     end
 
     def set_login
-        @current_user = AuthorizeApiRequest.call(request.headers).result
-        render json: { error: 'Not Authorized' }, status: 401 unless @current_user
-        render json: { user: @current_user }
+        puts 'hello??'
+        puts request.headers['Authorization']
+        puts request.headers['Authorization'].split(' ').last
+        puts JWT.decode(request.headers['Authorization'].split(' ').last, Rails.application.secrets.secret_key_base)
+        
+        puts 'decoded', JsonWebToken.decode(request.headers['Authorization'].split(' ').last)
+        # @current_user = AuthorizeApiRequest.call(request.headers).result
+        # puts 'wtf'
+        if @current_user 
+            render json: { user: @current_user }
+        else
+            render json: { error: 'Not Authorized' }, status: 401
+        end
+        # render json: { error: 'Not Authorized' }, status: 401 unless @current_user
+        # render json: { user: @current_user }
     end
 
     def user_params

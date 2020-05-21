@@ -25,10 +25,17 @@ export const loginUser = (state) => {
 
 export const setLogin = () => {
     return dispatch => {
-        fetch(`http://localhost:3001/set_login`)
-            .then(resp => resp.json())
-            .then(json => {
-                console.log(json);
+        const token = localStorage.getItem("token");
+        if (token) {
+            fetch(`http://localhost:3001/set_login`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
+                .then(resp => resp.json())
+                .then(json => {
+                    console.log(json);
+                })
+        } 
     }
 }
