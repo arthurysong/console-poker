@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from './Home';
+import Rooms from './Rooms';
 import { connect } from 'react-redux';
 import { setLogin } from './dispatchActions';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -14,12 +15,6 @@ class App extends React.Component {
     );
   }
 }
-
-// const mapStateToProps = state => {
-//   return {
-//     isLoggedIn: state.isLoggedIn
-//   }
-// }
 
 const mapDispatchToProps = dispatch => {
   return {
