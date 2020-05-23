@@ -11,6 +11,12 @@ export default function reducer (state = {
                 isLoggedIn: true,
                 user: action.user
             }
+        case 'LOGOUT':
+            return {
+                ...state,
+                isLoggedIn: false,
+                user: {}
+            }
         default:
             return state;
     }
