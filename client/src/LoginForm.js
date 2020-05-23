@@ -1,6 +1,7 @@
 import React from 'react';
 import { loginUser } from './dispatchActions';
 import { connect } from 'react-redux';
+import Errors from './Errors';
 
 class LoginForm extends React.Component {
     state = {
@@ -23,6 +24,7 @@ class LoginForm extends React.Component {
     render() {
         return(
             <div>
+                <Errors />
                 <form onSubmit={this.submitHandler}>
                     <input onChange={this.changeHandler} type="text" name="email" value={this.state.email}/><br/>
                     <input onChange={this.changeHandler} type="password" name="password" value={this.state.password}/><br/>

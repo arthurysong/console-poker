@@ -18,6 +18,11 @@ export default function reducer (state = {
                 isLoggedIn: false,
                 user: {}
             }
+        case 'ADD_ERRORS':
+            return {
+                ...state,
+                errors: action.errors
+            }
         default:
             return state;
     }
