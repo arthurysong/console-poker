@@ -18,8 +18,6 @@ class LoginForm extends React.Component {
         event.preventDefault();
         console.log(this.state);
         this.props.loginUser(this.state);
-        console.log('hello');
-        // this.props.history.push(`/rooms`)
     }
 
     render() {
