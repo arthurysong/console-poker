@@ -2,3 +2,4 @@ TODO:
 
 - Try to understand JWT
 - User can logout
+- Rooms redirects to Home if not logged in.
