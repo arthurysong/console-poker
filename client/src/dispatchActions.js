@@ -47,6 +47,7 @@ export const setLogin = history => {
 export const logOut = history => {
     // I don't need to send anything to database.
     return dispatch => {
+        localStorage.clear();
         dispatch({type: 'LOGOUT'})
         history.push(`/`);
     }

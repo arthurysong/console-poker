@@ -19,7 +19,7 @@ class App extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     setLogin: history => dispatch(setLogin(history)),
-    logOut: () => dispatch(logOut())
+    logOut: history => dispatch(logOut(history))
   }
 }
 

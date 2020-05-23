@@ -4,15 +4,15 @@ class Rooms extends React.Component {
     componentDidMount(){
         // if not logged in, redirect to login page?
     }
-    logOut(){
-        // this.props.logOut()
+    clickHandler = () => {
+        this.props.logOut(this.props.history)
     }
 
     render () {
         return (
             <div>
                 Rooms
-                <button onClick={this.logOut}>Log Out</button>
+                <button onClick={this.clickHandler}>Log Out</button>
             </div>
         )
     }
