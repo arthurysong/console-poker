@@ -1,7 +1,6 @@
 export const loginUser = (state) => {
     return dispatch => {
         const body = JSON.stringify(state)
-        // console.log(body);
         const options = {
             method: "POST",
             headers: {
@@ -11,6 +10,7 @@ export const loginUser = (state) => {
             body
         }
 
+
         fetch(`http://localhost:3001/authenticate`, options)
             .then(resp => resp.json())
             .then(json => {
@@ -18,10 +18,15 @@ export const loginUser = (state) => {
                 if (json.user) {
                     dispatch({type: 'LOGIN', user: json.user})
                     localStorage.setItem("token", json.auth_token);
+                // }
                 } else if (json.error) {
                     dispatch({type: 'ADD_ERRORS', errors: [json.error.user_authentication] })
                 }
-            });
+            })
+            // .catch(errors => { // i don't know how to catch bad request using catch.. hmm
+            //     console.log('hello? catch the error?');
+            //     console.log(errors);
+            // });
     }
 }
 
