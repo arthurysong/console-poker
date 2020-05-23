@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginForm from './LoginForm'
+import Home from './Home';
 import { connect } from 'react-redux';
 import { setLogin } from './dispatchActions';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -14,9 +14,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <LoginForm/>      
-      </div>
+      <Router>
+        <Route exact path="/" render={routerProps => <Home {...routerProps}/>}/>
+      </Router>
+      
     );
   }
 }
