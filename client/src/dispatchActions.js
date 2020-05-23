@@ -35,6 +35,9 @@ export const setLogin = () => {
                 .then(resp => resp.json())
                 .then(json => {
                     console.log(json);
+                    if (json.user) {
+                        dispatch({type: 'LOGIN', user: json.user})
+                    }
                 })
         } 
     }
