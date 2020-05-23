@@ -2,7 +2,7 @@ import React from 'react';
 import Home from './Home';
 import Rooms from './Rooms';
 import { connect } from 'react-redux';
-import { setLogin } from './dispatchActions';
+import { setLogin, logOut } from './dispatchActions';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends React.Component {
@@ -10,7 +10,7 @@ class App extends React.Component {
     return (
       <Router>
         <Route exact path="/" render={routerProps => <Home {...routerProps} setLogin={this.props.setLogin}/>}/>
-        <Route exact path="/rooms" render={routerProps => <Rooms {...routerProps} />}/>
+        <Route exact path="/rooms" render={routerProps => <Rooms {...routerProps} logOut={this.props.logOut}/>}/>
       </Router>
     );
   }
@@ -19,7 +19,7 @@ class App extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     setLogin: history => dispatch(setLogin(history)),
-    // logOut: () => dispatch(logOut())
+    logOut: () => dispatch(logOut())
   }
 }
 

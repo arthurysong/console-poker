@@ -44,11 +44,10 @@ export const setLogin = history => {
     }
 }
 
-export const logOut = () => {
+export const logOut = history => {
+    // I don't need to send anything to database.
     return dispatch => {
-        fetch(`http://localhost:3001/log_out`, {
-            
-        })
-
+        dispatch({type: 'LOGOUT'})
+        history.push(`/`);
     }
 }
