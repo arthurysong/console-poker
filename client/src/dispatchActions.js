@@ -43,3 +43,12 @@ export const setLogin = history => {
         } 
     }
 }
+
+export const logOut = () => {
+    return dispatch => {
+        fetch(`http://localhost:3001/log_out`, {
+            
+        })
+
+    }
+}

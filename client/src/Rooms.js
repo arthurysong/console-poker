@@ -1,8 +1,11 @@
 import React from 'react';
 
 class Rooms extends React.Component {
+    componentDidMount(){
+        // if not logged in, redirect to login page?
+    }
     logOut(){
-        this.props.logOut()
+        // this.props.logOut()
     }
 
     render () {
