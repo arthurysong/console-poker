@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { clearErrors } from './dispatchActions';
 
 class Errors extends React.Component {
     componentDidMount() {
@@ -13,7 +14,7 @@ class Errors extends React.Component {
     render(){
         return(
             <div>
-                {console.log(this.props.errors)}
+                {/* {console.log(this.props.errors)} */}
                 {this.props.errors}
             </div> 
         )
@@ -24,4 +25,7 @@ const mapStateToProps = state => {
     return { errors: state.errors }
 }
 
-export default connect(mapStateToProps)(Errors);
+const mapDispatchToProps = dispatch => {
+    return { clearErrors: () => dispatch(clearErrors())}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Errors);

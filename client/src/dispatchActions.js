@@ -18,8 +18,9 @@ export const loginUser = (state) => {
                 if (json.user) {
                     dispatch({type: 'LOGIN', user: json.user})
                     localStorage.setItem("token", json.auth_token);
-                } else if (json.errors) {
-                    dispatch({type: 'ADD_ERRORS', errors: json.errors })
+                } else if (json.error) {
+                    console.log(json.error.user_authentication);
+                    dispatch({type: 'ADD_ERRORS', errors: [json.error.user_authentication] })
                 }
             });
     }
@@ -52,5 +53,11 @@ export const logOut = history => {
         localStorage.clear();
         dispatch({type: 'LOGOUT'})
         history.push(`/`);
+    }
+}
+
+export const clearErrors = () => {
+    return dispatch => {
+        dispatch({type: 'CLEAR_ERRORS'});
     }
 }
