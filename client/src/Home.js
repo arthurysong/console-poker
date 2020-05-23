@@ -3,9 +3,7 @@ import LoginForm from './LoginForm';
 
 class Home extends React.Component {
     componentDidMount(){
-        if (this.props.isLoggedIn){
-            this.props.history.push(`/rooms`)
-        }
+        this.props.setLogin(this.props.history); // can i pass in the history here? and have the action redirect?
     }
 
     render() {

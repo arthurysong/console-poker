@@ -23,7 +23,7 @@ export const loginUser = (state) => {
     }
 }
 
-export const setLogin = () => {
+export const setLogin = history => {
     return dispatch => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -37,6 +37,7 @@ export const setLogin = () => {
                     console.log(json);
                     if (json.user) {
                         dispatch({type: 'LOGIN', user: json.user})
+                        history.push(`/rooms`);
                     }
                 })
         } 

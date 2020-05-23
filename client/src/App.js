@@ -5,31 +5,26 @@ import { setLogin } from './dispatchActions';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends React.Component {
-  componentDidMount() {
-    this.props.setLogin();
-    if (this.props.isLoggedIn) {
-      // this.props.history.push(`/`)
-    }
-  }
-
   render() {
     return (
       <Router>
-        <Route exact path="/" render={routerProps => <Home {...routerProps}/>}/>
+        <Route exact path="/" render={routerProps => <Home {...routerProps} setLogin={this.props.setLogin}/>}/>
+        <Route exact path="/rooms" render={routerProps => <Rooms {...routerProps} />}/>
       </Router>
-      
     );
   }
 }
-const mapStateToProps = state => {
-  return {
-    isLoggedIn: state.isLoggedIn
-  }
-}
+
+// const mapStateToProps = state => {
+//   return {
+//     isLoggedIn: state.isLoggedIn
+//   }
+// }
+
 const mapDispatchToProps = dispatch => {
   return {
-    setLogin: () => dispatch(setLogin())
+    setLogin: history => dispatch(setLogin(history))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
