@@ -1,3 +1,5 @@
+require 'pry'
+
 class AuthenticationController < ApplicationController
     skip_before_action :authenticate_request
 
@@ -15,14 +17,16 @@ class AuthenticationController < ApplicationController
     end
 
     def set_login
-        puts 'hello??'
-        puts request.headers['Authorization']
-        puts request.headers['Authorization'].split(' ').last
-        puts JWT.decode(request.headers['Authorization'].split(' ').last, Rails.application.secrets.secret_key_base)
-        puts JsonWebToken.decode(request.headers['Authorization'].split(' ').last)[0]
-        puts JsonWebToken.decode(request.headers['Authorization'].split(' ').last)[0][0]
+        # puts 'hello??'
+        # puts request.headers['Authorization']
+        # puts request.headers['Authorization'].split(' ').last
+        # puts JWT.decode(request.headers['Authorization'].split(' ').last, Rails.application.secrets.secret_key_base)
+        # puts JsonWebToken.decode(request.headers['Authorization'].split(' ').last)[0]
+        # puts JsonWebToken.decode(request.headers['Authorization'].split(' ').last)[0][:user_id]
+        binding.pry
 
         puts 'decoded', JsonWebToken.decode(request.headers['Authorization'].split(' ').last)
+
         @current_user = AuthorizeApiRequest.call(request.headers).result
         # puts 'wtf'
         if @current_user 
