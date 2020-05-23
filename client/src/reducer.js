@@ -1,7 +1,8 @@
 export default function reducer (state = {
         rooms: [],
         isLoggedIn: false,
-        user: {}
+        user: {},
+        errors: []
     }, action
 ) {
     switch (action.type) {
