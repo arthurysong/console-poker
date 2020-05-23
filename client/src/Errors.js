@@ -3,10 +3,6 @@ import { connect } from 'react-redux';
 import { clearErrors } from './dispatchActions';
 
 class Errors extends React.Component {
-    componentDidMount() {
-        this.props.clearErrors();
-    }
-
     componentWillUnmount(){
         this.props.clearErrors();
     }
@@ -14,7 +10,6 @@ class Errors extends React.Component {
     render(){
         return(
             <div>
-                {/* {console.log(this.props.errors)} */}
                 {this.props.errors}
             </div> 
         )

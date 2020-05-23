@@ -21,7 +21,7 @@ export default function reducer (state = {
         case 'ADD_ERRORS':
             return {
                 ...state,
-                errors: [...action.errors]
+                errors: [...state.errors, ...action.errors]
             }
         case 'CLEAR_ERRORS':
             return {

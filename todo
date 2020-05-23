@@ -1,5 +1,8 @@
 TODO:
 
-- Try to understand JWT
-- User can logout
-- Rooms redirects to Home if not logged in.
+- Try to understand JWT, I understand it, but I'm not too sure how to store JWT securely in browser.
+    For now, I'm just going to get it working using localStorage
+    Then later, I can make it secure
+- User can logout X
+- Rooms redirects to Home if not logged in =>
+- Should my errors property in store be an array? It's confusing me
