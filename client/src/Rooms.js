@@ -5,11 +5,11 @@ class Rooms extends React.Component {
         // if not logged in, redirect to login page?
         if (!this.props.isLoggedIn) {
             this.props.addError('Please sign in to see rooms.');
-            this.props.history.push(`/`)
+            // this.props.history.push(`/`)
         }
     }
     clickHandler = () => {
-        this.props.logOut(this.props.history)
+        this.props.logOut()
     }
 
     render () {

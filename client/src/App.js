@@ -18,9 +18,9 @@ class App extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setLogin: history => dispatch(setLogin(history)),
-    logOut: history => dispatch(logOut(history)),
-    addError: () => dispatch(addError())
+    setLogin: () => dispatch(setLogin()),
+    logOut: () => dispatch(logOut()),
+    addError: error => dispatch(addError(error))
   }
 }
 

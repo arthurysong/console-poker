@@ -25,7 +25,7 @@ export const loginUser = (state) => {
     }
 }
 
-export const setLogin = history => {
+export const setLogin = () => {
     return dispatch => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -39,19 +39,17 @@ export const setLogin = history => {
                     console.log("in setLogin action", json);
                     if (json.user) {
                         dispatch({type: 'LOGIN', user: json.user})
-                        history.push(`/rooms`);
                     }
                 })
         } 
     }
 }
 
-export const logOut = history => {
+export const logOut = () => {
     // I don't need to send anything to database.
     return dispatch => {
         localStorage.clear();
         dispatch({type: 'LOGOUT'})
-        history.push(`/`);
     }
 }
 

@@ -4,5 +4,8 @@ TODO:
     For now, I'm just going to get it working using localStorage
     Then later, I can make it secure
 - User can logout X
-- Rooms redirects to Home if not logged in =>
+- Rooms redirects to Home if not logged in X
+    Also displays error when user is not logged in.
 - Should my errors property in store be an array? It's confusing me
+    I decided to have an array of errors, because what if there are more than one errors?
+- Log in page not redirecting to /rooms page
