@@ -1,11 +1,17 @@
 export default function reducer (state = {
         rooms: [],
+        processing_auth: false,
         isLoggedIn: false,
         user: {},
         errors: []
     }, action
 ) {
     switch (action.type) {
+        case 'AUTH_REQUEST':
+            return {
+                ...state,
+                processing_auth: true
+            }
         case 'LOGIN':
             return {
                 ...state,
