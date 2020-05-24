@@ -13,11 +13,15 @@ class App extends React.Component {
   //   }
   // }
 
+  componentDidMount(){
+    this.props.setLogin(); // can i pass in the history here? and have the action redirect?
+  }
+
   render() {
     return (
       <Router>
         {/* {this.renderRedirectRoute()} */}
-        <Route exact path="/" render={routerProps => <Home {...routerProps} setLogin={this.props.setLogin}/>}/>
+        <Route exact path="/" render={routerProps => <Home {...routerProps}/>}/>
           {/* this.props.isLoggedIn
           ? <Redirect to="/rooms" /> 
           : <Home {...routerProps} setLogin={this.props.setLogin}/>)}/> */}
