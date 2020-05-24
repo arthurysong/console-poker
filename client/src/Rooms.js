@@ -3,7 +3,7 @@ import React from 'react';
 class Rooms extends React.Component {
     
     clickHandler = () => {
-        this.props.logOut()
+        this.props.logOut(this.props.history)
     }
 
     render () {

@@ -4,7 +4,7 @@ import Rooms from './Rooms';
 import { connect } from 'react-redux';
 import PrivateRoute from './PrivateRoute';
 import { setLogin, logOut, addError } from './dispatchActions';
-import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import LoginForm from './LoginForm';
 
 class App extends React.Component {
@@ -14,30 +14,14 @@ class App extends React.Component {
   //   }
   // }
 
-  componentDidMount(){
-    this.props.setLogin(); // can i pass in the history here? and have the action redirect?
-  }
-
-  componentDidUpdate(){
-    if (!this.props.processing_auth && !this.props.isLoggedIn){
-      useHistory().push("/signin");
-    }
-  }
-
   render() {
     return (
       <Router>
-        {/* {this.renderRedirectRoute()} */}
-        <Route exact path="/" render={routerProps => <Home {...routerProps}/>}/>
-        <Route path="login" render={routerProps => <LoginForm {...routerProps}/>}/>
-          {/* this.props.isLoggedIn
-          ? <Redirect to="/rooms" /> 
-          : <Home {...routerProps} setLogin={this.props.setLogin}/>)}/> */}
-        <PrivateRoute path="/rooms" isLoggedIn={this.props.isLoggedIn} component={<Rooms logOut={this.props.logOut} addError={this.props.addError}/>}/>
-        {/* // <Route exact path="/rooms" render={routerProps => <Rooms {...routerProps} logOut={this.props.logOut} addError={this.props.addError}/>}/> */}
-          {/* // this.props.isLoggedIn
-          // ? <Rooms {...routerProps} logOut={this.props.logOut} addError={this.props.addError}/>
-          // : <Home {...routerProps} setLogin={this.props.setLogin}/>)}/> */}
+        <Route path="/" render={routerProps => <Home {...routerProps} setLogin={this.props.setLogin} isLoggedIn={this.props.isLoggedIn} processing_auth={this.props.processing_auth}/>}/>
+        <Switch>
+          <Route path="/login" render={routerProps => <LoginForm {...routerProps}/>}/>
+          <Route path="/rooms" isLoggedIn={this.props.isLoggedIn} render={routerProps => <Rooms {...routerProps} logOut={this.props.logOut} addError={this.props.addError}/>}/>
+        </Switch>
       </Router>
     );
   }
@@ -45,8 +29,8 @@ class App extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setLogin: () => dispatch(setLogin()),
-    logOut: () => dispatch(logOut()),
+    setLogin: history => dispatch(setLogin(history)),
+    logOut: history => dispatch(logOut(history)),
     addError: error => dispatch(addError(error))
   }
 }
