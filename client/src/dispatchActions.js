@@ -16,17 +16,14 @@ export const loginUser = (state) => {
             .then(json => {
                 console.log("in loginUser action", json);
                 if (json.user) {
-                    dispatch({type: 'LOGIN', user: json.user})
+                    dispatch({type: 'AUTH_SUCCESS', user: json.user})
                     localStorage.setItem("token", json.auth_token);
                 // }
                 } else if (json.error) {
+                    dispatch({type: 'AUTH_FAIL'});
                     dispatch({type: 'ADD_ERRORS', errors: [json.error.user_authentication] })
                 }
             })
-            // .catch(errors => { // i don't know how to catch bad request using catch.. hmm
-            //     console.log('hello? catch the error?');
-            //     console.log(errors);
-            // });
     }
 }
 
@@ -43,7 +40,7 @@ export const setLogin = () => {
                 .then(json => {
                     console.log("in setLogin action", json);
                     if (json.user) {
-                        dispatch({type: 'LOGIN', user: json.user})
+                        dispatch({type: 'AUTH_SUCCESS', user: json.user})
                     }
                 })
         } 
