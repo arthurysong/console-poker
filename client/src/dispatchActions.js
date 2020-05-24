@@ -1,31 +1,34 @@
 import handleAuthRedirect from './handleAuthRedirect';
 
+const authenticate_user = (state, history, dispatch) => { // abstracted this out because I also need in my register action
+    const body = JSON.stringify(state)
+    const options = {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body
+    }
+    dispatch({type: 'AUTH_REQUEST'})
+    fetch(`http://localhost:3001/authenticate`, options)
+        .then(resp => resp.json())
+        .then(json => {
+            console.log("in loginUser action", json);
+            if (json.user) {
+                dispatch({type: 'AUTH_SUCCESS', user: json.user})
+                localStorage.setItem("token", json.auth_token);
+                history.push(`/rooms`);
+            } else if (json.errors) {
+                dispatch({type: 'AUTH_FAIL'});
+                dispatch({type: 'ADD_ERRORS', errors: [json.errors.user_authentication] })
+            }
+        })
+}
+
 export const loginUser = (state, history) => {
     return dispatch => {
-        const body = JSON.stringify(state)
-        const options = {
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body
-        }
-
-        dispatch({type: 'AUTH_REQUEST'})
-        fetch(`http://localhost:3001/authenticate`, options)
-            .then(resp => resp.json())
-            .then(json => {
-                console.log("in loginUser action", json);
-                if (json.user) {
-                    dispatch({type: 'AUTH_SUCCESS', user: json.user})
-                    localStorage.setItem("token", json.auth_token);
-                    history.push(`/rooms`);
-                } else if (json.errors) {
-                    dispatch({type: 'AUTH_FAIL'});
-                    dispatch({type: 'ADD_ERRORS', errors: [json.errors.user_authentication] })
-                }
-            })
+        authenticate_user(state, history, dispatch)
     }
 }
 
@@ -70,12 +73,6 @@ export const clearErrors = () => {
     }
 }
 
-// export const addError = (error) => {
-//     return dispatch => {
-//         dispatch({type: 'ADD_ERRORS', errors: [error]}) //add_errors accept an array of errors, so i can add both singular and plural errors
-//     }
-// }
-
 export const register = (state, history) => {
     return dispatch => {
         const body = JSON.stringify(state);
@@ -92,7 +89,8 @@ export const register = (state, history) => {
             .then(json => {
                 console.log(json)
                 if (json.user) {
-                    loginUser(state, history);
+                    console.log(state);
+                    authenticate_user(state, history, dispatch);
                 } else {
                     dispatch({type: 'ADD_ERRORS', errors: json.errors })
                 }

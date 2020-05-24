@@ -17,7 +17,7 @@ class Register extends React.Component {
 
     submitHandler = event => {
         event.preventDefault();
-        this.props.register(this.state);
+        this.props.register(this.state, this.props.history);
     }
 
     render() {
