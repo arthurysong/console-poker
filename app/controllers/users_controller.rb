@@ -14,7 +14,7 @@ class UsersController < ApplicationController
         if user.save
             render json: { user: user }, status: 201
         else 
-            render json: { errors: user.errors }, status: 400
+            render json: { errors: user.errors.full_messages }, status: 400
         end
         
         # binding.pry

@@ -15,3 +15,5 @@ TODO:
 - Need a register page.
 - Sign in via Google drive?
 - User validations
+- Change error json in authenticate to be errors.full_messages
+- Error component should not display duplicate errors

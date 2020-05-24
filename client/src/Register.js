@@ -1,4 +1,5 @@
 import React from 'react';
+import Errors from './Errors';
 
 class Register extends React.Component {
     state = {
@@ -22,6 +23,7 @@ class Register extends React.Component {
     render() {
         return (
             <div>
+                <Errors />
                 <form onSubmit={this.submitHandler} >
                     <label>
                         Username

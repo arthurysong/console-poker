@@ -94,7 +94,7 @@ export const register = (state, history) => {
                 if (json.user) {
                     loginUser(state, history);
                 } else {
-                    
+                    dispatch({type: 'ADD_ERRORS', errors: json.errors })
                 }
             })
     }
