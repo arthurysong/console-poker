@@ -75,3 +75,20 @@ export const addError = (error) => {
         dispatch({type: 'ADD_ERRORS', errors: [error]}) //add_errors accept an array of errors, so i can add both singular and plural errors
     }
 }
+
+export const register = (state) => {
+    return dispatch => {
+        const body = JSON.stringify(state);
+        const options = {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body
+        }
+        fetch(`http://localhost:3001/users`, options)
+            .then(resp => resp.json)
+            .then(json => console.log(json))
+    }
+}

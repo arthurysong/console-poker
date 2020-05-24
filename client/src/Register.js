@@ -4,7 +4,7 @@ class Register extends React.Component {
     state = {
         username: "",
         password: "",
-        password_confirm: "",
+        password_confirmation: "",
         email: ""
     }
 
@@ -16,7 +16,7 @@ class Register extends React.Component {
 
     submitHandler = event => {
         event.preventDefault();
-        
+        this.props.register(this.state);
     }
 
     render() {
@@ -33,11 +33,11 @@ class Register extends React.Component {
                     </label>
                     <label>
                         Password
-                    <input type="text" name="password" value={this.state.password} onChange={this.changeHandler}/><br/>
+                    <input type="password" name="password" value={this.state.password} onChange={this.changeHandler}/><br/>
                     </label>
                     <label>
                         Password Confirmation
-                    <input type="text" name="password_confirm" value={this.state.password_confirm} onChange={this.changeHandler}/><br/>
+                    <input type="password" name="password_confirmation" value={this.state.password_confirmation} onChange={this.changeHandler}/><br/>
                     </label>
                     <input type="submit" value="Create Account"/><br/>
                 </form>
