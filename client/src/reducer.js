@@ -12,9 +12,17 @@ export default function reducer (state = {
                 ...state,
                 processing_auth: true
             }
-        case 'LOGIN':
+        case 'AUTH_FAIL':
             return {
                 ...state,
+                processing_auth: false,
+                isLoggedIn: false,
+                user: {}
+            }
+        case 'AUTH_SUCCESS':
+            return {
+                ...state,
+                processing_auth: false,
                 isLoggedIn: true,
                 user: action.user
             }
