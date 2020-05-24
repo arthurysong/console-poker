@@ -1,3 +1,5 @@
+import handleAuthRedirect from './handleAuthRedirect';
+
 export const loginUser = (state, history) => {
     return dispatch => {
         const body = JSON.stringify(state)
@@ -42,13 +44,13 @@ export const setLogin = history => {
                     console.log("in setLogin action", json);
                     if (json.user) {
                         dispatch({type: 'AUTH_SUCCESS', user: json.user})
-                        history.push(`/rooms`);
+                        handleAuthRedirect(true, history);  // created function to control for different routes for redirects
                     } else if (json.error) {
                         dispatch({type: 'AUTH_FAIL'});
                     }
                 })
         } else {
-            history.push(`/login`);
+            handleAuthRedirect(false, history)
         }
     }
 }
