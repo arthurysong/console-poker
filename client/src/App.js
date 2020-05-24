@@ -2,10 +2,10 @@ import React from 'react';
 import Home from './Home';
 import Rooms from './Rooms';
 import { connect } from 'react-redux';
-import PrivateRoute from './PrivateRoute';
 import { setLogin, logOut, addError } from './dispatchActions';
-import { BrowserRouter as Router, Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginForm from './LoginForm';
+import Register from './Register';
 
 class App extends React.Component {
   // renderRedirectRoute = () =>  {
@@ -17,10 +17,11 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Route path="/" render={routerProps => <Home {...routerProps} setLogin={this.props.setLogin} isLoggedIn={this.props.isLoggedIn} processing_auth={this.props.processing_auth}/>}/>
+        <Route path="/" render={routerProps => <Home {...routerProps} setLogin={this.props.setLogin}/>}/>
         <Switch>
           <Route path="/login" render={routerProps => <LoginForm {...routerProps}/>}/>
-          <Route path="/rooms" isLoggedIn={this.props.isLoggedIn} render={routerProps => <Rooms {...routerProps} logOut={this.props.logOut} addError={this.props.addError}/>}/>
+          <Route path="/rooms" render={routerProps => <Rooms {...routerProps} logOut={this.props.logOut}/>}/>
+          <Route path="/register" render={routerProps => <Register {...routerProps}/>}/>
         </Switch>
       </Router>
     );
