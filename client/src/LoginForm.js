@@ -2,6 +2,7 @@ import React from 'react';
 import { loginUser } from './dispatchActions';
 import { connect } from 'react-redux';
 import Errors from './Errors';
+import { Link } from 'react-router-dom';
 
 class LoginForm extends React.Component {
     state = {
@@ -18,9 +19,16 @@ class LoginForm extends React.Component {
     submitHandler =  event => {
         event.preventDefault();
         console.log(this.state);
-        this.props.loginUser(this.state)
+        this.props.loginUser(this.state, this.props.history)
     }
 
+    renderRegister = () => {
+        return (
+            <>
+                Don't have an account? <Link to="/register">Register!</Link>
+            </>
+        )
+    }
     render() {
         return(
             <div>
@@ -37,7 +45,7 @@ class LoginForm extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        loginUser: state => dispatch(loginUser(state))
+        loginUser: (state, history) => dispatch(loginUser(state, history))
     }
 }
 

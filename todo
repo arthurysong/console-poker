@@ -8,7 +8,9 @@ TODO:
     Also displays error when user is not logged in.
 - Should my errors property in store be an array? It's confusing me
     I decided to have an array of errors, because what if there are more than one errors?
-- Log in page not redirecting to /rooms page
+- Log in page not redirecting to /rooms page X
     I'm going to redirect by passing in history into dispatch actions
     It seems a lot more simpler that way
-    I don't think I need processing_auth anymore then.
+    I don't think I need processing_auth anymore then. =>
+- Need a register page.
+- Sign in via Google drive?

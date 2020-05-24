@@ -1,4 +1,4 @@
-export const loginUser = (state) => {
+export const loginUser = (state, history) => {
     return dispatch => {
         const body = JSON.stringify(state)
         const options = {
@@ -18,6 +18,7 @@ export const loginUser = (state) => {
                 if (json.user) {
                     dispatch({type: 'AUTH_SUCCESS', user: json.user})
                     localStorage.setItem("token", json.auth_token);
+                    history.push(`/rooms`);
                 } else if (json.errors) {
                     dispatch({type: 'AUTH_FAIL'});
                     dispatch({type: 'ADD_ERRORS', errors: [json.errors.user_authentication] })
@@ -57,7 +58,7 @@ export const logOut = history => {
     return dispatch => {
         localStorage.clear();
         dispatch({type: 'LOGOUT'})
-        history.push(`/`);
+        history.push(`/login`);
     }
 }
 
