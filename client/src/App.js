@@ -4,7 +4,8 @@ import Rooms from './Rooms';
 import { connect } from 'react-redux';
 import PrivateRoute from './PrivateRoute';
 import { setLogin, logOut, addError } from './dispatchActions';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, useHistory } from 'react-router-dom';
+import LoginForm from './LoginForm';
 
 class App extends React.Component {
   // renderRedirectRoute = () =>  {
@@ -17,11 +18,18 @@ class App extends React.Component {
     this.props.setLogin(); // can i pass in the history here? and have the action redirect?
   }
 
+  componentDidUpdate(){
+    if (!this.props.processing_auth && !this.props.isLoggedIn){
+      useHistory().push("/signin");
+    }
+  }
+
   render() {
     return (
       <Router>
         {/* {this.renderRedirectRoute()} */}
         <Route exact path="/" render={routerProps => <Home {...routerProps}/>}/>
+        <Route path="login" render={routerProps => <LoginForm {...routerProps}/>}/>
           {/* this.props.isLoggedIn
           ? <Redirect to="/rooms" /> 
           : <Home {...routerProps} setLogin={this.props.setLogin}/>)}/> */}
@@ -45,7 +53,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: state.isLoggedIn
+    isLoggedIn: state.isLoggedIn,
+    processing_auth: state.processing_auth
   }
 }
 
