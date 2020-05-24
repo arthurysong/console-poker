@@ -70,13 +70,13 @@ export const clearErrors = () => {
     }
 }
 
-export const addError = (error) => {
-    return dispatch => {
-        dispatch({type: 'ADD_ERRORS', errors: [error]}) //add_errors accept an array of errors, so i can add both singular and plural errors
-    }
-}
+// export const addError = (error) => {
+//     return dispatch => {
+//         dispatch({type: 'ADD_ERRORS', errors: [error]}) //add_errors accept an array of errors, so i can add both singular and plural errors
+//     }
+// }
 
-export const register = (state) => {
+export const register = (state, history) => {
     return dispatch => {
         const body = JSON.stringify(state);
         const options = {
@@ -88,7 +88,14 @@ export const register = (state) => {
             body
         }
         fetch(`http://localhost:3001/users`, options)
-            .then(resp => resp.json)
-            .then(json => console.log(json))
+            .then(resp => resp.json())
+            .then(json => {
+                console.log(json)
+                if (json.user) {
+                    loginUser(state, history);
+                } else {
+                    
+                }
+            })
     }
 }
