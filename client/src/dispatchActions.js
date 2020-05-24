@@ -21,7 +21,7 @@ const authenticate_user = (state, history, dispatch) => { // abstracted this out
                 history.push(`/rooms`);
             } else if (json.errors) {
                 dispatch({type: 'AUTH_FAIL'});
-                dispatch({type: 'ADD_ERRORS', errors: [json.errors.user_authentication] })
+                dispatch({type: 'ADD_ERRORS', errors: json.errors })
             }
         })
 }
@@ -87,9 +87,8 @@ export const register = (state, history) => {
         fetch(`http://localhost:3001/users`, options)
             .then(resp => resp.json())
             .then(json => {
-                console.log(json)
+                console.log("in register action ", json);
                 if (json.user) {
-                    console.log(state);
                     authenticate_user(state, history, dispatch);
                 } else {
                     dispatch({type: 'ADD_ERRORS', errors: json.errors })

@@ -8,7 +8,7 @@ class AuthenticationController < ApplicationController
         if command.success?
             render json: { auth_token: command.result[:token], user: command.result[:user] }
         else
-            render json: { errors: command.errors }, status: :unauthorized
+            render json: { errors: command.errors[:user_authentication] }, status: :unauthorized
         end
     end
 
