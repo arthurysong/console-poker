@@ -8,11 +8,6 @@ import LoginForm from './LoginForm';
 import Register from './Register';
 
 class App extends React.Component {
-  // renderRedirectRoute = () =>  {
-  //   if (!this.props.isLoggedIn) {
-  //     return (<Route path="/" render={() => <Redirect to="/"/>}/>)
-  //   }
-  // }
 
   render() {
     return (

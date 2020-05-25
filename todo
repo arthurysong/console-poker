@@ -11,9 +11,11 @@ TODO:
 - Log in page not redirecting to /rooms page X
     I'm going to redirect by passing in history into dispatch actions
     It seems a lot more simpler that way
-    I don't think I need processing_auth anymore then. =>
-- Need a register page.
+    I don't think I need processing_auth anymore then. 
+- Need a register page. X Register page complete, creates user and signs in on success
 - Sign in via Google drive?
 - User validations
-- Change error json in authenticate to be errors.full_messages
-- Error component should not display duplicate errors
+- Change error json in authenticate to be errors.full_messages X Json now properly formatted to return array of messages
+- Error component should not display duplicate errors X Changed reducer, so it overrides old messages.
+- Now display rooms real time
+- Rooms should have max capacity of eight

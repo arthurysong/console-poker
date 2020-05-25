@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   post '/authenticate', to: 'authentication#authenticate'
   get '/test', to: 'authentication#test'
   get '/set_login', to: 'authentication#set_login'
+
+  mount ActionCable.server => '/cable'
 end
