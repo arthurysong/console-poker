@@ -97,3 +97,17 @@ export const register = (state, history) => {
             })
     }
 }
+
+export const loadRooms = () => {
+    return dispatch => {
+        const token = localStorage.getItem("token"); //i'm going to make each request send tokens even though i have route authorization
+        // because people can still query the database without going through the client and i want to protect the API itself.
+        fetch(`http://localhost:3001/rooms`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(resp => resp.json())
+            .then(json => console.log(json))
+    }
+}

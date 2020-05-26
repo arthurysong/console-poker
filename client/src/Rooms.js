@@ -1,6 +1,9 @@
 import React from 'react';
 
 class Rooms extends React.Component {
+    componentDidMount(){
+        this.props.loadRooms();
+    }
     
     clickHandler = () => {
         this.props.logOut(this.props.history)
