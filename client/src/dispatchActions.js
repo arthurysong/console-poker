@@ -48,8 +48,9 @@ export const setLogin = history => {
                     if (json.user) {
                         dispatch({type: 'AUTH_SUCCESS', user: json.user})
                         handleAuthRedirect(true, history);  // created function to control for different routes for redirects
-                    } else if (json.error) {
+                    } else if (json.errors) {
                         dispatch({type: 'AUTH_FAIL'});
+                        handleAuthRedirect(false, history);
                     }
                 })
         } else {

@@ -19,3 +19,4 @@ TODO:
 - Error component should not display duplicate errors X Changed reducer, so it overrides old messages.
 - Now display rooms real time
 - Rooms should have max capacity of eight
+- Should be redirected to login, if login fails

@@ -10,8 +10,6 @@ class RoomsListChannel < ApplicationCable::Channel
 
   # when i receive data from consumer subscription
   def receive(data)
-    note = Room.find(data["id"])
-    note.update!(text: data["text"])
     ActionCable.server.broadcast('rooms', data) #I could put my broadcast statement in my controller?
   end
 end
