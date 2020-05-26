@@ -15,7 +15,7 @@ class App extends React.Component {
         <Route path="/" render={routerProps => <Home {...routerProps} setLogin={this.props.setLogin}/>}/>
         <Switch>
           <Route path="/login" render={routerProps => <LoginForm {...routerProps}/>}/>
-          <Route path="/rooms" render={routerProps => <Rooms {...routerProps} logOut={this.props.logOut} loadRooms={this.props.loadRooms}/>}/>
+          <Route path="/rooms" render={routerProps => <Rooms {...routerProps} logOut={this.props.logOut} loadRooms={this.props.loadRooms} rooms={this.props.rooms}/>}/>
           <Route path="/register" render={routerProps => <Register {...routerProps} register={this.props.register}/>}/>
         </Switch>
       </Router>
@@ -35,7 +35,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     isLoggedIn: state.isLoggedIn,
-    processing_auth: state.processing_auth
+    processing_auth: state.processing_auth,
+    rooms: state.rooms
   }
 }
 
