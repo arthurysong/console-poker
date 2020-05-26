@@ -42,6 +42,11 @@ export default function reducer (state = {
                 ...state,
                 errors: []
             }
+        case 'ADD_ROOMS':
+            return {
+                ...state,
+                rooms: action.rooms
+            }
         default:
             return state;
     }

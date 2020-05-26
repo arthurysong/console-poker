@@ -3,7 +3,6 @@ class Room < ApplicationRecord
     has_one :chatbox
 
     def as_json(options = {})
-
         super(only: [:name], methods: [:no_users])
     end 
 
