@@ -113,7 +113,5 @@ export const loadRooms = () => {
                 console.log(json);
                 dispatch({type: 'ADD_ROOMS', rooms: json})
             })
-        
-        
     }
 }

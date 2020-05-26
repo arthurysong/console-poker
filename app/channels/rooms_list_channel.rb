@@ -10,7 +10,8 @@ class RoomsListChannel < ApplicationCable::Channel
 
   # when i receive data from consumer subscription
   def receive(data)
-    
-    ActionCable.server.broadcast('rooms', data) #I could put my broadcast statement in my controller?
+    r = Room.create(data)
+    rooms = Room.all
+    ActionCable.server.broadcast('rooms', rooms) #I could put my broadcast statement in my controller?
   end
 end

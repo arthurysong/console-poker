@@ -1,15 +1,19 @@
 import React from 'react';
 
-function NewRoomForm ({ createRoom }) {
-    return (
-        <form onSubmit={createRoom}>
-            <label>
-                Name
-            <input type="text" name="name" value={this.props.name} onChange={changeHandler}/><br/>
-            </label>
-            <input type="submit" value="Create" />
-        </form>
-    )
+class NewRoomForm extends React.Component {
+    render() {
+        return (
+            <div>
+                <form onSubmit={this.props.createRoom}>
+                    <label>
+                        Name
+                    <input type="text" name="name" onChange={this.props.changeHandler} value={this.props.name} /><br/>
+                    </label>
+                    <input type="submit" value="Create" />
+                </form>
+            </div>
+        )
+    }
 }
 
 export default NewRoomForm;
