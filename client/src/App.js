@@ -3,6 +3,7 @@ import Home from './Home';
 import Rooms from './Rooms';
 import { connect } from 'react-redux';
 import { setLogin, logOut, register, loadRooms, reloadRooms } from './dispatchActions';
+import { wsConnect } from './websocketActions';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import Register from './Register';
@@ -15,7 +16,14 @@ class App extends React.Component {
         <Route path="/" render={routerProps => <Home {...routerProps} setLogin={this.props.setLogin}/>}/>
         <Switch>
           <Route path="/login" render={routerProps => <LoginForm {...routerProps}/>}/>
-          <Route path="/rooms" render={routerProps => <Rooms {...routerProps} logOut={this.props.logOut} loadRooms={this.props.loadRooms} reloadRooms={this.props.reloadRooms} rooms={this.props.rooms}/>}/>
+          <Route path="/rooms" render={routerProps => 
+            <Rooms {...routerProps} 
+              logOut={this.props.logOut} 
+              isLoggedIn={this.props.isLoggedIn}
+              loadRooms={this.props.loadRooms} 
+              reloadRooms={this.props.reloadRooms} 
+              rooms={this.props.rooms}
+              wsConnect={this.props.wsConnect}/>}/>
           <Route path="/register" render={routerProps => <Register {...routerProps} register={this.props.register}/>}/>
         </Switch>
       </Router>
@@ -29,7 +37,8 @@ const mapDispatchToProps = dispatch => {
     setLogin: history => dispatch(setLogin(history)),
     logOut: history => dispatch(logOut(history)),
     loadRooms: () => dispatch(loadRooms()),
-    reloadRooms: data => dispatch(reloadRooms(data))
+    // reloadRooms: data => dispatch(reloadRooms(data)),
+    wsConnect: host => dispatch(wsConnect())
   }
 }
 
