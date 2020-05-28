@@ -19,7 +19,7 @@ const socketMiddleware = () => {
 
         switch (payload.type) {
             case 'update_rooms':
-                store.dispatch(updateRooms(payload.rooms);
+                store.dispatch(updateRooms(payload.rooms));
                 break;
             default:
                 break;
@@ -62,3 +62,5 @@ const socketMiddleware = () => {
     }
 
 }
+
+export default socketMiddleware();

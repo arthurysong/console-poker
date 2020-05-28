@@ -2,7 +2,7 @@ import React from 'react';
 import Home from './Home';
 import Rooms from './Rooms';
 import { connect } from 'react-redux';
-import { setLogin, logOut, register, loadRooms, reloadRooms } from './dispatchActions';
+import { setLogin, logOut, register, loadRooms } from './dispatchActions';
 import { wsConnect } from './websocketActions';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginForm from './LoginForm';
