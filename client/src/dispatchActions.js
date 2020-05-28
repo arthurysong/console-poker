@@ -115,3 +115,7 @@ export const loadRooms = () => {
             })
     }
 }
+
+export const reloadRooms = data => {
+    return {type: 'ADD_ROOMS', rooms: data}
+}

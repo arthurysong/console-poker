@@ -15,6 +15,7 @@ class Rooms extends React.Component {
                 received(data) {
                     //update store with data...
                     console.log(data);
+                    this.props.reloadRooms(data);
                 }
             })
     }
