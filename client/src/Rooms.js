@@ -10,6 +10,8 @@ class Rooms extends React.Component {
 
     componentDidMount(){
         // this.props.loadRooms();
+        // here i need to subscribe to RoomsListChannel
+        
     }
     
     clickHandler = () => {
