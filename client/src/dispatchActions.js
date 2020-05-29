@@ -66,6 +66,7 @@ export const logOut = history => {
     return dispatch => {
         localStorage.clear();
         dispatch({type: 'LOGOUT'})
+        dispatch({type: 'DISCONNECT', host: 'ws://127.0.0.1:3001/cable'});
         history.push(`/login`);
     }
 }
