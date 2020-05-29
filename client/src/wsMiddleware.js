@@ -1,4 +1,4 @@
-import * as actions from './websocketActions';
+import * as actions from './wsActions';
 import { updateRooms } from './dispatchActions';
 
 const socketMiddleware = () => {
@@ -6,6 +6,8 @@ const socketMiddleware = () => {
 
     const onOpen = store => event => {
         console.log('websocket open', event.target.url);
+        // socket.send(JSON.stringify({"command": "subscribe","identifier":"{\"channel\":\"RoomsListChannel\"}"})) this, is to subscribe to a specific channel
+        // which we will get to in a bit
         store.dispatch(actions.wsConnected(event.target.url));
     };
 
@@ -14,11 +16,15 @@ const socketMiddleware = () => {
     };
 
     const onMessage = store => (event) => {
-        const payload = JSON.parse(event.data);
+        let payload = JSON.parse(event.data);
         console.log('receiving server message');
-
+        // console.log(JSON.parse(event.data));
+        console.log(payload.message)
+        
+        payload = payload.message || payload
         switch (payload.type) {
             case 'update_rooms':
+                console.log('update_rooms switch case');
                 store.dispatch(updateRooms(payload.rooms));
                 break;
             default:
@@ -51,9 +57,10 @@ const socketMiddleware = () => {
                 console.log('websocket closed');
                 break;
             case 'NEW_MESSAGE':
-                console.log('sending message');
+                console.log('sending message', action.msg);
+
                 // console.log('sending a message', action.msg)
-                // socket.send(JSON.stringify({command: 'NEW_MESSAGE', message: action.msg}));
+                socket.send(JSON.stringify({command: "message", data: { action: "update", message: action.msg }}));
                 break;
             default:
                 console.log('the next action: ', action);

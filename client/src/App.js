@@ -3,12 +3,15 @@ import Home from './Home';
 import Rooms from './Rooms';
 import { connect } from 'react-redux';
 import { setLogin, logOut, register, loadRooms } from './dispatchActions';
-import { wsConnect } from './websocketActions';
+import { wsConnect, wsSend } from './wsActions';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import Register from './Register';
 
 class App extends React.Component {
+  componentDidMount() {
+        this.props.wsConnect(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
+  }
 
   render() {
     return (
@@ -23,7 +26,8 @@ class App extends React.Component {
               loadRooms={this.props.loadRooms} 
               reloadRooms={this.props.reloadRooms} 
               rooms={this.props.rooms}
-              wsConnect={this.props.wsConnect}/>}/>
+              wsConnect={this.props.wsConnect}
+              wsSend={this.props.wsSend}/>}/>
           <Route path="/register" render={routerProps => <Register {...routerProps} register={this.props.register}/>}/>
         </Switch>
       </Router>
@@ -38,7 +42,8 @@ const mapDispatchToProps = dispatch => {
     logOut: history => dispatch(logOut(history)),
     loadRooms: () => dispatch(loadRooms()),
     // reloadRooms: data => dispatch(reloadRooms(data)),
-    wsConnect: host => dispatch(wsConnect())
+    wsConnect: host => dispatch(wsConnect(host)),
+    wsSend: msg => dispatch(wsSend(msg))
   }
 }
 

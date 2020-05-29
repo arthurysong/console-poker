@@ -1,5 +1,5 @@
 import React from 'react';
-import consumer from './consumer';
+// import consumer from './consumer';
 import NewRoomForm from './NewRoomForm';
 import { Route } from 'react-router-dom';
 
@@ -9,19 +9,7 @@ class Rooms extends React.Component {
     }
 
     componentDidMount(){
-        // this.props.loadRooms(); // instead I'm going to connect to websockets connection
-
-        // subscribe to roomslistchannel
-        // this.subscription = consumer.subscriptions.create({ channel: "RoomsListChannel" }, {
-        //         received(data) {
-        //             //update store with data...
-        //             console.log(data);
-        //             this.props.reloadRooms(data);
-        //         }
-        //     })
-        if (this.props.isLoggedIn) {
-            this.props.wsConnect(`http://localhost:3001/cable`)
-        }
+        // this.props.loadRooms();
     }
     
     clickHandler = () => {
@@ -39,6 +27,7 @@ class Rooms extends React.Component {
     createRoom = event => {
         event.preventDefault();
         // this.subscription.send(this.state)
+        this.props.wsSend(this.state);
     }
 
     render () {

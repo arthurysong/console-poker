@@ -117,5 +117,6 @@ export const loadRooms = () => {
 }
 
 export const updateRooms = data => {
+    console.log('updateRooms action');
     return {type: 'ADD_ROOMS', rooms: data}
 }
