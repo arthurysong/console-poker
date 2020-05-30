@@ -3,19 +3,20 @@ import Home from './Home';
 import Rooms from './Rooms';
 import { connect } from 'react-redux';
 import { setLogin, logOut, register, loadRooms } from './dispatchActions';
-import { wsConnect, wsSend } from './wsActions';
+import { wsSend, wsSubscribeRoomsList, wsConnect } from './wsActions';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import Register from './Register';
 
 class App extends React.Component {
-  // componentDidMount() {
-        // this.props.wsConnect(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
-  // } I'm going to do this if user successfully logs in actually.
+  componentDidMount() {
+        this.props.wsConnect(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
+  } 
+  // I'm going to do this if user successfully logs in actually.
 
   render() {
     return (
-      <Router>
+      <>
         <Route path="/" render={routerProps => <Home {...routerProps} setLogin={this.props.setLogin}/>}/>
         <Switch>
           <Route path="/login" render={routerProps => <LoginForm {...routerProps}/>}/>
@@ -26,12 +27,13 @@ class App extends React.Component {
               loadRooms={this.props.loadRooms} 
               reloadRooms={this.props.reloadRooms} 
               rooms={this.props.rooms}
-              wsConnect={this.props.wsConnect}
+              wsConnected={this.props.wsConnected}
+              wsSubscribeRoomsList={this.props.wsSubscribeRoomsList}
               wsSend={this.props.wsSend}/>}/>
           <Route path="/register" render={routerProps => <Register {...routerProps} register={this.props.register}/>}/>
         </Switch>
-      </Router>
-    );
+      </>
+    )
   }
 }
 
@@ -43,6 +45,7 @@ const mapDispatchToProps = dispatch => {
     loadRooms: () => dispatch(loadRooms()),
     // reloadRooms: data => dispatch(reloadRooms(data)),
     wsConnect: host => dispatch(wsConnect(host)),
+    wsSubscribeRoomsList: host => dispatch(wsSubscribeRoomsList(host)),
     wsSend: msg => dispatch(wsSend(msg))
   }
 }
@@ -50,6 +53,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     isLoggedIn: state.isLoggedIn,
+    wsConnected: state.wsConnected,
     processing_auth: state.processing_auth,
     rooms: state.rooms
   }

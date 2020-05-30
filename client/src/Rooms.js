@@ -8,10 +8,19 @@ class Rooms extends React.Component {
         name: ""
     }
 
-    componentDidMount(){
-        // this.props.loadRooms();
-        // here i need to subscribe to RoomsListChannel
-        
+    // componentDidMount(){
+    //     // this.props.loadRooms();
+    //     // here i need to subscribe to RoomsListChannel
+    //     // this.props.wsSubscribeRoomsList();
+    //     this.props.wsSubscribeRoomsList(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
+
+    // }
+
+    componentDidUpdate() {
+        // console.log(this.props.wsConnected)
+        if (this.props.wsConnected === true) {
+            this.props.wsSubscribeRoomsList(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`)
+        }
     }
     
     clickHandler = () => {

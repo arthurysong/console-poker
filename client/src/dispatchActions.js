@@ -18,7 +18,6 @@ const authenticate_user = (state, history, dispatch) => { // abstracted this out
             if (json.user) {
                 dispatch({type: 'AUTH_SUCCESS', user: json.user})
                 localStorage.setItem("token", json.auth_token);
-                dispatch({type: 'WS_CONNECT', host: 'ws://127.0.0.1:3001/cable'})
                 history.push(`/rooms`);
             } else if (json.errors) {
                 dispatch({type: 'AUTH_FAIL'});
@@ -48,7 +47,7 @@ export const setLogin = history => {
                     console.log("in setLogin action", json);
                     if (json.user) {
                         dispatch({type: 'AUTH_SUCCESS', user: json.user})
-                        dispatch({type: 'WS_CONNECT', host: 'ws://127.0.0.1:3001/cable'})
+                        
                         handleAuthRedirect(true, history);  // created function to control for different routes for redirects
                     } else if (json.errors) {
                         dispatch({type: 'AUTH_FAIL'});
@@ -66,7 +65,6 @@ export const logOut = history => {
     return dispatch => {
         localStorage.clear();
         dispatch({type: 'LOGOUT'})
-        dispatch({type: 'WS_DISCONNECT', host: 'ws://127.0.0.1:3001/cable'});
         history.push(`/login`);
     }
 }

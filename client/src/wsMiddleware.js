@@ -1,5 +1,6 @@
 import * as actions from './wsActions';
 import { updateRooms } from './dispatchActions';
+import WebSocketConnection from './WebSocketConnection';
 
 const socketMiddleware = () => {
     let socket = null;
@@ -32,6 +33,17 @@ const socketMiddleware = () => {
         }
     }
 
+    // connection and handlers
+    // const createWebSocket = (host, store) => {
+    //     const socket = new WebSocket(host);
+
+    //     socket.onmessage = onMessage(store);
+    //     socket.onclose = onClose(store);
+    //     socket.onopen = onOpen(store);
+
+    //     return socket
+    // }
+
     //middleware part of function
     return store => next => action => {
         switch (action.type) {
@@ -39,15 +51,14 @@ const socketMiddleware = () => {
                 if (socket !== null) {
                     socket.close();
                 }
-
-                // connect to the remote host
                 socket = new WebSocket(action.host);
 
-                //websocket handlers
                 socket.onmessage = onMessage(store);
                 socket.onclose = onClose(store);
                 socket.onopen = onOpen(store);
-
+                // connect to the remote host
+                console.log('ws connecting');
+                // socket = createWebSocket(action.host, store)
                 break;
             case 'WS_DISCONNECT':
                 if (socket !== null){
@@ -55,6 +66,13 @@ const socketMiddleware = () => {
                 }
                 socket = null;
                 console.log('websocket closed');
+                break;
+            case 'SUBSCRIBE_ROOMS_LIST':
+                // if (socket == null) {
+                //     socket = createWebSocket(action.host)
+                // }
+                socket.send(JSON.stringify({"command": "subscribe","identifier":"{\"channel\":\"RoomsListChannel\"}"})) 
+                // console.log('hello');
                 break;
             case 'NEW_MESSAGE':
                 console.log('sending message', action.msg);

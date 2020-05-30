@@ -2,6 +2,7 @@ export default function reducer (state = {
         rooms: [],
         processing_auth: false,
         isLoggedIn: false,
+        wsConnected: false,
         user: {},
         errors: []
     }, action
@@ -46,6 +47,17 @@ export default function reducer (state = {
             return {
                 ...state,
                 rooms: action.rooms
+            }
+        case 'WS_CONNECTED':
+            console.log('this is not firing is it');
+            return {
+                ...state,
+                wsConnected: true
+            }
+        case 'WS_DISCONNECTED':
+            return {
+                ...state,
+                wsConnected: false
             }
         default:
             return state;
