@@ -23,14 +23,11 @@ class App extends React.Component {
           <Route path="/rooms" render={routerProps => 
             <Rooms {...routerProps} 
               logOut={this.props.logOut} 
-              isLoggedIn={this.props.isLoggedIn}
-              loadRooms={this.props.loadRooms} 
-              reloadRooms={this.props.reloadRooms} 
               rooms={this.props.rooms}
               wsConnected={this.props.wsConnected}
               wsCreateRoom={this.props.wsCreateRoom}
               wsSubscribeRoomsList={this.props.wsSubscribeRoomsList}
-              wsSend={this.props.wsSend}/>}/>
+              />}/>
 
           <Route path="/register" render={routerProps => <Register {...routerProps} register={this.props.register}/>}/>
         </Switch>

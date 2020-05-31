@@ -1,5 +1,4 @@
 import React from 'react';
-// import consumer from './consumer';
 import NewRoomForm from './NewRoomForm';
 import { Route } from 'react-router-dom';
 
@@ -7,14 +6,6 @@ class Rooms extends React.Component {
     state = {
         name: ""
     }
-
-    // componentDidMount(){
-    //     // this.props.loadRooms();
-    //     // here i need to subscribe to RoomsListChannel
-    //     // this.props.wsSubscribeRoomsList();
-    //     this.props.wsSubscribeRoomsList(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
-
-    // }
 
     componentDidUpdate() {
         // console.log(this.props.wsConnected)
@@ -41,7 +32,6 @@ class Rooms extends React.Component {
 
     createRoom = event => {
         event.preventDefault();
-        // this.subscription.send(this.state)
         this.props.wsCreateRoom(this.state);
     }
 
