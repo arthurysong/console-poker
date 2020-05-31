@@ -22,6 +22,10 @@ class Rooms extends React.Component {
             this.props.wsSubscribeRoomsList(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`)
         }
     }
+
+    componentWillUnmount(){
+        this.props.wsUnsubscribeRoomsList(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
+    }
     
     clickHandler = () => {
         this.props.logOut(this.props.history)
@@ -38,7 +42,7 @@ class Rooms extends React.Component {
     createRoom = event => {
         event.preventDefault();
         // this.subscription.send(this.state)
-        this.props.wsSend(this.state);
+        this.props.wsCreateRoom(this.state);
     }
 
     render () {

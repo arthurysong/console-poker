@@ -3,7 +3,7 @@ import Home from './Home';
 import Rooms from './Rooms';
 import { connect } from 'react-redux';
 import { setLogin, logOut, register, loadRooms } from './dispatchActions';
-import { wsSend, wsSubscribeRoomsList, wsConnect } from './wsActions';
+import { wsSend, wsSubscribeRoomsList, wsConnect, wsCreateRoom } from './wsActions';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import Register from './Register';
@@ -28,8 +28,10 @@ class App extends React.Component {
               reloadRooms={this.props.reloadRooms} 
               rooms={this.props.rooms}
               wsConnected={this.props.wsConnected}
+              wsCreateRoom={this.props.wsCreateRoom}
               wsSubscribeRoomsList={this.props.wsSubscribeRoomsList}
               wsSend={this.props.wsSend}/>}/>
+
           <Route path="/register" render={routerProps => <Register {...routerProps} register={this.props.register}/>}/>
         </Switch>
       </>
@@ -46,7 +48,8 @@ const mapDispatchToProps = dispatch => {
     // reloadRooms: data => dispatch(reloadRooms(data)),
     wsConnect: host => dispatch(wsConnect(host)),
     wsSubscribeRoomsList: host => dispatch(wsSubscribeRoomsList(host)),
-    wsSend: msg => dispatch(wsSend(msg))
+    wsSend: msg => dispatch(wsSend(msg)),
+    wsCreateRoom: state => dispatch(wsCreateRoom(state))
   }
 }
 

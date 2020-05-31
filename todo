@@ -23,7 +23,8 @@ TODO:
     Create create and delete actions for rooms
     Need to update store with data from rebroadcast 
     X /rooms displays rooms real time w connection to WS
-- Creating a Room using WebSockets
+- Creating a Room using WebSockets X => can now create a room using WebSockets!!
+- Unsubscribe when unmount to /rooms component?
 - Rooms should have max capacity of eight X Will manage using client
 - Should be redirected to login, if login fails from home X redirects to login if credentials can't login in set_login
 - REGEX expression for handleAuthRedirect for /rooms url
