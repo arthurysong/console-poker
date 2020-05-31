@@ -1,6 +1,7 @@
 import React from 'react';
 import NewRoomForm from './NewRoomForm';
 import { Route } from 'react-router-dom';
+import RoomListItem from './RoomListItem';
 
 class Rooms extends React.Component {
     state = {
@@ -29,7 +30,7 @@ class Rooms extends React.Component {
         })
     }
 
-    renderRooms = () => (this.props.rooms.map((room, index) => <li key={index}>{room.name}<br/>{room.no_users}/8</li>))
+    renderRooms = () => (this.props.rooms.map((room) => <RoomListItem key={room.id} room={room} joinRoom={this.props.joinRoom}/>))
 
     createRoom = event => {
         event.preventDefault();

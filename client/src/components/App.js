@@ -9,11 +9,6 @@ import LoginForm from './LoginForm';
 import Register from './Register';
 
 class App extends React.Component {
-  // componentDidMount() {
-        // this.props.wsConnect(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
-  // } 
-  // I'm going to do this if user successfully logs in actually.
-
   render() {
     return (
       <>
