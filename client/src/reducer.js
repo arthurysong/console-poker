@@ -1,6 +1,6 @@
 export default function reducer (state = {
         rooms: [],
-        processing_auth: false,
+        processingAuth: false,
         isLoggedIn: false,
         wsConnected: false,
         user: {},
@@ -11,19 +11,19 @@ export default function reducer (state = {
         case 'AUTH_REQUEST':
             return {
                 ...state,
-                processing_auth: true
+                processingAuth: true
             }
         case 'AUTH_FAIL':
             return {
                 ...state,
-                processing_auth: false,
+                processingAuth: false,
                 isLoggedIn: false,
                 user: {}
             }
         case 'AUTH_SUCCESS':
             return {
                 ...state,
-                processing_auth: false,
+                processingAuth: false,
                 isLoggedIn: true,
                 user: action.user
             }
