@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { wsConnect } from './wsActions';
+import { wsConnect } from '../redux/wsActions';
 
 class WebSocketConnection extends React.Component {
     componentDidMount() {

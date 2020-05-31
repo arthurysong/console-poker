@@ -1,5 +1,5 @@
 import React from 'react';
-import { loginUser } from './dispatchActions';
+import { loginUser } from '../redux/dispatchActions';
 import { connect } from 'react-redux';
 import Errors from './Errors';
 import { Link } from 'react-router-dom';

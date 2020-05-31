@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './components/App';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware} from 'redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import thunk from 'redux-thunk';
-import wsMiddleware from './wsMiddleware';
-import reducer from './reducer';
-import WebSocketConnection from './WebSocketConnection';
+import wsMiddleware from './redux/wsMiddleware';
+import reducer from './redux/reducer';
+import WebSocketConnection from './components/WebSocketConnection';
 
 const middleware = [wsMiddleware, thunk]
 const store = createStore (reducer, applyMiddleware(...middleware))

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { clearErrors } from './dispatchActions';
+import { clearErrors } from '../redux/dispatchActions';
 
 class Errors extends React.Component {
     componentWillUnmount(){
