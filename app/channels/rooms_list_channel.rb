@@ -11,26 +11,14 @@ class RoomsListChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
+    stop_all_streams
   end
 
-  # when i receive data from consumer subscription
   def receive(data)
-    # puts data
-    # binding.pry
-    # r = Room.create(data.message)
-    # rooms = Room.all
-    
-    # ActionCable.server.broadcast('rooms', { type: "update_rooms", rooms: rooms }) #I could put my broadcast statement in my controller?
   end
 
   def create_room(state)
     puts 'hello??? in create_room '
-    # puts state
-    # puts content
-    # binding.pry
-    # binding.pry/
-    # puts state.content
     r = Room.create(state["content"])
     rooms = Room.all
 

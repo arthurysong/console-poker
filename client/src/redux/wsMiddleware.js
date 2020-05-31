@@ -10,6 +10,7 @@ const socketMiddleware = () => {
     };
 
     const onClose = store => () => {
+        console.log('websocket disconnected')
         store.dispatch(actions.wsDisconnected());
     };
 

@@ -8,7 +8,8 @@ class Rooms extends React.Component {
     }
 
     componentDidUpdate() {
-        // console.log(this.props.wsConnected)
+        console.log(this.props.wsConnected)
+        
         if (this.props.wsConnected === true) {
             this.props.wsSubscribeRoomsList(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`)
         }

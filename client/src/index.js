@@ -19,7 +19,9 @@ const Root = ({store}) => (
     <Provider store={store}>
       <WebSocketConnection host={`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`} >
         <Route path="/" component={App}/>
+        
       </WebSocketConnection>
+      {/* <Route path="/" component={App}/> */}
     </Provider>
   </Router>
 )

@@ -17,15 +17,15 @@ TODO:
 - User validations
 - Change error json in authenticate to be errors.full_messages X Json now properly formatted to return array of messages
 - Error component should not display duplicate errors X Changed reducer, so it overrides old messages.
-- Now display rooms real time
+- Now display rooms real time X => displays real time using WS
     Need to create subscription
     Okay I have subscription and channel created
     Create create and delete actions for rooms
     Need to update store with data from rebroadcast 
     X /rooms displays rooms real time w connection to WS
 - Creating a Room using WebSockets X => can now create a room using WebSockets!!
-- Unsubscribe when unmount to /rooms component?
 - Rooms should have max capacity of eight X Will manage using client
 - Should be redirected to login, if login fails from home X redirects to login if credentials can't login in set_login
 - REGEX expression for handleAuthRedirect for /rooms url
-- Change processing_auth state property to processingAuth
+- Change processing_auth state property to processingAuth X => changed
+- Unsubscribe when unmount to /rooms component?
