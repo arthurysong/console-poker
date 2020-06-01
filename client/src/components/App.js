@@ -1,9 +1,10 @@
 import React from 'react';
 import Home from './Home';
-import Rooms from './Rooms';
+import RoomsList from './RoomsList';
+import Room from './Room';
 import { connect } from 'react-redux';
 import { setLogin, logOut, register} from '../redux/dispatchActions';
-import { wsSubscribeRoomsList, wsUnsubscribeRoomsList, wsConnect, wsCreateRoom } from '../redux/wsActions';
+import { wsSubscribeRoomsList, wsUnsubscribeRoomsList, wsConnect, wsCreateRoom, wsSubscribeRoom } from '../redux/wsActions';
 import { Route, Switch } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import Register from './Register';
@@ -15,8 +16,12 @@ class App extends React.Component {
         <Route path="/" render={routerProps => <Home {...routerProps} setLogin={this.props.setLogin}/>}/>
         <Switch>
           <Route path="/login" render={routerProps => <LoginForm {...routerProps}/>}/>
+          <Route path={`/rooms/:id`} render={routerProps => 
+            <Room {...routerProps} 
+              wsSubscribeRoom={this.props.wsSubscribeRoom} 
+              wsConnected={this.props.wsConnected}/>}/>
           <Route path="/rooms" render={routerProps => 
-            <Rooms {...routerProps} 
+            <RoomsList {...routerProps} 
               logOut={this.props.logOut} 
               rooms={this.props.rooms}
               wsConnected={this.props.wsConnected}
@@ -43,7 +48,8 @@ const mapDispatchToProps = dispatch => {
     wsSubscribeRoomsList: host => dispatch(wsSubscribeRoomsList(host)),
     wsUnsubscribeRoomsList: host => dispatch(wsUnsubscribeRoomsList(host)),
     // wsSend: msg => dispatch(wsSend(msg)),
-    wsCreateRoom: state => dispatch(wsCreateRoom(state))
+    wsCreateRoom: state => dispatch(wsCreateRoom(state)),
+    wsSubscribeRoom: room => dispatch(wsSubscribeRoom(room))
   }
 }
 

@@ -30,7 +30,7 @@ class Rooms extends React.Component {
         })
     }
 
-    renderRooms = () => (this.props.rooms.map((room) => <RoomListItem key={room.id} room={room} joinRoom={this.props.joinRoom}/>))
+    renderRooms = () => (this.props.rooms.map((room) => <RoomListItem key={room.id} room={room} wsSubscribeRoom={this.props.wsSubscribeRoom}/>))
 
     createRoom = event => {
         event.preventDefault();

@@ -62,13 +62,26 @@ const socketMiddleware = () => {
             case 'UNSUBSCRIBE_ROOMS_LIST':
                 socket.send(JSON.stringify({"command": "unsubscribe","identifier":"{\"channel\":\"RoomsListChannel\"}"}));
                 break;
+            case 'SUBSCRIBE_ROOM':
+                const subscribe_room_info = {
+                    command: 'subscribe',
+                    identifier: JSON.stringify({channel: "RoomChannel"}),
+                    data: JSON.stringify({ content: action.roomId })
+                }
+                socket.send(JSON.stringify(subscribe_room_info)); 
+                console.log('subscribing to room', action.roomId)
+                break;
+
+            case 'UNSUBSCRIBE_ROOM':
+                socket.send(JSON.stringify({"command": "unsubscribe","identifier":"{\"channel\":\"RoomsChannel\"}"}));
+                break;
             case 'CREATE_ROOM':
-                const send_info = {
+                const create_room_info = {
                     command: 'message',
                     identifier: JSON.stringify({channel: "RoomsListChannel"}),
                     data: JSON.stringify({action: "create_room", content: action.state})
                 }
-                socket.send(JSON.stringify(send_info));
+                socket.send(JSON.stringify(create_room_info));
                 break;
             case 'NEW_MESSAGE':
                 console.log('sending message', action.msg);
