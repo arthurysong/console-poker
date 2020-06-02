@@ -1,14 +1,10 @@
-binding.pry
+require 'pry'
 
 class RoomChannel < ApplicationCable::Channel
-  def subscribed(data)
-    # stream_from "some_channel"
-    stream_from "room_#{params[:content]}"
+  def subscribed
+    stream_from "room_#{params["room"]}"
 
-    puts params
-    # puts request
-
-    room = Room.find(params[:data])
+    room = Room.find(params["room"])
     ActionCable.server.broadcast("room_#{room.id}", room )
   end
 
