@@ -7,7 +7,7 @@ class RoomsListChannel < ApplicationCable::Channel
     stream_from 'rooms'
 
     rooms = Room.all
-    ActionCable.server.broadcast('rooms', { type: "update_rooms", rooms: rooms })
+    ActionCable.server.broadcast('rooms', { type: 'current_rooms', rooms: rooms })
   end
 
   def unsubscribed
@@ -18,11 +18,9 @@ class RoomsListChannel < ApplicationCable::Channel
   end
 
   def create_room(state)
-    puts 'hello??? in create_room '
-    r = Room.create(state["content"])
-    rooms = Room.all
+    r = Room.create(name: state["name"])
 
-    ActionCable.server.broadcast('rooms', { type: "update_rooms", rooms: rooms }) #I could put my broadcast statement in my controller?
+    ActionCable.server.broadcast('rooms', { type: 'new_room', room: r }) #I could put my broadcast statement in my controller?
   end
 end
 
