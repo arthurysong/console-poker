@@ -2,10 +2,15 @@ import React from 'react';
 import NewRoomForm from './NewRoomForm';
 import { Route } from 'react-router-dom';
 import RoomListItem from './RoomListItem';
+import Cable from 'actioncable';
 
 class Rooms extends React.Component {
     state = {
         name: ""
+    }
+
+    componentDidMount(){
+
     }
 
     componentDidUpdate() {

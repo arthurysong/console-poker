@@ -5,8 +5,7 @@ export default function resourceReducer (state = {
     isLoggedIn: false,
     user: {},
     errors: [],
-    wsConnected: false, 
-    wsSubscribedToRoom: false
+    wsConnected: false
 }, action
 ) {
 switch (action.type) {
@@ -34,15 +33,15 @@ switch (action.type) {
             ...state,
             wsConnected: false
         }
-    case 'WS_ROOM_SUBSCRIBED':
-        return {
-            ...state,
-            wsSubscribedToRoom: true
-        }
+    // case 'WS_ROOM_SUBSCRIBED':
+    //     return {
+    //         ...state,
+    //         wsSubscribedToRoom: true
+    //     }
     case 'WS_ROOM_UNSUBSCRIBED':
         return {
             ...state,
-            wsSubscribedToRoom: false
+            room: undefined
         }
 
         //auth

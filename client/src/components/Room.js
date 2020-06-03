@@ -1,37 +1,35 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-const Room = props => {
-    useEffect(() => {
-        console.log('useeffect');
-        console.log('wsConnected', props.wsConnected);
-        console.log('wsSubscribedRoom', props.wsSubscribedRoom);
-        if (props.wsConnected && !props.wsSubscribedRoom){
-
-            props.wsSubscribeRoom(props.match.params.id);
+class Room extends React.Component {
+    subscribeIfNotSubscribed(){
+        if (this.props.wsConnected && !this.props.room){
+            this.props.wsSubscribeRoom(this.props.match.params.id);
         }
-        return function cleanup() {
-            props.wsUnsubscribeRoom()
-        }
-    })
+    }
 
-    function renderRoom(){
-        if (props.room !== undefined) {
+    componentWillUnmount(){
+        this.props.wsUnsubscribeRoom();
+    }
+
+    renderRoom(){
+        if (this.props.room !== undefined) {
             return (
                 <>
-                {props.room.name}
-                {props.room.messages.map((message, index) => <li key={index}>{message.payload}</li>)}
+                {this.props.room.name}
+                {this.props.room.messages.map((message, index) => <li key={index}>{message.payload}</li>)}
                 </>
             )
         }
     }
 
-    // render(){
+    render(){
         return(
             <div>
-                {renderRoom()}
+                {this.subscribeIfNotSubscribed()}
+                {this.renderRoom()}
             </div>
         )
-    // }
+    }
 }
 
 export default Room;

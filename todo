@@ -13,8 +13,6 @@ TODO:
     It seems a lot more simpler that way
     I don't think I need processing_auth anymore then. 
 - Need a register page. X Register page complete, creates user and signs in on success
-- Sign in via Google drive?
-- User validations
 - Change error json in authenticate to be errors.full_messages X Json now properly formatted to return array of messages
 - Error component should not display duplicate errors X Changed reducer, so it overrides old messages.
 - Now display rooms real time X => displays real time using WS
@@ -26,9 +24,12 @@ TODO:
 - Creating a Room using WebSockets X => can now create a room using WebSockets!!
 - Rooms should have max capacity of eight X Will manage using client
 - Should be redirected to login, if login fails from home X redirects to login if credentials can't login in set_login
-- REGEX expression for handleAuthRedirect for /rooms url
 - Change processing_auth state property to processingAuth X => changed
 - Unsubscribe when unmount to /rooms component? X => unsubscribes when Room component unmounts
 - Join a Room and begin chatting *
-- I need to reorganize reducer into a wsReducer and reducer X => created auth ws and resource reducers
-    
+- Remove wsSubscribed, instead use state.room to check if subscribed to room
+    -> make sure to make state.room = undefined when unsubscribed
+    -> same goes for RoomsList subscribing
+- User validations
+- REGEX expression for handleAuthRedirect for /rooms url
+- Sign in via Google drive?
