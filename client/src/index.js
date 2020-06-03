@@ -10,23 +10,20 @@ import wsMiddleware from './redux/wsMiddleware';
 import reducer from './redux/reducer';
 import WebSocketConnection from './components/WebSocketConnection';
 
-const middleware = [wsMiddleware, thunk]
-const store = createStore (reducer, applyMiddleware(...middleware))
+// const middleware = [wsMiddleware, thunk]
+const store = createStore (reducer, applyMiddleware(thunk))
 window.store = store;
 
-const Root = ({store}) => (
-  <Router>
-    <Provider store={store}>
-      <WebSocketConnection host={`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`} >
-        <Route path="/" component={App}/>
-      </WebSocketConnection>
-      {/* <Route path="/" component={App}/> */}
-    </Provider>
-  </Router>
-)
+// const Root = ({store}) => (
+//   <Router>
+    
+//   </Router>
+// )
 
 ReactDOM.render(
-  <Root store={store} />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );
 

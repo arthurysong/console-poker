@@ -42,6 +42,10 @@ class Rooms extends React.Component {
             }
         });
     }
+
+    componentWillUnmount(){
+        this.subscription.disconnected();
+    }
     
     clickHandler = () => {
         this.props.logOut(this.props.history)

@@ -1,50 +1,12 @@
 export default function resourceReducer (state = {
-    rooms: [],
-    room: undefined,
     processingAuth: false,
     isLoggedIn: false,
     user: {},
-    errors: [],
-    wsConnected: false
+    errors: []
 }, action
 ) {
 switch (action.type) {
-    //resources
-    case 'ADD_ROOMS':
-        return {
-            ...state,
-            rooms: action.rooms
-        }
-    case 'SET_ROOM':
-        return {
-            ...state,
-            room: action.room
-        }
-
-        //websockets
-    case 'WS_CONNECTED':
-        console.log('this is not firing is it');
-        return {
-            ...state,
-            wsConnected: true
-        }
-    case 'WS_DISCONNECTED':
-        return {
-            ...state,
-            wsConnected: false
-        }
-    // case 'WS_ROOM_SUBSCRIBED':
-    //     return {
-    //         ...state,
-    //         wsSubscribedToRoom: true
-    //     }
-    case 'WS_ROOM_UNSUBSCRIBED':
-        return {
-            ...state,
-            room: undefined
-        }
-
-        //auth
+    //auth
     case 'AUTH_REQUEST':
         return {
             ...state,
@@ -80,16 +42,7 @@ switch (action.type) {
             ...state,
             errors: []
         }
-    // case 'WS_ROOMSLIST_SUBSCRIBED':
-    //     return {
-    //         ...state,
-    //         wsSubscribedRList: true
-    //     }
-    // case 'WS_ROOMSLIST_UNSUBSCRIBED':
-    //     return {
-    //         ...state,
-    //         wsSubscribedRList: false
-    //     }
+
     default:
         return state;
 
