@@ -10,6 +10,7 @@ class Rooms extends React.Component {
         newForm: false
     }
 
+    //websockets handlers
     handleData(data){
         if (data.type === 'current_rooms'){
             this.setState({
@@ -23,10 +24,16 @@ class Rooms extends React.Component {
         
     }
 
-    componentDidMount(){
-        let cable = Cable.createConsumer(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
+    createRoom = event => {
+        event.preventDefault();
+        this.subscription.createRoom(this.state.name)
+    }
 
-        this.subscription = cable.subscriptions.create({
+    // lifecycle hooks
+    componentDidMount(){
+        this.cable = Cable.createConsumer(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
+
+        this.subscription = this.cable.subscriptions.create({
             channel: 'RoomsListChannel'
           }, {
             connected: () => {},
@@ -44,24 +51,18 @@ class Rooms extends React.Component {
     }
 
     componentWillUnmount(){
-        this.subscription.disconnected();
+        this.cable.subscriptions.remove(this.subscription);
     }
     
-    clickHandler = () => {
-        this.props.logOut(this.props.history)
-    }
-
+    //component handlers
     changeHandler = event => {
         this.setState({
             name: event.target.value
         })
     }
 
-    renderRooms = () => (this.state.rooms.map((room) => <RoomListItem key={room.id} room={room} wsSubscribeRoom={this.props.wsSubscribeRoom}/>))
-
-    createRoom = event => {
-        event.preventDefault();
-        this.subscription.createRoom(this.state.name)
+    clickHandler = () => {
+        this.props.logOut(this.props.history)
     }
 
     toggleNewForm = () => {
@@ -69,6 +70,8 @@ class Rooms extends React.Component {
             newForm: !prevState.newForm
         }));
     }
+
+    renderRooms = () => (this.state.rooms.map((room) => <RoomListItem key={room.id} room={room} wsSubscribeRoom={this.props.wsSubscribeRoom}/>))
 
     render () {
         return (
