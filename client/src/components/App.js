@@ -4,7 +4,7 @@ import RoomsList from './RoomsList';
 import Room from './Room';
 import { connect } from 'react-redux';
 import { setLogin, logOut, register} from '../redux/dispatchActions';
-import { wsSubscribeRoomsList, wsUnsubscribeRoomsList, wsConnect, wsCreateRoom, wsSubscribeRoom } from '../redux/wsActions';
+import { wsSubscribeRoomsList, wsUnsubscribeRoomsList, wsConnect, wsCreateRoom, wsSubscribeRoom, wsUnsubscribeRoom } from '../redux/wsActions';
 import { Route, Switch } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import Register from './Register';
@@ -20,6 +20,8 @@ class App extends React.Component {
             <Room {...routerProps} 
               wsSubscribeRoom={this.props.wsSubscribeRoom} 
               wsConnected={this.props.wsConnected}
+              wsSubscribedToRoom={this.props.wsSubscribedToRoom}
+              wsUnsubscribeRoom={this.props.wsUnsubscribeRoom}
               room={this.props.room}/>}/>
           <Route path="/rooms" render={routerProps => 
             <RoomsList {...routerProps} 
@@ -44,13 +46,12 @@ const mapDispatchToProps = dispatch => {
     register: (state,history) => dispatch(register(state,history)),
     setLogin: history => dispatch(setLogin(history)),
     logOut: history => dispatch(logOut(history)),
-    // loadRooms: () => dispatch(loadRooms()),
     wsConnect: host => dispatch(wsConnect(host)),
     wsSubscribeRoomsList: host => dispatch(wsSubscribeRoomsList(host)),
     wsUnsubscribeRoomsList: host => dispatch(wsUnsubscribeRoomsList(host)),
-    // wsSend: msg => dispatch(wsSend(msg)),
     wsCreateRoom: state => dispatch(wsCreateRoom(state)),
-    wsSubscribeRoom: room => dispatch(wsSubscribeRoom(room))
+    wsSubscribeRoom: room => dispatch(wsSubscribeRoom(room)),
+    wsUnsubscribeRoom: () => dispatch(wsUnsubscribeRoom())
   }
 }
 
@@ -58,7 +59,7 @@ const mapStateToProps = state => {
   return {
     isLoggedIn: state.isLoggedIn,
     wsConnected: state.wsConnected,
-    // processingAuth: state.processingAuth,
+    wsSubscribedToRoom: state.wsSubscribedToRoom,
     rooms: state.rooms,
     room: state.room
   }

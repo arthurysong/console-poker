@@ -4,10 +4,9 @@ import { updateRooms, setRoom } from './dispatchActions';
 const socketMiddleware = () => {
     let socket = null;
 
-    const onOpen = (store, res) => event => {
+    const onOpen = store => event => {
         console.log('websocket open', event.target.url);
         store.dispatch(actions.wsConnected(event.target.url));
-        res();
     };
 
     const onClose = store => () => {
@@ -43,28 +42,14 @@ const socketMiddleware = () => {
                 if (socket !== null) {
                     socket.close();
                 }
-
-                //what if I await 
-
-                const connect = async (host) => {
-                    await new Promise((res, err) => {
-                        socket = new WebSocket(host);
-
-                        socket.onmessage = onMessage(store);
-                        socket.onopen = onOpen(store, res);
-                        socket.onclose = onClose(store);
-                    })
-                }
-                
                 console.log('ws connecting');
-                connect(action.host);
                 //connect to websocket
-                // socket = new WebSocket(action.host);
+                socket = new WebSocket(action.host);
 
                 //handlers
-                // socket.onmessage = onMessage(store);
-                // socket.onclose = onClose(store);
-                // socket.onopen = onOpen(store);
+                socket.onmessage = onMessage(store);
+                socket.onclose = onClose(store);
+                socket.onopen = onOpen(store);
                 // connect to the remote host
                 break;
             case 'WS_DISCONNECT':
@@ -74,25 +59,14 @@ const socketMiddleware = () => {
                 socket = null;
                 console.log('websocket closed');
                 break;
-            case 'SUBSCRIBE_ROOMS_LIST':
+
+            case 'WS_SUBSCRIBE_ROOMS_LIST':
                 socket.send(JSON.stringify({"command": "subscribe","identifier":"{\"channel\":\"RoomsListChannel\"}"})) 
                 break;
-            case 'UNSUBSCRIBE_ROOMS_LIST':
+            case 'WS_UNSUBSCRIBE_ROOMS_LIST':
                 socket.send(JSON.stringify({"command": "unsubscribe","identifier":"{\"channel\":\"RoomsListChannel\"}"}));
                 break;
-            case 'SUBSCRIBE_ROOM':
-                const subscribe_room_info = {
-                    command: 'subscribe',
-                    identifier: JSON.stringify({channel: "RoomChannel", room: action.roomId })
-                }
-                socket.send(JSON.stringify(subscribe_room_info)); 
-                console.log('subscribing to room', action.roomId)
-                break;
-
-            case 'UNSUBSCRIBE_ROOM':
-                socket.send(JSON.stringify({"command": "unsubscribe","identifier":"{\"channel\":\"RoomsChannel\"}"}));
-                break;
-            case 'CREATE_ROOM':
+            case 'WS_CREATE_ROOM':
                 const create_room_info = {
                     command: 'message',
                     identifier: JSON.stringify({channel: "RoomsListChannel"}),
@@ -100,6 +74,20 @@ const socketMiddleware = () => {
                 }
                 socket.send(JSON.stringify(create_room_info));
                 break;
+
+            case 'WS_SUBSCRIBE_ROOM':
+                const subscribe_room_info = {
+                    command: 'subscribe',
+                    identifier: JSON.stringify({channel: "RoomChannel", room: action.roomId })
+                }
+                socket.send(JSON.stringify(subscribe_room_info)); 
+                console.log('subscribing to room', action.roomId);
+                break;
+            case 'WS_UNSUBSCRIBE_ROOM':
+                socket.send(JSON.stringify({"command": "unsubscribe","identifier":"{\"channel\":\"RoomChannel\"}"}));
+                break;
+
+            
             case 'NEW_MESSAGE':
                 console.log('sending message', action.msg);
                 break;
