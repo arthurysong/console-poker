@@ -121,3 +121,8 @@ export const updateRooms = data => {
     console.log('updateRooms action');
     return {type: 'ADD_ROOMS', rooms: data}
 }
+
+export const setRoom = data => {
+    console.log('setting room');
+    return {type: 'SET_ROOM', room: data}
+}

@@ -1,13 +1,10 @@
-export default function reducer (state = {
-        rooms: [],
-        processingAuth: false,
-        isLoggedIn: false,
-        wsConnected: false,
-        user: {},
-        errors: []
-    }, action
-) {
-    switch (action.type) {
+export default function authReducer (state = {
+    processingAuth: false,
+    isLoggedIn: false,
+    user: {},
+    errors: []
+}, action) {
+    switch(action.type){
         case 'AUTH_REQUEST':
             return {
                 ...state,
@@ -43,24 +40,7 @@ export default function reducer (state = {
                 ...state,
                 errors: []
             }
-        case 'ADD_ROOMS':
-            return {
-                ...state,
-                rooms: action.rooms
-            }
-        case 'WS_CONNECTED':
-            console.log('this is not firing is it');
-            return {
-                ...state,
-                wsConnected: true
-            }
-        case 'WS_DISCONNECTED':
-            return {
-                ...state,
-                wsConnected: false
-            }
         default:
             return state;
     }
-
 }

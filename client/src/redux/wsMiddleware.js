@@ -1,12 +1,13 @@
 import * as actions from './wsActions';
-import { updateRooms } from './dispatchActions';
+import { updateRooms, setRoom } from './dispatchActions';
 
 const socketMiddleware = () => {
     let socket = null;
 
-    const onOpen = store => event => {
+    const onOpen = (store, res) => event => {
         console.log('websocket open', event.target.url);
         store.dispatch(actions.wsConnected(event.target.url));
+        res();
     };
 
     const onClose = store => () => {
@@ -25,6 +26,10 @@ const socketMiddleware = () => {
                 console.log('update_rooms switch case');
                 store.dispatch(updateRooms(payload.rooms));
                 break;
+            case 'set_room':
+                console.log('setting room');
+                store.dispatch(setRoom(payload.room))
+                break;
             default:
                 break;
         }
@@ -39,17 +44,28 @@ const socketMiddleware = () => {
                     socket.close();
                 }
 
-                //what if I return promise??
+                //what if I await 
 
+                const connect = async (host) => {
+                    await new Promise((res, err) => {
+                        socket = new WebSocket(host);
+
+                        socket.onmessage = onMessage(store);
+                        socket.onopen = onOpen(store, res);
+                        socket.onclose = onClose(store);
+                    })
+                }
+                
+                console.log('ws connecting');
+                connect(action.host);
                 //connect to websocket
-                socket = new WebSocket(action.host);
+                // socket = new WebSocket(action.host);
 
                 //handlers
-                socket.onmessage = onMessage(store);
-                socket.onclose = onClose(store);
-                socket.onopen = onOpen(store);
+                // socket.onmessage = onMessage(store);
+                // socket.onclose = onClose(store);
+                // socket.onopen = onOpen(store);
                 // connect to the remote host
-                console.log('ws connecting');
                 break;
             case 'WS_DISCONNECT':
                 if (socket !== null){

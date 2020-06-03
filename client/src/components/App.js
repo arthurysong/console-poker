@@ -19,7 +19,8 @@ class App extends React.Component {
           <Route path={`/rooms/:id`} render={routerProps => 
             <Room {...routerProps} 
               wsSubscribeRoom={this.props.wsSubscribeRoom} 
-              wsConnected={this.props.wsConnected}/>}/>
+              wsConnected={this.props.wsConnected}
+              room={this.props.room}/>}/>
           <Route path="/rooms" render={routerProps => 
             <RoomsList {...routerProps} 
               logOut={this.props.logOut} 
@@ -58,7 +59,8 @@ const mapStateToProps = state => {
     isLoggedIn: state.isLoggedIn,
     wsConnected: state.wsConnected,
     // processingAuth: state.processingAuth,
-    rooms: state.rooms
+    rooms: state.rooms,
+    room: state.room
   }
 }
 

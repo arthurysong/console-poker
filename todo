@@ -30,4 +30,5 @@ TODO:
 - Change processing_auth state property to processingAuth X => changed
 - Unsubscribe when unmount to /rooms component? X => unsubscribes when Room component unmounts
 - Join a Room and begin chatting *
+- I need to reorganize reducer into a wsReducer and reducer X => created auth ws and resource reducers
     
