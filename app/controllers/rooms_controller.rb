@@ -4,6 +4,11 @@ class RoomsController < ApplicationController
         render json: rooms
     end
 
+    def show
+        room = Room.find(params[:id])
+        render json: room
+    end
+
     def create
         # puts 'hello'
         room = Room.create(room_params)

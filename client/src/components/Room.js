@@ -43,7 +43,15 @@ class Room extends React.Component {
     }
 
     loadRoom(id) {
-        fetch(`http://localhost:3001/rooms/${id}`)
+        const token = localStorage.getItem('token');
+        const options = {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }
+        fetch(`http://localhost:3001/rooms/${id}`, options)
+            .then(resp => resp.json())
+            .then(json => this.setState({room: json}));
     }
 
     renderRoom(){
