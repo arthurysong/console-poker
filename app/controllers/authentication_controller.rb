@@ -1,7 +1,7 @@
 require 'pry'
 
 class AuthenticationController < ApplicationController
-    skip_before_action :authenticate_request
+    # skip_before_action :authenticate_request
 
     def authenticate
         command = AuthenticateUser.call(user_params[:email], user_params[:password])
@@ -13,11 +13,8 @@ class AuthenticationController < ApplicationController
     end
 
     def set_login
-        @current_user = AuthorizeApiRequest.call(request.headers).result
         if @current_user 
             render json: { user: @current_user }
-        else
-            render json: { errors: 'Not Authorized' }, status: :unauthorized
         end
     end
 

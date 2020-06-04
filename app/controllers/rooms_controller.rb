@@ -4,6 +4,11 @@ class RoomsController < ApplicationController
         render json: rooms
     end
 
+    def create
+        puts 'hello'
+        
+    end
+
     private
 
     def room_params

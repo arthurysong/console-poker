@@ -1,11 +1,10 @@
 import React from 'react';
-import NewRoomForm from './NewRoomForm';
 import RoomListItem from './RoomListItem';
 import Cable from 'actioncable';
+import { Link } from 'react-router-dom';
 
 class Rooms extends React.Component {
     state = {
-        name: "",
         rooms: [],
         newForm: false
     }
@@ -24,11 +23,6 @@ class Rooms extends React.Component {
         
     }
 
-    createRoom = event => {
-        event.preventDefault();
-        this.subscription.createRoom(this.state.name)
-    }
-
     // lifecycle hooks
     componentDidMount(){
         this.cable = Cable.createConsumer(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
@@ -42,11 +36,6 @@ class Rooms extends React.Component {
                 console.log(data);
                 this.handleData(data);
             },
-            createRoom: function(name){
-              this.perform('create_room', {
-                name: name
-              });
-            }
         });
     }
 
@@ -65,20 +54,13 @@ class Rooms extends React.Component {
         this.props.logOut(this.props.history)
     }
 
-    toggleNewForm = () => {
-        this.setState(prevState => ({
-            newForm: !prevState.newForm
-        }));
-    }
-
     renderRooms = () => (this.state.rooms.map((room) => <RoomListItem key={room.id} room={room} wsSubscribeRoom={this.props.wsSubscribeRoom}/>))
 
     render () {
         return (
             <div>
                 Rooms<br/>
-                <button onClick={this.toggleNewForm}>New Room</button><br/>
-                {this.state.newForm && <NewRoomForm createRoom={this.createRoom} changeHandler={this.changeHandler} name={this.state.name}/>}
+                <Link to="/rooms/new">Create Room</Link>
                 <ul>
                     {this.renderRooms()}
                 </ul>

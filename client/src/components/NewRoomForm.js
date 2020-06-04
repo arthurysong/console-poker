@@ -1,13 +1,28 @@
 import React from 'react';
 
 class NewRoomForm extends React.Component {
+    state = {
+        name: ""
+    }
+
+    changeHandler = event => {
+        this.setState({
+            name: event.target.value
+        })
+    }
+
+    submitHandler = event => {
+        event.preventDefault();
+        this.props.createRoom(this.state);
+    }
+
     render() {
         return (
             <div>
-                <form onSubmit={this.props.createRoom}>
+                <form onSubmit={this.submitHandler}>
                     <label>
-                        Name
-                    <input type="text" name="name" onChange={this.props.changeHandler} value={this.props.name} /><br/>
+                        Name&nbsp;
+                    <input type="text" name="name" onChange={this.changeHandler} value={this.state.name} /><br/>
                     </label>
                     <input type="submit" value="Create" />
                 </form>

@@ -35,6 +35,7 @@ export const loginUser = (state, history) => {
 export const setLogin = history => {
     return dispatch => {
         const token = localStorage.getItem("token");
+        console.log('in setlogin');
         if (token) {
             dispatch({type: 'AUTH_REQUEST'});
             fetch(`http://localhost:3001/set_login`, {
@@ -99,30 +100,47 @@ export const register = (state, history) => {
     }
 }
 
-export const loadRooms = () => {
+export const createRoom = state => {
     return dispatch => {
-        const token = localStorage.getItem("token"); //i'm going to make each request send tokens even though i have route authorization
-        // because people can still query the database without going through the client and i want to protect the API itself.
-        fetch(`http://localhost:3001/rooms`, {
+        const body = JSON.stringify(state)
+        const options = {
+            method: "POST",
             headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body
+        }
+        fetch(`http://localhost:3001/rooms`, options)
             .then(resp => resp.json())
-            .then(json => {
-                
-                console.log(json);
-                dispatch({type: 'ADD_ROOMS', rooms: json})
-            })
+            .then(json => console.log(json));
     }
 }
 
-export const updateRooms = data => {
-    console.log('updateRooms action');
-    return {type: 'ADD_ROOMS', rooms: data}
-}
+// export const loadRooms = () => {
+//     return dispatch => {
+//         const token = localStorage.getItem("token"); //i'm going to make each request send tokens even though i have route authorization
+//         // because people can still query the database without going through the client and i want to protect the API itself.
+//         fetch(`http://localhost:3001/rooms`, {
+//             headers: {
+//                 Authorization: `Bearer ${token}`
+//             }
+//         })
+//             .then(resp => resp.json())
+//             .then(json => {
+                
+//                 console.log(json);
+//                 dispatch({type: 'ADD_ROOMS', rooms: json})
+//             })
+//     }
+// }
 
-export const setRoom = data => {
-    console.log('setting room');
-    return {type: 'SET_ROOM', room: data}
-}
+// export const updateRooms = data => {
+//     console.log('updateRooms action');
+//     return {type: 'ADD_ROOMS', rooms: data}
+// }
+
+// export const setRoom = data => {
+//     console.log('setting room');
+//     return {type: 'SET_ROOM', room: data}
+// }

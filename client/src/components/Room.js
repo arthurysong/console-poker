@@ -1,15 +1,15 @@
 import React from 'react';
 
 class Room extends React.Component {
-    subscribeIfNotSubscribed(){
-        if (this.props.wsConnected && !this.props.room){
-            this.props.wsSubscribeRoom(this.props.match.params.id);
-        }
-    }
+    // subscribeIfNotSubscribed(){
+    //     if (this.props.wsConnected && !this.props.room){
+    //         this.props.wsSubscribeRoom(this.props.match.params.id);
+    //     }
+    // }
 
-    componentWillUnmount(){
-        this.props.wsUnsubscribeRoom();
-    }
+    // componentWillUnmount(){
+    //     this.props.wsUnsubscribeRoom();
+    // }
 
     renderRoom(){
         if (this.props.room !== undefined) {
@@ -25,7 +25,7 @@ class Room extends React.Component {
     render(){
         return(
             <div>
-                {this.subscribeIfNotSubscribed()}
+                {/* {this.subscribeIfNotSubscribed()} */}
                 {this.renderRoom()}
             </div>
         )
