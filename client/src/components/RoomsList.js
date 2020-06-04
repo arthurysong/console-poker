@@ -35,7 +35,7 @@ class Rooms extends React.Component {
             received: (data) => {
                 console.log(data);
                 this.handleData(data);
-            },
+            }
         });
     }
 
