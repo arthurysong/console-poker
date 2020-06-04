@@ -11,7 +11,7 @@ class Room extends React.Component {
     componentDidMount(){
         //retrieve room? and set the room?
         //also I need to set user.room = current room****
-        this.joinAndLoadRoom(this.props.match.params.id);
+        // this.joinAndLoadRoom(this.props.match.params.id);
 
         //subscribe to room
         //start streaming messages, you don't have access to messages from before, or should you?
@@ -36,29 +36,45 @@ class Room extends React.Component {
     componentWillUnmount(){
         //unsubscribe to room
         //set user.room = nil in db
+        this.cable.subscriptions.remove(this.subscription)
         
     }
 
     handleData(data){
-        // switch (data.type) {
-        //     case: 
+        console.log(data);
+        switch (data.type) {
+            case 'current_room':
+                // console.log 
+                this.setState({ room: data.room })
+                break;
+            default:
+                break;
+        }
     }
 
-    joinAndLoadRoom(id) {
-        const token = localStorage.getItem('token');
-        const options = {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }
-        fetch(`http://localhost:3001/join_room/${id}`, options)
-            .then(resp => resp.json())
-            .then(json => this.setState({room: json}));
-    }
+    // joinAndLoadRoom(id) {
+    //     const token = localStorage.getItem('token');
+    //     const options = {
+    //         headers: {
+    //             'Authorization': `Bearer ${token}`
+    //         }
+    //     }
+    //     fetch(`http://localhost:3001/join_room/${id}`, options)
+    //         .then(resp => resp.json())
+    //         .then(json => this.setState({room: json}));
+    //         // .then(json => console.log(json));
+    // }
 
     renderRoom(){
         if (this.state.room !== undefined) {
-            return (this.state.room.name)
+            return (
+                <>
+                {this.state.room.name}<br/>
+                <ul>
+                    {this.state.room.users.map((user, index) => <li key={index}>{user.username}</li>)}
+                </ul>
+                </>
+            )
         }
     }
 
@@ -79,6 +95,7 @@ class Room extends React.Component {
             <div>
                 {this.renderRoom()}
                 {/* {this.renderMessages()} */}
+                {/* {this.state.messages.map()} */}
                 <form onSubmit={this.submitHandler}>
                     <input type="textarea" onChange={this.changeHandler} value={this.state.newMessage}/>
                     <input type="submit" value="send"/>
