@@ -10,19 +10,21 @@ room = Room.create(name: 'PakkFlow')
 room2 = Room.create(name: 'Omegacucks')
 # puts 'hello1'
 # puts 'hello123'
+# users = User.create({username: 'sona', email: 'sona@gmail.com', password: '123456' })
+
 users = User.create([
-    {username: 'sona', email: 'sona@gmail.com', password: '123456',  room_id: room.id },
-    {username: 'toxicflower', email: 'toxicflower@gmail.com', password: '123456', room_id: room.id },
-    {username: 'phoenixgold', email: 'phoenixgold@gmail.com', password: '123456', room_id: room.id },
-    {username: 'fudge', email: 'fudge@gmail.com', password: '123456', room_id: room.id },
-    {username: 'bulldog', email: 'bulldog@gmail.com', password: '123456', room_id: room2.id },
-    {username: 'raeyei', email: 'raeyei@gmail.com', password: '123456', room_id: room2.id },
-    {username: 'lacari', email: 'lacari@gmail.com', password: '123456', room_id: room2.id },
-    {username: 'arch', email: 'arch@gmail.com', password: '123456', room_id: room2.id },
-    {username: 'drunkenmonkey', email: 'drunkenmonkey@gmail.com', password: '123456', room_id: room2.id },
-    {username: 'warlord', email: 'warlord@gmail.com', password: '123456', room_id: room2.id },
-    {username: 'laden', email: 'laden@gmail.com', password: '123456', room_id: room2.id },
-    {username: 'bruceu', email: 'bruceu@gmail.com', password: '123456', room_id: room2.id }
+    {username: 'sona', email: 'sona@gmail.com', password: '123456' },
+    {username: 'toxicflower', email: 'toxicflower@gmail.com', password: '123456' },
+    {username: 'phoenixgold', email: 'phoenixgold@gmail.com', password: '123456' },
+    {username: 'fudge', email: 'fudge@gmail.com', password: '123456' },
+    {username: 'bulldog', email: 'bulldog@gmail.com', password: '123456' },
+    {username: 'raeyei', email: 'raeyei@gmail.com', password: '123456' },
+    {username: 'lacari', email: 'lacari@gmail.com', password: '123456' },
+    {username: 'arch', email: 'arch@gmail.com', password: '123456' },
+    {username: 'drunkenmonkey', email: 'drunkenmonkey@gmail.com', password: '123456' },
+    {username: 'warlord', email: 'warlord@gmail.com', password: '123456' },
+    {username: 'laden', email: 'laden@gmail.com', password: '123456' },
+    {username: 'bruceu', email: 'bruceu@gmail.com', password: '123456' }
 ])
 
 # puts 'hello2'

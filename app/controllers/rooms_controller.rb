@@ -1,3 +1,5 @@
+require 'pry'
+
 class RoomsController < ApplicationController
     def index
         rooms = Room.all
@@ -7,6 +9,12 @@ class RoomsController < ApplicationController
     def show
         room = Room.find(params[:id])
         render json: room
+    end
+
+    def join_room
+        room = Room.find(params[:id])
+        
+        binding.pry
     end
 
     def create

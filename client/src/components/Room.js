@@ -10,7 +10,8 @@ class Room extends React.Component {
 
     componentDidMount(){
         //retrieve room? and set the room?
-        this.loadRoom(this.props.match.params.id);
+        //also I need to set user.room = current room****
+        this.joinAndLoadRoom(this.props.match.params.id);
 
         //subscribe to room
         //start streaming messages, you don't have access to messages from before, or should you?
@@ -24,7 +25,7 @@ class Room extends React.Component {
                 console.log(data);
                 this.handleData(data);
             },
-            createMessage: function(data){
+            sendMessage: function(data){
                 this.perform("create_message", { content: data });
             }
         });
@@ -34,6 +35,7 @@ class Room extends React.Component {
     // i think that's better.
     componentWillUnmount(){
         //unsubscribe to room
+        //set user.room = nil in db
         
     }
 
@@ -42,14 +44,14 @@ class Room extends React.Component {
         //     case: 
     }
 
-    loadRoom(id) {
+    joinAndLoadRoom(id) {
         const token = localStorage.getItem('token');
         const options = {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         }
-        fetch(`http://localhost:3001/rooms/${id}`, options)
+        fetch(`http://localhost:3001/join_room/${id}`, options)
             .then(resp => resp.json())
             .then(json => this.setState({room: json}));
     }
@@ -60,10 +62,27 @@ class Room extends React.Component {
         }
     }
 
+    submitHandler = event => {
+        event.preventDefault();
+        this.subscription.sendMessage(this.state.newMessage);
+        this.setState({ newMessage: "" })
+    }
+
+    changeHandler = event => {
+        this.setState({
+            newMessage: event.target.value
+        })
+    }
+
     render(){
         return(
             <div>
                 {this.renderRoom()}
+                {/* {this.renderMessages()} */}
+                <form onSubmit={this.submitHandler}>
+                    <input type="textarea" onChange={this.changeHandler} value={this.state.newMessage}/>
+                    <input type="submit" value="send"/>
+                </form>
             </div>
         )
     }
