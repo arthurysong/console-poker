@@ -100,22 +100,23 @@ export const register = (state, history) => {
     }
 }
 
-export const createRoom = state => {
-    return dispatch => {
+export const createRoom = state => dispatch =>  
+    new Promise (function(res, err) {
         const body = JSON.stringify(state)
+        const token = localStorage.getItem('token');
         const options = {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body
         }
         fetch(`http://localhost:3001/rooms`, options)
             .then(resp => resp.json())
             .then(json => console.log(json));
-    }
-}
+    })
 
 // export const loadRooms = () => {
 //     return dispatch => {
