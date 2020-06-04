@@ -13,7 +13,8 @@ class NewRoomForm extends React.Component {
 
     submitHandler = event => {
         event.preventDefault();
-        this.props.createRoom(this.state);
+        this.props.createRoom(this.state)
+            .then(json => this.props.history.push(`/rooms/${json.id}`));
     }
 
     render() {

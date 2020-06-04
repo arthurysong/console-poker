@@ -115,7 +115,8 @@ export const createRoom = state => dispatch =>
         }
         fetch(`http://localhost:3001/rooms`, options)
             .then(resp => resp.json())
-            .then(json => console.log(json));
+            .then(json => res(json))
+            .catch(err => err(err));
     })
 
 // export const loadRooms = () => {

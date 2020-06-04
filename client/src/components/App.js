@@ -18,6 +18,7 @@ class App extends React.Component {
           <Route path="/login" render={routerProps => <LoginForm {...routerProps}/>}/>
           <Route path="/rooms/new" render={routerProps => 
             <NewRoomForm 
+              {...routerProps}
               createRoom={this.props.createRoom}/>}/>
 
           <Route path={`/rooms/:id`} render={routerProps => 
