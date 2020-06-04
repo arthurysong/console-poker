@@ -1,5 +1,6 @@
 import React from 'react';
 import Cable from 'actioncable';
+import Chatbox from './Chatbox';
 
 class Room extends React.Component {
     state = {
@@ -52,18 +53,9 @@ class Room extends React.Component {
         }
     }
 
-    // joinAndLoadRoom(id) {
-    //     const token = localStorage.getItem('token');
-    //     const options = {
-    //         headers: {
-    //             'Authorization': `Bearer ${token}`
-    //         }
-    //     }
-    //     fetch(`http://localhost:3001/join_room/${id}`, options)
-    //         .then(resp => resp.json())
-    //         .then(json => this.setState({room: json}));
-    //         // .then(json => console.log(json));
-    // }
+    leaveRoom = () => {
+
+    }
 
     renderRoom(){
         if (this.state.room !== undefined) {
@@ -94,12 +86,10 @@ class Room extends React.Component {
         return(
             <div>
                 {this.renderRoom()}
-                {/* {this.renderMessages()} */}
-                {/* {this.state.messages.map()} */}
-                <form onSubmit={this.submitHandler}>
-                    <input type="textarea" onChange={this.changeHandler} value={this.state.newMessage}/>
-                    <input type="submit" value="send"/>
-                </form>
+                <button onClick={this.leaveRoom}>Leave</button>
+                <Chatbox room={this.state.room} newMessage={this.state.newMessage} changeHandler={this.changeHandler}
+                    submitHandler={this.submitHandler}/>
+                
             </div>
         )
     }

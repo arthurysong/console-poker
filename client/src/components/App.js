@@ -8,11 +8,14 @@ import { setLogin, logOut, register } from '../redux/dispatchActions';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import Register from './Register';
+import User from './User';
 
 class App extends React.Component {
   render() {
     return (
       <Router>
+        <User user={this.props.user}/>
+        {console.log(this.props.user)}
         <Route path="/" render={routerProps => <Home {...routerProps} setLogin={this.props.setLogin}/>}/>
         <Switch>
           <Route path="/login" render={routerProps => <LoginForm {...routerProps}/>}/>
@@ -49,6 +52,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     isLoggedIn: state.isLoggedIn,
+    usser: state.user
   }
 }
 

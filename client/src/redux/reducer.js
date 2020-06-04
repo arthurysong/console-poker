@@ -1,7 +1,7 @@
 export default function resourceReducer (state = {
     processingAuth: false,
     isLoggedIn: false,
-    user: {},
+    user: undefined,
     errors: []
 }, action
 ) {
