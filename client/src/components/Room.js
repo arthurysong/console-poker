@@ -1,6 +1,7 @@
 import React from 'react';
 import Cable from 'actioncable';
 import Chatbox from './Chatbox';
+import Game from './Game';
 
 class Room extends React.Component {
     state = {
@@ -39,6 +40,7 @@ class Room extends React.Component {
                 break;
             case 'new_message':
                 this.setState(prevState => ({ messages: [ ...prevState.messages, data.message ]}))
+                break;
             default:
                 break;
         }
@@ -80,6 +82,7 @@ class Room extends React.Component {
                 {this.renderRoom()}
                 <Chatbox messages={this.state.messages} newMessage={this.state.newMessage} changeHandler={this.changeHandler}
                     submitHandler={this.submitHandler}/>
+                <Game />
                 
             </div>
         )
