@@ -4,7 +4,7 @@ import RoomsList from './RoomsList';
 import NewRoomForm from './NewRoomForm';
 import Room from './Room';
 import { connect } from 'react-redux';
-import { setLogin, logOut, register, createRoom } from '../redux/dispatchActions';
+import { setLogin, logOut, register } from '../redux/dispatchActions';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import Register from './Register';
@@ -18,7 +18,9 @@ class App extends React.Component {
           <Route path="/login" render={routerProps => <LoginForm {...routerProps}/>}/>
           <Route path="/rooms/new" render={routerProps => 
             <NewRoomForm 
-              createRoom={this.props.createRoom}/>}/>
+              {...routerProps}
+              // createRoom={this.props.createRoom}
+              />}/>
 
           <Route path={`/rooms/:id`} render={routerProps => 
             <Room {...routerProps}/>}/>
@@ -40,7 +42,7 @@ const mapDispatchToProps = dispatch => {
     register: (state,history) => dispatch(register(state,history)),
     setLogin: history => dispatch(setLogin(history)),
     logOut: history => dispatch(logOut(history)),
-    createRoom: state => dispatch(createRoom(state))
+    // createRoom: state => dispatch(createRoom(state))
   }
 }
 

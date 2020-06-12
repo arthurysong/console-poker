@@ -1,9 +1,8 @@
 class User < ApplicationRecord
     has_secure_password
     belongs_to :room, optional: true
-
-    belongs_to :game, optional: true
-    belongs_to :round, optional: true
+    belongs_to :game, inverse_of: 'player', optional: true
+    belongs_to :round, inverse_of: 'player', optional: true
 
     #round_bet
     #chips
@@ -16,7 +15,6 @@ class User < ApplicationRecord
     end
 
     def make_move(move, amount = 0, blinds = false)
-        # binding.pry
         if is_move_valid?
             self.round.make_player_move(move, amount, blinds)
         end

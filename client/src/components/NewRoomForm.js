@@ -11,9 +11,26 @@ class NewRoomForm extends React.Component {
         })
     }
 
+    createRoom = () => {
+        const body = JSON.stringify(this.state)
+        const token = localStorage.getItem('token');
+        const options = {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body
+        }
+        return fetch(`http://localhost:3001/rooms`, options)
+    }
+
     submitHandler = event => {
         event.preventDefault();
-        this.props.createRoom(this.state);
+        this.createRoom(this.state)
+            .then(resp => resp.json())
+            .then(json => this.props.history.push(`/rooms/${json.id}`));
     }
 
     render() {

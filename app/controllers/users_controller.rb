@@ -9,8 +9,8 @@ class UsersController < ApplicationController
     end
 
     def create
-        puts 'hello'
         user = User.new(user_params)
+        
         if user.save
             render json: { user: user }, status: 201
         else 

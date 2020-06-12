@@ -2,7 +2,7 @@ require 'pry'
 
 class Round < ApplicationRecord
     belongs_to :game
-    has_many :players
+    has_many :players, foreign_key: "game_id", class_name: "User"
 
     #phase
     #small_blind_index

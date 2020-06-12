@@ -1,3 +1,5 @@
+require 'pry'
+
 class RoomsController < ApplicationController
     def index
         rooms = Room.all
@@ -5,13 +7,15 @@ class RoomsController < ApplicationController
     end
 
     def create
-        puts 'hello'
-        
+        # puts 'hello'
+        room = Room.create(room_params)
+        puts room
+        render json: room
     end
 
     private
 
     def room_params
-        room.permit(:name)
+        params.permit(:name)
     end
 end
