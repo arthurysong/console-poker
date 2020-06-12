@@ -2,7 +2,7 @@ require 'pry'
 
 class Round < ApplicationRecord
     belongs_to :game
-    has_many :players, foreign_key: "round_id", class_name: "User"
+    has_many :users
 
     #phase
     #small_blind_index
@@ -28,7 +28,7 @@ class Round < ApplicationRecord
     end
 
     def active_players
-        self.players.select {|player| player.playing }
+        self.users.select {|player| player.playing }
     end
 
     def access_community_cards
@@ -48,10 +48,9 @@ class Round < ApplicationRecord
     end
 
     def start
-        self.game.players.each do |player| 
+        self.game.users.each do |player| 
             player.playing = true 
             player.round_id = self.id
-            # player.total_bet = 0
             player.round_bet = 0
             player.save
         end
@@ -81,7 +80,7 @@ class Round < ApplicationRecord
         self.save
 
         #deal cards to players
-        self.players.each do |player|
+        self.active_players.each do |player|
             cards = []
             2.times do 
                 c = deck.delete_at(Random.rand(deck.length))
@@ -103,10 +102,10 @@ class Round < ApplicationRecord
         
         self.turn_count = 1
 
-        # if self.phase == 0
-        #     self.turn.make_move('raise', SMALL_BLIND, true) # put in blinds for preflop round
-        #     self.turn.make_move('raise', BIG_BLIND, true) # put in blinds for preflop round
-        # end
+        if self.phase == 0
+            self.turn.make_move('raise', SMALL_BLIND, true) # put in blinds for preflop round
+            self.turn.make_move('raise', BIG_BLIND, true) # put in blinds for preflop round
+        end
 
         self.save
     end
@@ -152,9 +151,7 @@ class Round < ApplicationRecord
             self.save
 
         elsif command == "raise"
-            puts 'hi'
             if can_players_afford?(amount) && amount > self.highest_bet_for_phase
-                puts '2'
                 money_to_leave_player = amount - turn.round_bet
                 turn.round_bet = amount
                 turn.chips -= money_to_leave_player
@@ -164,7 +161,6 @@ class Round < ApplicationRecord
                 self.highest_bet_for_phase = amount
                 next_turn(blinds)
                 self.save
-                binding.pry
             end
         elsif command == "allin"
             turn.make_move('raise', max_raise_level)
@@ -243,8 +239,6 @@ class Round < ApplicationRecord
     end
 
     def end_game_by_fold
-        #set is playing to false
-        #give pot to last active player
         self.is_playing = false
         self.save
 

@@ -24,10 +24,9 @@ users = User.create([
     {username: 'bruceu', email: 'bruceu@gmail.com', password: '123456' }
 ])
 
-# puts 'hello2'
 chatbox = Chatbox.create(room_id: room.id)
 chatbox2 = Chatbox.create(room_id: room2.id)
-# puts 'hello3'
+
 messages = Message.create([
     {chatbox: chatbox, user: users[0], payload: "what's up guys?"},
     {chatbox: chatbox, user: users[1], payload: "yo what up, how you been??"},

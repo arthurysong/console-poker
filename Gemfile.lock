@@ -81,6 +81,7 @@ GEM
     foreman (0.87.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    holdem (1.1.0)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.0)
@@ -215,6 +216,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   foreman
+  holdem
   jbuilder (~> 2.7)
   jwt
   listen (~> 3.2)
