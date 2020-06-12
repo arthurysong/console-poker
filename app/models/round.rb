@@ -2,7 +2,7 @@ require 'pry'
 
 class Round < ApplicationRecord
     belongs_to :game
-    has_many :players, foreign_key: "game_id", class_name: "User"
+    has_many :players, foreign_key: "round_id", class_name: "User"
 
     #phase
     #small_blind_index
@@ -103,10 +103,10 @@ class Round < ApplicationRecord
         
         self.turn_count = 1
 
-        if self.phase == 0
-            self.turn.make_move('raise', SMALL_BLIND, true) # put in blinds for preflop round
-            self.turn.make_move('raise', BIG_BLIND, true) # put in blinds for preflop round
-        end
+        # if self.phase == 0
+        #     self.turn.make_move('raise', SMALL_BLIND, true) # put in blinds for preflop round
+        #     self.turn.make_move('raise', BIG_BLIND, true) # put in blinds for preflop round
+        # end
 
         self.save
     end
@@ -152,7 +152,9 @@ class Round < ApplicationRecord
             self.save
 
         elsif command == "raise"
+            puts 'hi'
             if can_players_afford?(amount) && amount > self.highest_bet_for_phase
+                puts '2'
                 money_to_leave_player = amount - turn.round_bet
                 turn.round_bet = amount
                 turn.chips -= money_to_leave_player
@@ -162,6 +164,7 @@ class Round < ApplicationRecord
                 self.highest_bet_for_phase = amount
                 next_turn(blinds)
                 self.save
+                binding.pry
             end
         elsif command == "allin"
             turn.make_move('raise', max_raise_level)
