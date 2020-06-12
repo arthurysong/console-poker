@@ -57,7 +57,8 @@ class Room extends React.Component {
     }
 
     leaveRoom = () => {
-
+        // redirect to /rooms
+        this.props.history.push(`/rooms`);
     }
 
     renderRoom(){
@@ -65,6 +66,7 @@ class Room extends React.Component {
             return (
                 <>
                 {this.state.room.name}<br/>
+                <button onClick={this.leaveRoom}>Leave</button>
                 <ul>
                     {this.state.room.users.map((user, index) => <li key={index}>{user.username}</li>)}
                 </ul>
@@ -90,7 +92,6 @@ class Room extends React.Component {
             <div>
                 {console.log(this.state.messages)}
                 {this.renderRoom()}
-                <button onClick={this.leaveRoom}>Leave</button>
                 <Chatbox messages={this.state.messages} newMessage={this.state.newMessage} changeHandler={this.changeHandler}
                     submitHandler={this.submitHandler}/>
                 
