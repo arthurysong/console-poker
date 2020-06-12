@@ -10,12 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_014800) do
+ActiveRecord::Schema.define(version: 2020_06_12_003235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "chatboxes", force: :cascade do |t|
+    t.integer "room_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "games", force: :cascade do |t|
     t.integer "room_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -35,11 +41,33 @@ ActiveRecord::Schema.define(version: 2020_05_16_014800) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "rounds", force: :cascade do |t|
+    t.integer "game_id"
+    t.integer "phase", default: 0
+    t.integer "turn_count", default: 0
+    t.integer "no_players_for_phase", default: 0
+    t.integer "small_blind_index", default: 0
+    t.integer "turn_index", default: 0
+    t.integer "pot", default: 0
+    t.integer "highest_bet_for_phase", default: 0
+    t.string "community_cards"
+    t.boolean "is_playing", default: false
+    t.boolean "all_in", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
     t.string "password_digest"
     t.integer "room_id"
+    t.integer "game_id"
+    t.integer "round_id"
+    t.boolean "playing"
+    t.integer "round_bet"
+    t.integer "chips", default: 100000
+    t.string "cards"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

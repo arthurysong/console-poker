@@ -6,6 +6,14 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :password_digest
       t.integer :room_id
 
+      #for playing poker
+      t.integer :game_id
+      t.integer :round_id
+
+      t.boolean :playing
+      t.integer :round_bet
+      t.integer :chips, :default => 100000
+      t.string :cards
 
       t.timestamps
     end
