@@ -50,7 +50,7 @@ export const setLogin = history => {
                         dispatch({type: 'AUTH_SUCCESS', user: json.user})
                         
                         handleAuthRedirect(true, history);  // created function to control for different routes for redirects
-                    } else if (json.errors) {
+                    } else if (json.error) {
                         dispatch({type: 'AUTH_FAIL'});
                         handleAuthRedirect(false, history);
                     }
@@ -99,50 +99,3 @@ export const register = (state, history) => {
             })
     }
 }
-
-// export const createRoom = state => dispatch =>  
-//     new Promise (function(res, err) {
-//         const body = JSON.stringify(state)
-//         const token = localStorage.getItem('token');
-//         const options = {
-//             method: "POST",
-//             headers: {
-//                 'Accept': 'application/json',
-//                 'Content-Type': 'application/json',
-//                 'Authorization': `Bearer ${token}`
-//             },
-//             body
-//         }
-//         fetch(`http://localhost:3001/rooms`, options)
-//             .then(resp => resp.json())
-//             .then(json => res(json))
-//             .catch(err => err(err));
-//     })
-
-// export const loadRooms = () => {
-//     return dispatch => {
-//         const token = localStorage.getItem("token"); //i'm going to make each request send tokens even though i have route authorization
-//         // because people can still query the database without going through the client and i want to protect the API itself.
-//         fetch(`http://localhost:3001/rooms`, {
-//             headers: {
-//                 Authorization: `Bearer ${token}`
-//             }
-//         })
-//             .then(resp => resp.json())
-//             .then(json => {
-                
-//                 console.log(json);
-//                 dispatch({type: 'ADD_ROOMS', rooms: json})
-//             })
-//     }
-// }
-
-// export const updateRooms = data => {
-//     console.log('updateRooms action');
-//     return {type: 'ADD_ROOMS', rooms: data}
-// }
-
-// export const setRoom = data => {
-//     console.log('setting room');
-//     return {type: 'SET_ROOM', room: data}
-// }
