@@ -48,6 +48,9 @@ class Room extends React.Component {
                 // console.log 
                 this.setState({ room: data.room })
                 break;
+            case 'new_message':
+                console.log(data)
+                this.setState(prevState => ({ messages: [ ...prevState.messages, data.message ]}))
             default:
                 break;
         }
@@ -85,9 +88,10 @@ class Room extends React.Component {
     render(){
         return(
             <div>
+                {console.log(this.state.messages)}
                 {this.renderRoom()}
                 <button onClick={this.leaveRoom}>Leave</button>
-                <Chatbox room={this.state.room} newMessage={this.state.newMessage} changeHandler={this.changeHandler}
+                <Chatbox messages={this.state.messages} newMessage={this.state.newMessage} changeHandler={this.changeHandler}
                     submitHandler={this.submitHandler}/>
                 
             </div>
