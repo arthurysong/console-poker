@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-# puts 'hello'
+
 room = Room.create(name: 'PakkFlow')
 room2 = Room.create(name: 'Omegacucks')
 
