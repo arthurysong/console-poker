@@ -45,7 +45,6 @@ class Room extends React.Component {
     }
 
     leaveRoom = () => {
-        // redirect to /rooms
         this.props.history.push(`/rooms`);
     }
 
@@ -53,11 +52,11 @@ class Room extends React.Component {
         if (this.state.room !== undefined) {
             return (
                 <>
-                {this.state.room.name}<br/>
-                <button onClick={this.leaveRoom}>Leave</button>
-                <ul>
-                    {this.state.room.users.map((user, index) => <li key={index}>{user.username}</li>)}
-                </ul>
+                    {this.state.room.name}<br/>
+                    <button onClick={this.leaveRoom}>Leave</button>
+                    <ul>
+                        {this.state.room.users.map((user, index) => <li key={index}>{user.username}</li>)}
+                    </ul>
                 </>
             )
         }
