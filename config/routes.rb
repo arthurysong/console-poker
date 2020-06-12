@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :rounds
+  resources :games
   resources :messages
   resources :chatboxes
   resources :rooms
