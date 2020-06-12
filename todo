@@ -26,10 +26,12 @@ TODO:
 - Should be redirected to login, if login fails from home X redirects to login if credentials can't login in set_login
 - Change processing_auth state property to processingAuth X => changed
 - Unsubscribe when unmount to /rooms component? X => unsubscribes when Room component unmounts
-- Join a Room and begin chatting *
+- Join a Room and begin chatting X => Can join/leave room and chat real time
 - Remove wsSubscribed, instead use state.room to check if subscribed to room
     -> make sure to make state.room = undefined when unsubscribed
     -> same goes for RoomsList subscribing
-- User validations
-- REGEX expression for handleAuthRedirect for /rooms url
-- Sign in via Google drive?
+    X => Room component handles subscriptions
+
+? User validations
+? REGEX expression for handleAuthRedirect for /rooms url
+? Sign in via Google drive?
