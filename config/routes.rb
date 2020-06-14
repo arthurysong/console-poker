@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :games
   resources :messages
   resources :chatboxes
-  resources :rooms
+  resources :rooms do
+    resources :games, only: [:index]
+  end
   resources :users
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
