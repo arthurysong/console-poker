@@ -33,7 +33,7 @@ class Round < ApplicationRecord
     end
 
     def active_players
-        self.users.select {|player| player.playing }
+        self.users.select {|player| player.playing }.sort{|a, b| a.id <=> b.id}
     end
 
     def access_community_cards
@@ -117,15 +117,15 @@ class Round < ApplicationRecord
         self.no_players_for_phase = active_players.count
         self.highest_bet_for_phase = 0
         self.turn_index = self.small_blind_index
-        
         self.turn_count = 1
+        self.save
 
         if self.phase == 0
             self.status << "Collecting Blinds (200, 400)."
             self.turn.make_move('raise', SMALL_BLIND, true) # put in blinds for preflop round
             self.turn.make_move('raise', BIG_BLIND, true) # put in blinds for preflop round
         end
-
+        self.status << "#{turn.username}'s turn."
         self.save
     end
 
@@ -135,9 +135,12 @@ class Round < ApplicationRecord
         else
             self.turn_index = 0
         end
-        self.status << "#{turn.username}'s turn."
-
-        self.turn_count += 1 unless blinds
+        # self.status << "#{turn.username}'s turn."
+        # self.turn_count += 1 unless blinds
+        unless blinds
+            self.status << "#{turn.username}'s turn."
+            self.turn_count += 1 unless blinds
+        end
     end
 
     def make_player_move(command, amount = 0, blinds = false)
@@ -155,7 +158,7 @@ class Round < ApplicationRecord
             self.save
         elsif command == "check"
             # add check
-            if self.highest_bet_for_phase == 0
+            if self.highest_bet_for_phase == 0 || turn.round_bet == self.highest_bet_for_phase
                 self.status << "#{turn.username} checks"
                 next_turn
             else
@@ -184,15 +187,30 @@ class Round < ApplicationRecord
             self.save
         elsif command == "raise"
             if can_players_afford?(amount) && amount > self.highest_bet_for_phase
-                self.status << "#{turn.username} raises to #{amount}."
+                if blinds 
+                    self.status << "#{turn.username}: #{amount}"
+                else
+                    self.status << "#{turn.username} raises to #{amount}."
+                end
+                # puts 'hello i am firing'
+                # turn.tap do |player|
+                #     money_to_leave_player = amount - player.round_bet
+                #     player.round_bet = amount
+                #     player.chips -= money_to_leave_player
+                #     player.save
+                # end
+                puts turn.username
                 money_to_leave_player = amount - turn.round_bet
-                turn.round_bet = amount
+                puts turn.round_bet = amount
                 turn.chips -= money_to_leave_player
+                puts turn.save
+                # puts 'hello i have fired'
+
                 if turn.chips == 0
                     self.all_in = true 
                     self.status << "#{turn.username} is all in."
                 end
-                turn.save
+                # binding.pry
                 self.pot += money_to_leave_player
                 self.highest_bet_for_phase = amount
                 next_turn(blinds)
@@ -257,12 +275,15 @@ class Round < ApplicationRecord
         
         if best_players.count == 1
             self.status << "#{best_players[0].username} has the best hand with #{best_hands[0]}"
+            self.status << "#{best_players[0].username} wins #{self.pot}!"
         else
             string = "Tie!"
             best_players.each_with_index do |player, index|
                 string += "\n#{player.username} has #{best_hand[index]}"
+                
             end
             self.status << string
+            self.status << "#{self.pot} is split between the winners."
         end
 
         split = self.pot / best_players.count
