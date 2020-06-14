@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-    def show
+    def index
         if params[:room_id]
             room = Room.find(params[:room_id])
             if room.game?
