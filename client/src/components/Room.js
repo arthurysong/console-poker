@@ -76,14 +76,19 @@ class Room extends React.Component {
         })
     }
 
+    renderGameComp = () => {
+        if (this.state.room) {
+            return (<Game room={this.state.room}/>)
+        }
+    }
+
     render(){
         return(
             <div>
                 {this.renderRoom()}
                 <Chatbox messages={this.state.messages} newMessage={this.state.newMessage} changeHandler={this.changeHandler}
                     submitHandler={this.submitHandler}/>
-                <Game />
-                
+                {this.renderGameComp()}
             </div>
         )
     }

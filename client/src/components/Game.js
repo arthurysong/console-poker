@@ -2,7 +2,7 @@ import React from 'react';
 
 class Game extends React.Component {
     state = {
-        game: {}
+        game: undefined
     }
 
     componentDidMount() {
@@ -10,6 +10,21 @@ class Game extends React.Component {
         // GET /rooms/:id/game?
         // Set this.state.game with JSON
         // If game is found, subscribe to games channel
+        const token = localStorage.getItem("token");
+        if (token) {
+        fetch(`http://localhost:3001/rooms/${this.props.room.id}/games`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(resp => resp.json())
+            .then(json => {
+                console.log(json);
+                if (json.game) {
+                    // show board
+                }
+            })
+        }
     }
 
     createAndStartGame = () => {
@@ -17,6 +32,7 @@ class Game extends React.Component {
         // POST /rounds/:id/games? Nested Route
         // set this.state.game with JSON
         // subscribe to game_channel
+        
     }
 
     renderButton = () => {
