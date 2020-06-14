@@ -20,8 +20,11 @@ class Game extends React.Component {
             .then(resp => resp.json())
             .then(json => {
                 console.log(json);
-                if (json.game) {
+                if (!json.error) {
                     // show board
+                    this.setState({
+                        game: json
+                    })
                 }
             })
         }
@@ -53,6 +56,8 @@ class Game extends React.Component {
 
     renderButton = () => {
         // if game is loaded don't render button
+        // console.log(this.state)
+        // make sure the number of players are greater than two
         if (this.state.game === undefined) {
             return <button onClick={this.createAndStartGame}>Start Game</button>
         }
