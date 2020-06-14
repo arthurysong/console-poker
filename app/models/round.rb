@@ -166,7 +166,7 @@ class Round < ApplicationRecord
             end
             self.save
         elsif command == "call"
-            if self.highest_bet_for_phase > turn.round_bet || self.highest_bet_for_phase == 0
+            if self.highest_bet_for_phase >= turn.round_bet || self.highest_bet_for_phase == 0
                 self.status << "#{turn.username} calls."
                 money_to_leave_player = self.highest_bet_for_phase - turn.round_bet
                 turn.round_bet = self.highest_bet_for_phase
@@ -312,7 +312,7 @@ class Round < ApplicationRecord
         last_player.save
 
         self.is_playing = false
-        self.status << "#{last_player.turn} wins #{self.pot}!"
+        self.status << "#{last_player.username} wins #{self.pot}!"
         self.save
     
     end
