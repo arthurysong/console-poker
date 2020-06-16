@@ -54,6 +54,16 @@ class Round < ApplicationRecord
         players_have_bet? && @turn_count > @no_of_players_for_phase
     end
 
+    def players_have_bet?
+        #check all players self.current_bet to be equal to highest bet
+        self.active_players.each do |player|
+            if player.round_bet < self.highest_bet_for_phase
+                return false
+            end
+        end
+        true
+    end
+
     def start
         self.status << "Round starting..."
         self.game.users.each do |player| 
@@ -137,8 +147,7 @@ class Round < ApplicationRecord
         else
             self.turn_index = 0
         end
-        # self.status << "#{turn.username}'s turn."
-        # self.turn_count += 1 unless blinds
+
         unless blinds
             self.status << "#{turn.username}'s turn."
             self.turn_count += 1 unless blinds
@@ -155,6 +164,7 @@ class Round < ApplicationRecord
             if self.turn_index == self.active_players.count # if last person folds, i need to set index to first person
                 self.turn_index = 0
             end
+            
             self.status << "#{turn.username}'s turn..."
             self.turn_count += 1
             self.save
@@ -177,7 +187,7 @@ class Round < ApplicationRecord
                     self.all_in = true
                     self.status << "#{turn.username} is all in."
                 end
-                # self.all_in = true if turn.chips == 0
+
                 self.pot += money_to_leave_player
                 turn.save
 
@@ -194,19 +204,12 @@ class Round < ApplicationRecord
                 else
                     self.status << "#{turn.username} raises to #{amount}."
                 end
-                # puts 'hello i am firing'
-                # turn.tap do |player|
-                #     money_to_leave_player = amount - player.round_bet
-                #     player.round_bet = amount
-                #     player.chips -= money_to_leave_player
-                #     player.save
-                # end
-                puts turn.username
+              
+                turn.username
                 money_to_leave_player = amount - turn.round_bet
-                puts turn.round_bet = amount
+                turn.round_bet = amount
                 turn.chips -= money_to_leave_player
-                puts turn.save
-                # puts 'hello i have fired'
+                turn.save
 
                 if turn.chips == 0
                     self.all_in = true 
@@ -256,7 +259,6 @@ class Round < ApplicationRecord
             showdown
         else
             self.phase += 1
-            #show another card
             start_betting_round
         end
     end
@@ -264,8 +266,9 @@ class Round < ApplicationRecord
     def showdown
         best_hands = []
         best_players = []
+        # phase = 3
         active_players.each_with_index do |player, index|
-            hand = Holdem::PokerHand.new(player.cards + " " + self.access_community_cards)
+            hand = Holdem::PokerHand.new(player.cards + " " + self.community_cards)
             if index == 0 || hand == best_hands[0]
                 best_hands << hand
                 best_players << player
@@ -281,7 +284,7 @@ class Round < ApplicationRecord
         else
             string = "Tie!"
             best_players.each_with_index do |player, index|
-                string += "\n#{player.username} has #{best_hand[index]}"
+                string += "\n#{player.username} has #{best_hands[index]}"
                 
             end
             self.status << string
@@ -298,15 +301,6 @@ class Round < ApplicationRecord
         self.save
     end
 
-    def players_have_bet?
-        #check all players self.current_bet to be equal to highest bet
-        self.active_players.each do |player|
-            if player.round_bet < self.highest_bet_for_phase
-                return false
-            end
-        end
-        true
-    end
 
     def end_game_by_fold
         last_player = self.active_players[0]
