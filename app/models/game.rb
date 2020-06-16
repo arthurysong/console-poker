@@ -3,6 +3,14 @@ class Game < ApplicationRecord
     has_many :users
     has_many :rounds
 
+    def as_json(options = {})
+        super(only: [:id], methods: [:active_round])
+    end 
+
+    def active_round
+        self.rounds.last
+    end
+
     def start
         self.room.users.each do |user|
             user.game_id = self.id

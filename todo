@@ -35,3 +35,5 @@ TODO:
 ? User validations
 ? REGEX expression for handleAuthRedirect for /rooms url
 ? Sign in via Google drive?
+
+CREATE A MACRO FETCH WITH TOKEN FUNCTION

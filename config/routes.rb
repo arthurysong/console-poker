@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :messages
   resources :chatboxes
   resources :rooms do
-    resources :games, only: [:index]
+    resources :games, only: [:index, :create]
   end
   resources :users
 

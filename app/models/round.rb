@@ -16,6 +16,8 @@ class Round < ApplicationRecord
     #all_in
     #status
 
+    #make sure players are at least greater than 2 before starting...
+
     PRE_FLOP = 0
     FLOP = 1
     TURN = 2
@@ -25,7 +27,7 @@ class Round < ApplicationRecord
     BIG_BLIND = 400
 
     def as_json(options = {})
-        super(only: [:status, :pot, :highest_bet_for_phase, :id], methods: [:active_players, :access_community_cards], include: [:users])
+        super(only: [:id, :status, :pot, :highest_bet_for_phase], methods: [:active_players, :access_community_cards], include: [:users])
     end 
 
     def turn 
