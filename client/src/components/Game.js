@@ -6,27 +6,22 @@ class Game extends React.Component {
     }
 
     componentDidMount() {
-        // check if there is game for this room
-        // GET /rooms/:id/game?
-        // Set this.state.game with JSON
-        // If game is found, subscribe to games channel
         const token = localStorage.getItem("token");
         if (token) {
-        fetch(`http://localhost:3001/rooms/${this.props.room.id}/games`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then(resp => resp.json())
-            .then(json => {
-                console.log(json);
-                if (!json.error) {
-                    // show board
-                    this.setState({
-                        game: json
-                    })
+            fetch(`http://localhost:3001/rooms/${this.props.room.id}/games`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
                 }
             })
+                .then(resp => resp.json())
+                .then(json => {
+                    console.log(json);
+                    if (!json.error) {
+                        this.setState({
+                            game: json
+                        })
+                    }
+                })
         }
     }
 
@@ -44,7 +39,8 @@ class Game extends React.Component {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 }
-            }).then(resp => resp.json())
+            })
+                .then(resp => resp.json())
                 .then(json => {
                     console.log(json);
                     this.setState({
@@ -54,10 +50,17 @@ class Game extends React.Component {
         }
     }
 
+    renderBoard = () => {
+        if (this.state.game !== undefined){
+            return (
+                <>
+                    Hellos
+                </>
+            )
+        }
+    }
+
     renderButton = () => {
-        // if game is loaded don't render button
-        // console.log(this.state)
-        // make sure the number of players are greater than two
         if (this.state.game === undefined) {
             return <button onClick={this.createAndStartGame}>Start Game</button>
         }
@@ -66,6 +69,8 @@ class Game extends React.Component {
     render() {
         return (
             <>
+                {this.renderBoard()}
+                {/* {this.renderConsole()} */}
                 {this.renderButton()}
             </>
         )

@@ -10,14 +10,14 @@ room = Room.create(name: 'PakkFlow')
 room2 = Room.create(name: 'Omegacucks')
 
 users = User.create([
-    {username: 'sona', email: 'sona@gmail.com', password: '123456', room: room },
-    {username: 'toxicflower', email: 'toxicflower@gmail.com', password: '123456', room: room },
-    {username: 'phoenixgold', email: 'phoenixgold@gmail.com', password: '123456', room: room },
-    {username: 'fudge', email: 'fudge@gmail.com', password: '123456', room: room },    
-    # {username: 'sona', email: 'sona@gmail.com', password: '123456', },
-    # {username: 'toxicflower', email: 'toxicflower@gmail.com', password: '123456', },
-    # {username: 'phoenixgold', email: 'phoenixgold@gmail.com', password: '123456', },
-    # {username: 'fudge', email: 'fudge@gmail.com', password: '123456', },
+    # {username: 'sona', email: 'sona@gmail.com', password: '123456', room: room },
+    # {username: 'toxicflower', email: 'toxicflower@gmail.com', password: '123456', room: room },
+    # {username: 'phoenixgold', email: 'phoenixgold@gmail.com', password: '123456', room: room },
+    # {username: 'fudge', email: 'fudge@gmail.com', password: '123456', room: room },    
+    {username: 'sona', email: 'sona@gmail.com', password: '123456', },
+    {username: 'toxicflower', email: 'toxicflower@gmail.com', password: '123456', },
+    {username: 'phoenixgold', email: 'phoenixgold@gmail.com', password: '123456', },
+    {username: 'fudge', email: 'fudge@gmail.com', password: '123456', },
     {username: 'bulldog', email: 'bulldog@gmail.com', password: '123456' },
     {username: 'raeyei', email: 'raeyei@gmail.com', password: '123456' },
     {username: 'lacari', email: 'lacari@gmail.com', password: '123456' },
@@ -39,4 +39,4 @@ messages = Message.create([
     {chatbox: chatbox, user: users[3], payload: "supppp, i'm down for the forest"}
 ])
 
-game = Game.create(room_id: room.id)
+# game = Game.create(room_id: room.id)
