@@ -51,7 +51,7 @@ class Round < ApplicationRecord
     end
 
     def phase_finished?
-        players_have_bet? && @turn_count > @no_of_players_for_phase
+        players_have_bet? && self.turn_count > self.no_players_for_phase
     end
 
     def players_have_bet?
@@ -229,7 +229,7 @@ class Round < ApplicationRecord
         
         if check_if_over
             end_game_by_fold
-        elsif players_have_bet? && self.turn_count > self.no_players_for_phase
+        elsif phase_finished?
             initiate_next_phase
         end
     end
