@@ -1,4 +1,5 @@
 import React from 'react';
+import GameBoard from './GameBoard';
 
 class Game extends React.Component {
     state = {
@@ -26,10 +27,6 @@ class Game extends React.Component {
     }
 
     createAndStartGame = () => {
-        // create a game that belongs to room
-        // POST /rounds/:id/games? Nested Route
-        // set this.state.game with JSON
-        // subscribe to game_channel
         const token = localStorage.getItem("token");
         if (token) {
             fetch(`http://localhost:3001/rooms/${this.props.room.id}/games`, {
@@ -50,16 +47,6 @@ class Game extends React.Component {
         }
     }
 
-    renderBoard = () => {
-        if (this.state.game !== undefined){
-            return (
-                <>
-                    Hellos
-                </>
-            )
-        }
-    }
-
     renderButton = () => {
         if (this.state.game === undefined) {
             return <button onClick={this.createAndStartGame}>Start Game</button>
@@ -69,7 +56,7 @@ class Game extends React.Component {
     render() {
         return (
             <>
-                {this.renderBoard()}
+                <GameBoard round={this.state.game.active_round} />
                 {/* {this.renderConsole()} */}
                 {this.renderButton()}
             </>

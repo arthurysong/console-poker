@@ -1,36 +1,6 @@
 TODO:
-
-- Try to understand JWT, I understand it, but I'm not too sure how to store JWT securely in browser.
-    For now, I'm just going to get it working using localStorage
-    Then later, I can make it secure
-- User can logout X
-- Rooms redirects to Home if not logged in X
-    Also displays error when user is not logged in.
-- Should my errors property in store be an array? It's confusing me
-    I decided to have an array of errors, because what if there are more than one errors?
-- Log in page not redirecting to /rooms page X
-    I'm going to redirect by passing in history into dispatch actions
-    It seems a lot more simpler that way
-    I don't think I need processing_auth anymore then. 
-- Need a register page. X Register page complete, creates user and signs in on success
-- Change error json in authenticate to be errors.full_messages X Json now properly formatted to return array of messages
-- Error component should not display duplicate errors X Changed reducer, so it overrides old messages.
-- Now display rooms real time X => displays real time using WS
-    Need to create subscription
-    Okay I have subscription and channel created
-    Create create and delete actions for rooms
-    Need to update store with data from rebroadcast 
-    X /rooms displays rooms real time w connection to WS
-- Creating a Room using WebSockets X => can now create a room using WebSockets!!
-- Rooms should have max capacity of eight X Will manage using client
-- Should be redirected to login, if login fails from home X redirects to login if credentials can't login in set_login
-- Change processing_auth state property to processingAuth X => changed
-- Unsubscribe when unmount to /rooms component? X => unsubscribes when Room component unmounts
-- Join a Room and begin chatting X => Can join/leave room and chat real time
-- Remove wsSubscribed, instead use state.room to check if subscribed to room
-    -> make sure to make state.room = undefined when unsubscribed
-    -> same goes for RoomsList subscribing
-    X => Room component handles subscriptions
+Should I not send cards to JSON? and create separate subscription for a user's cards?
+Eh I don't think it matters too much as long as it's not being displayed in console.
 
 ? User validations
 ? REGEX expression for handleAuthRedirect for /rooms url
