@@ -7,8 +7,10 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import reducer from './redux/reducer';
 import './fonts/stylesheet.css';
+import cableMiddleware from './redux/cableMiddleware';
 
-const store = createStore (reducer, applyMiddleware(thunk))
+// const store = createStore(reducer, applyMiddleware(thunk, cableMiddleware))
+const store = createStore(reducer, applyMiddleware(cableMiddleware(), thunk))
 window.store = store;
 
 ReactDOM.render(

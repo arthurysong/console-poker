@@ -1,49 +1,20 @@
 import React from 'react';
-import Cable from 'actioncable';
 import Chatbox from './Chatbox';
 import Game from './Game';
+import { connect } from 'react-redux';
+import { subscribeRoom, unsubscribeRoom } from '../redux/cableActions';
 
 class Room extends React.Component {
     state = {
-        room: undefined,
-        messages: [],
         newMessage: ""
     }
 
-    componentDidMount(){
-        this.cable = Cable.createConsumer(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
-        this.subscription = this.cable.subscriptions.create({
-            channel: 'RoomChannel', room: `${this.props.match.params.id}`
-          }, {
-            connected: () => {},
-            disconnected: () => {},
-            received: (data) => {
-                console.log(data);
-                this.handleData(data);
-            },
-            sendMessage: function(data){
-                this.perform("create_message", { content: data });
-            }
-        });
+    componentDidMount() {
+        this.subscription = this.props.subscribeRoom(this.props.match.params.id);
     }
 
-    componentWillUnmount(){
-        this.cable.subscriptions.remove(this.subscription)
-        
-    }
-
-    handleData(data){
-        console.log(data);
-        switch (data.type) {
-            case 'current_room':
-                this.setState({ room: data.room })
-                break;
-            case 'new_message':
-                this.setState(prevState => ({ messages: [ ...prevState.messages, data.message ]}))
-                break;
-            default:
-                break;
-        }
+    componentWillUnmount() {
+        this.props.unsubscribeRoom(this.props.match.params.id);
     }
 
     leaveRoom = () => {
@@ -51,13 +22,13 @@ class Room extends React.Component {
     }
 
     renderRoom(){
-        if (this.state.room !== undefined) {
+        if (this.props.room !== undefined) {
             return (
                 <>
-                    {this.state.room.name}<br/>
+                    {this.props.room.name}<br/>
                     <button onClick={this.leaveRoom}>Leave</button>
                     <ul>
-                        {this.state.room.users.map((user, index) => <li key={index}>{user.username}</li>)}
+                        {this.props.room.users.map((user, index) => <li key={index}>{user.username}</li>)}
                     </ul>
                 </>
             )
@@ -77,8 +48,8 @@ class Room extends React.Component {
     }
 
     renderGameComp = () => {
-        if (this.state.room) {
-            return (<Game room={this.state.room}/>)
+        if (this.props.room) {
+            return (<Game room={this.props.room}/>)
         }
     }
 
@@ -86,7 +57,7 @@ class Room extends React.Component {
         return(
             <div>
                 {this.renderRoom()}
-                <Chatbox messages={this.state.messages} newMessage={this.state.newMessage} changeHandler={this.changeHandler}
+                <Chatbox messages={this.props.messages} newMessage={this.state.newMessage} changeHandler={this.changeHandler}
                     submitHandler={this.submitHandler}/>
                 <br/>
                 <br/>
@@ -96,4 +67,18 @@ class Room extends React.Component {
     }
 }
 
-export default Room;
+const mapStateToProps = state => {
+    return {
+        room: state.room,
+        messages: state.messages
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        subscribeRoom: roomId => dispatch(subscribeRoom(roomId)),
+        unsubscribeRoom: roomId => dispatch(unsubscribeRoom(roomId))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Room);

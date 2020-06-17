@@ -9,12 +9,14 @@
     "@testing-library/user-event": "^7.1.2",
     "actioncable": "^5.2.4-3",
     "react": "^16.13.1",
+    "react-actioncable-provider": "^2.0.0",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "underscore": "^1.10.2"
   },
   "scripts": {
     "start": "react-scripts start",

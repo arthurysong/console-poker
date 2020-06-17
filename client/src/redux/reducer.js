@@ -2,7 +2,9 @@ export default function resourceReducer (state = {
     processingAuth: false,
     isLoggedIn: false,
     user: undefined,
-    errors: []
+    errors: [],
+    room: undefined,
+    messages: []
 }, action
 ) {
 switch (action.type) {
@@ -42,7 +44,26 @@ switch (action.type) {
             ...state,
             errors: []
         }
-
+    case 'SET_ROOM':
+        return {
+            ...state,
+            room: action.room
+        }
+    case 'DELETE_ROOM':
+        return {
+            ...state,
+            room: undefined
+        }
+    case 'NEW_MESSAGE':
+        return {
+            ...state,
+            messages: [...state.messages, action.message]
+        }
+    case 'CLEAR_MESSAGES':
+        return {
+            ...state,
+            messages: []
+        }
     default:
         return state;
 

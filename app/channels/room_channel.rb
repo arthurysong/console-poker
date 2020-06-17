@@ -22,6 +22,7 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
+    puts "I UNSUBSCRIBED!!"
     # Any cleanup needed when channel is unsubscribed
     @room.users.delete(self.connection.current_user)
     @user.save
