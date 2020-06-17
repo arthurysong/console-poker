@@ -11,6 +11,10 @@ import Register from './Register';
 import User from './User';
 
 class App extends React.Component {
+  componentDidMount() {
+    this.cable = Cable.createConsumer(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
+  }
+  
   render() {
     return (
       <Router>
