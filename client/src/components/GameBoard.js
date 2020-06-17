@@ -1,19 +1,40 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Console from './Console';
 
 class GameBoard extends React.Component {
     renderPlayerCards = user => {
-        if (user.username === this.state.user.username) {
-            return (user.cards)
+        if (user.playing === true) {
+            if (user.username === this.props.user.username) {
+                return (user.cards)
+            } else {
+                return "Xx Xx"
+            }
         } else {
-            return "Xx Xx"
+            return "*FOLD*"
+        }
+    }
+    
+    renderDealerButton = user => {
+        if (user.id === this.props.round.dealer_id) {
+            return "(D)"
         }
     }
 
     renderPlayers = () => {
         return (
             <>
-                {this.props.round.ordered_users.map((user,index) => <li key={index}>{user.username} ({user.chips}): {this.renderPlayerCards(user)}</li>)}
+                {this.props.round.ordered_users.map((user,index) => 
+                    <li key={index}>{user.username} ({user.chips}): {this.renderPlayerCards(user)} {this.renderDealerButton(user)}</li>)}
+            </>
+        )
+    }
+
+    renderCommunityCards = () => {
+        return (
+            <>
+                Community Cards:<br/>
+                {this.props.round.access_community_cards}
             </>
         )
     }
@@ -22,7 +43,11 @@ class GameBoard extends React.Component {
         return(
             <>
                 Players:
-                {this.renderPlayers()}
+                <ul>
+                    {this.renderPlayers()}<br/>
+                    {this.renderCommunityCards()}<br/>
+                    <Console />
+                </ul>
             </>
         )
     }

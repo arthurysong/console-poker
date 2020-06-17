@@ -27,11 +27,19 @@ class Round < ApplicationRecord
     BIG_BLIND = 400
 
     def as_json(options = {})
-        super(only: [:id, :status, :pot, :highest_bet_for_phase], methods: [:access_community_cards, :ordered_users])
+        super(only: [:id, :status, :pot, :highest_bet_for_phase], methods: [:access_community_cards, :ordered_users, :dealer_id])
     end 
 
     def ordered_users
         self.users.sort{|a,b| a.id <=> b.id}
+    end
+
+    def dealer_id
+        dealer_index = small_blind_index + 2
+        if dealer_index > self.users.length - 1
+            dealer_index = dealer_index % self.users.length
+        end
+        self.users[dealer_index].id
     end
 
     def turn 

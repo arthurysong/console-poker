@@ -63,7 +63,6 @@ class Game extends React.Component {
         return (
             <>
                 {this.renderGameBoard()}
-                {/* {this.renderConsole()} */}
                 {this.renderButton()}
             </>
         )
