@@ -27,7 +27,7 @@ class Round < ApplicationRecord
     BIG_BLIND = 400
 
     def as_json(options = {})
-        super(only: [:id, :status, :pot, :highest_bet_for_phase], methods: [:active_players, :access_community_cards, :ordered_users])
+        super(only: [:id, :status, :pot, :highest_bet_for_phase], methods: [:access_community_cards, :ordered_users])
     end 
 
     def ordered_users

@@ -1,24 +1,36 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 class GameBoard extends React.Component {
-
-    renderBoard = () => {
-        if (this.state.game !== undefined){
-            return (
-                <>
-                    {this.state.game.active_round.}
-                </>
-            )
+    renderPlayerCards = user => {
+        if (user.username === this.state.user.username) {
+            return (user.cards)
+        } else {
+            return "Xx Xx"
         }
     }
-    
+
+    renderPlayers = () => {
+        return (
+            <>
+                {this.props.round.ordered_users.map((user,index) => <li key={index}>{user.username} ({user.chips}): {this.renderPlayerCards(user)}</li>)}
+            </>
+        )
+    }
+
     render() {
         return(
             <>
-                {this.renderBoard()}
+                Players:
+                {this.renderPlayers()}
             </>
         )
     }
 }
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
 
-export default GameBoard;
+export default connect(mapStateToProps)(GameBoard);

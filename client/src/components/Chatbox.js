@@ -10,7 +10,9 @@ const Chatbox = props => {
 
     return (
         <>
-            {renderMessages()}
+            <ul>
+                {renderMessages()}
+            </ul>
             <form onSubmit={props.submitHandler}>
                 <input type="textarea" onChange={props.changeHandler} value={props.newMessage}/>
                 <input type="submit" value="send"/>

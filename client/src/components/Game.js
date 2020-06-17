@@ -52,11 +52,17 @@ class Game extends React.Component {
             return <button onClick={this.createAndStartGame}>Start Game</button>
         }
     }
+
+    renderGameBoard = () => {
+        if (this.state.game !== undefined) {
+            return <GameBoard round={this.state.game.active_round} />
+        }
+    }
     
     render() {
         return (
             <>
-                <GameBoard round={this.state.game.active_round} />
+                {this.renderGameBoard()}
                 {/* {this.renderConsole()} */}
                 {this.renderButton()}
             </>

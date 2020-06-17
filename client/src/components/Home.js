@@ -8,7 +8,7 @@ class Home extends React.Component {
     render() {
         return (
             <div>
-                Home Component!
+                {/* Home Component! */}
             </div>
         )
     }

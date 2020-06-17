@@ -88,6 +88,8 @@ class Room extends React.Component {
                 {this.renderRoom()}
                 <Chatbox messages={this.state.messages} newMessage={this.state.newMessage} changeHandler={this.changeHandler}
                     submitHandler={this.submitHandler}/>
+                <br/>
+                <br/>
                 {this.renderGameComp()}
             </div>
         )

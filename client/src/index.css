@@ -1,0 +1,17 @@
+body {
+    font-family: 'atari_classicchunky';
+} 
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    font-family: inherit;
+}
+
+input {
+    font-family: inherit;
+}
