@@ -24,13 +24,18 @@ input[type="password"]{
     font-family: inherit;
 }
 
+/* #jterminal { */
+    /* font-family: inherit !important;  */
+    /* font-size: 40em; */
+/* } */
+
 #console {
     background: #111;
     /* font-family:Khula; */
-    font-size:1em;
+    /* /* font-size:1em; */
     text-align:left;
     width: 600px;
-    color: white;
+    color: white; 
     /* height:200px; */
     /* width:600px; */
     /* display:block; */
@@ -43,21 +48,21 @@ input[type="password"]{
     /* margin:auto; */
 }
 
-#console-input {
+/* #console-input {
     width: 100%;
     box-sizing : border-box;
     /* outline: none;
     border:none; */
-    background-image:none;
+    /* background-image:none;
     background-color:transparent;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-}
+} */
 
-#console-underscore {
+/* #console-underscore {
     display:inline-block;
     position:relative;
     top:-0.14em;
     left:10px;
- }
+ } */ 

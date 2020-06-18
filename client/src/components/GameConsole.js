@@ -8,46 +8,27 @@ class GameConsole extends React.Component {
     state = {
         command: ""
     }
+
     componentDidMount() {
         const div = findDOMNode(this.refs.jterminal);
         terminal(window, $);
-        $(div).terminal((cmd, t) => {
+        console.log(this)
+        this.term = $(div).terminal((cmd, t) => {
             t.echo('user said ' + cmd);
         }, {
-            greetings: 'JQuery Terminal'
+            greetings: 'Game Terminal:'
         })
+        // this.term.echo('fuck');
+        this.props.round.status.forEach(s => this.term.echo(s))
+        // term.echo('fuck');
     }
 
-    renderStatus = () => {
-        return (
-            <ul>
-                {this.props.round.status.map((s,index) => <li key={index}>{s}</li>)}
-            </ul>
-        )
-    }
 
-    changeHandler = event => {
-        console.log(event.key);
-    }
-
-    // renderForm = () => {
-    //    return (
-    //         <input id={"console-input"} type="text" onChange={this.changeHandler} value={this.state.command} />
-    //    )
-        
-    // }
-    renderTerminal = () => {
-        
-    }
 
     render(){
         return (
             <div id={"console"}>
-                Console:
-                
-                {this.renderStatus()}
-                {/* {this.renderForm()} */}
-                <div ref="jterminal">
+                <div ref="jterminal" id="jterminal">
                 </div> 
             </div>
         )
