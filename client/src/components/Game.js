@@ -2,12 +2,11 @@ import React from 'react';
 import GameBoard from './GameBoard';
 import GameConsole from './GameConsole'
 import { connect } from 'react-redux';
-import { setGame, startGame, deleteGame } from '../redux/dispatchActions';
+import { setGameAndConnect, startGameAndConnect, deleteGame } from '../redux/gameActions';
 
 class Game extends React.Component {
-
     componentDidMount() {
-        this.props.setGame(this.props.room.id);
+        this.props.setGameAndConnect(this.props.room.id);
     }
 
     componentWillUnmount(){
@@ -15,7 +14,7 @@ class Game extends React.Component {
     }
 
     createAndStartGame = () => {
-        this.props.startGame(this.props.room.id);
+        this.props.startGameAndConnect(this.props.room.id);
     }
 
     renderButton = () => {
@@ -43,7 +42,6 @@ class Game extends React.Component {
             </>
         )
     }
-
 }
 
 const mapStateToProps = state => {
@@ -54,8 +52,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setGame: roomId => dispatch(setGame(roomId)),
-        startGame: roomId => dispatch(startGame(roomId)),
+        setGameAndConnect: roomId => dispatch(setGameAndConnect(roomId)),
+        startGameAndConnect: roomId => dispatch(startGameAndConnect(roomId)),
         deleteGame: () => dispatch(deleteGame())
     }
 }

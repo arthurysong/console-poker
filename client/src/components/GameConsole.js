@@ -12,15 +12,12 @@ class GameConsole extends React.Component {
     componentDidMount() {
         const div = findDOMNode(this.refs.jterminal);
         terminal(window, $);
-        console.log(this)
         this.term = $(div).terminal((cmd, t) => {
             t.echo('user said ' + cmd);
         }, {
             greetings: 'Game Terminal:'
         })
-        // this.term.echo('fuck');
         this.props.round.status.forEach(s => this.term.echo(s))
-        // term.echo('fuck');
     }
 
 

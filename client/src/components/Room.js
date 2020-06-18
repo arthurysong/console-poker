@@ -2,7 +2,7 @@ import React from 'react';
 import Chatbox from './Chatbox';
 import Game from './Game';
 import { connect } from 'react-redux';
-import { subscribeRoom, unsubscribeRoom } from '../redux/cableActions';
+import { subscribeRoom, unsubscribeRoom } from '../redux/roomActions';
 
 class Room extends React.Component {
     state = {

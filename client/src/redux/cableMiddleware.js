@@ -12,7 +12,8 @@ export default function cableMiddleware() {
     const {
       channel,
       room,
-      leave,
+      game,
+      leave
     } = action;
     const token = localStorage.getItem('token')
 
@@ -21,22 +22,12 @@ export default function cableMiddleware() {
     }
 
     if (leave) {
-        // console.log(cable.subscriptions)
-        const subscription = cable.subscriptions.subscriptions.find(sub => sub.identifier === JSON.stringify({ channel, room, token }))
-        // console.log(subscription)
-    //   _.find(
-    //     cable.subscriptions.subscriptions,
-    //     sub => sub.identifier === JSON.stringify({ channel, room }),
-    //   );
+        const subscription = cable.subscriptions.subscriptions.find(sub => sub.identifier === JSON.stringify( action ))
         cable.subscriptions.remove(subscription);
         dispatch({ type: 'DELETE_ROOM' })
         dispatch({ type: 'CLEAR_MESSAGES' })
         return 
     }
-
-    // if (typeof(received) === 'string') {
-    //   received = result => dispatch({ type: received, result })
-    // }
 
     const received = result => {
         console.log(result)
@@ -58,17 +49,6 @@ export default function cableMiddleware() {
         });
     }
 
-    const setUser = function(){
-      this.perform('set_user', {
-        token: `${localStorage.getItem('token')}`
-      })
-    }
-
-
-    // return cable.subscriptions.create({ channel, room }, { received });
     return cable.subscriptions.create({ channel, room, token }, { received, sendMessage });
-    // when subscription connects, perform setUser to set user.
-
-    // console.log(cable.subscriptions)
   };
 }

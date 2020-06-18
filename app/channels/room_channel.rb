@@ -19,10 +19,6 @@ class RoomChannel < ApplicationCable::Channel
     ActionCable.server.broadcast("room_#{@room.id}", {type: "new_message", message: m})
   end
 
-  def set_user(data)
-    puts data
-  end
-
   def unsubscribed
     puts "I UNSUBSCRIBED!!"
     @room.users.delete(@user)
