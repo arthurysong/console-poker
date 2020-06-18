@@ -1,8 +1,21 @@
 import React from 'react';
+import { findDOMNode } from 'react-dom';
+import $ from 'jquery';
+import terminal from 'jquery.terminal';
+import 'jquery.terminal/css/jquery.terminal.css';
 
 class GameConsole extends React.Component {
     state = {
         command: ""
+    }
+    componentDidMount() {
+        const div = findDOMNode(this.refs.jterminal);
+        terminal(window, $);
+        $(div).terminal((cmd, t) => {
+            t.echo('user said ' + cmd);
+        }, {
+            greetings: 'JQuery Terminal'
+        })
     }
 
     renderStatus = () => {
@@ -17,19 +30,25 @@ class GameConsole extends React.Component {
         console.log(event.key);
     }
 
-    renderForm = () => {
-       return (
-            <input id={"console-input"} type="text" onChange={this.changeHandler} value={this.state.command} />
-       )
+    // renderForm = () => {
+    //    return (
+    //         <input id={"console-input"} type="text" onChange={this.changeHandler} value={this.state.command} />
+    //    )
+        
+    // }
+    renderTerminal = () => {
         
     }
+
     render(){
         return (
             <div id={"console"}>
                 Console:
                 
                 {this.renderStatus()}
-                {this.renderForm()}
+                {/* {this.renderForm()} */}
+                <div ref="jterminal">
+                </div> 
             </div>
         )
     }
