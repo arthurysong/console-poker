@@ -27,13 +27,4 @@ class RoomChannel < ApplicationCable::Channel
     ActionCable.server.broadcast("room_#{@room.id}", { type: "current_room", room: @room })
     stop_all_streams
   end
-
-  private
-    def find_verified_user 
-      if current_user = User.find(JWT.decode(params['token'], Rails.application.secrets.secret_key_base)[0]["user_id"])
-        current_user
-      else
-        reject
-      end
-    end
 end
