@@ -1,7 +1,6 @@
 TODO:
-Should I not send cards to JSON? and create separate subscription for a user's cards?
-Eh I don't think it matters too much as long as it's not being displayed in console.
-
+Scrolling box for Chatbox
+Play through a game using the client
 ? User validations
 ? REGEX expression for handleAuthRedirect for /rooms url
 ? Sign in via Google drive?

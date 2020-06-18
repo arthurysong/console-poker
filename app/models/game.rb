@@ -5,6 +5,7 @@ class Game < ApplicationRecord
 
     def as_json(options = {})
         super(only: [:id], methods: [:active_round])
+        # super(only: [:id])
     end 
 
     def active_round
