@@ -2,7 +2,8 @@ import ActionCable from 'actioncable';
 import Console from '../components/Console';
 
 export default function cableMiddleware() {
-  const cable = ActionCable.createConsumer(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
+  // const cable = ActionCable.createConsumer(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
+  const cable = ActionCable.createConsumer(`ws://127.0.0.1:3001/cable`);
 
   return ({ dispatch, getState }) => next => (action) => {
     if (typeof(action) === 'function') {
@@ -60,8 +61,18 @@ export default function cableMiddleware() {
         });
     }
 
+    const setUser = function(){
+      this.perform('set_user', {
+        token: `${localStorage.getItem('token')}`
+      })
+    }
+
+    const token = localStorage.getItem('token')
+
     // return cable.subscriptions.create({ channel, room }, { received });
-    return cable.subscriptions.create({ channel, room }, { received, sendMessage });
+    return cable.subscriptions.create({ channel, room, token }, { received, sendMessage });
+    // when subscription connects, perform setUser to set user.
+
     // console.log(cable.subscriptions)
   };
 }

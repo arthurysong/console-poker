@@ -15,3 +15,11 @@ button {
 input {
     font-family: inherit;
 }
+
+input[type="text"]{
+    font-family: inherit;
+}
+
+input[type="password"]{
+    font-family: inherit;
+}
