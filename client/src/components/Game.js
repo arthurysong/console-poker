@@ -1,68 +1,44 @@
 import React from 'react';
 import GameBoard from './GameBoard';
+import GameConsole from './GameConsole'
+import { connect } from 'react-redux';
+import { setGame, startGame, deleteGame } from '../redux/dispatchActions';
 
 class Game extends React.Component {
-    state = {
-        game: undefined
-    }
 
     componentDidMount() {
-        const token = localStorage.getItem("token");
-        if (token) {
-            fetch(`http://localhost:3001/rooms/${this.props.room.id}/games`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-                .then(resp => resp.json())
-                .then(json => {
-                    console.log(json);
-                    if (!json.error) {
-                        this.setState({
-                            game: json
-                        })
-                    }
-                })
-        }
+        this.props.setGame(this.props.room.id);
+    }
+
+    componentWillUnmount(){
+        this.props.deleteGame();
     }
 
     createAndStartGame = () => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            fetch(`http://localhost:3001/rooms/${this.props.room.id}/games`, {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-                .then(resp => resp.json())
-                .then(json => {
-                    console.log(json);
-                    this.setState({
-                        game: json
-                    })
-                })
-        }
+        this.props.startGame(this.props.room.id);
     }
 
     renderButton = () => {
-        if (this.state.game === undefined) {
+        if (this.props.game === undefined) {
             return <button onClick={this.createAndStartGame}>Start Game</button>
         }
     }
 
-    renderGameBoard = () => {
-        if (this.state.game !== undefined) {
-            return <GameBoard round={this.state.game.active_round} />
+    renderGame = () => {
+        if (this.props.game !== undefined) {
+            return (
+                <>
+                    <GameBoard round={this.props.game.active_round} />
+                    <GameConsole round={this.props.game.active_round} />
+                </>
+            )
         }
     }
     
     render() {
         return (
             <>
-                {this.renderGameBoard()}
+                {this.renderGame()}
                 {this.renderButton()}
             </>
         )
@@ -70,4 +46,18 @@ class Game extends React.Component {
 
 }
 
-export default Game;
+const mapStateToProps = state => {
+    return {
+        game: state.game
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setGame: roomId => dispatch(setGame(roomId)),
+        startGame: roomId => dispatch(startGame(roomId)),
+        deleteGame: () => dispatch(deleteGame())
+    }
+}
+// export default Game;
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

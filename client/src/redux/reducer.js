@@ -4,7 +4,8 @@ export default function resourceReducer (state = {
     user: undefined,
     errors: [],
     room: undefined,
-    messages: []
+    messages: [],
+    game: undefined
 }, action
 ) {
 switch (action.type) {
@@ -64,9 +65,17 @@ switch (action.type) {
             ...state,
             messages: []
         }
+    case 'SET_GAME':
+        return {
+            ...state,
+            game: action.game
+        }
+    case 'DELETE_GAME':
+        return {
+            ...state,
+            game: undefined
+        }
     default:
         return state;
-
 }
-
 }

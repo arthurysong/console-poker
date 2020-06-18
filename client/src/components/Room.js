@@ -35,18 +35,6 @@ class Room extends React.Component {
         }
     }
 
-    submitHandler = event => {
-        event.preventDefault();
-        this.subscription.sendMessage(this.state.newMessage);
-        this.setState({ newMessage: "" })
-    }
-
-    changeHandler = event => {
-        this.setState({
-            newMessage: event.target.value
-        })
-    }
-
     renderGameComp = () => {
         if (this.props.room) {
             return (<Game room={this.props.room}/>)
@@ -57,9 +45,7 @@ class Room extends React.Component {
         return(
             <div>
                 {this.renderRoom()}
-                <Chatbox messages={this.props.messages} newMessage={this.state.newMessage} changeHandler={this.changeHandler}
-                    submitHandler={this.submitHandler}/>
-                <br/>
+                <Chatbox messages={this.props.messages} subscription={this.subscription}/><br/>
                 <br/>
                 {this.renderGameComp()}
             </div>

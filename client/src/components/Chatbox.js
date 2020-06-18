@@ -1,24 +1,42 @@
 import React from 'react';
 
-const Chatbox = props => {
-    const renderMessages = () => {
-        if (props.messages !== undefined) {
-            return (props.messages.map((message, index) => <li key={index}>{message.username}: {message.payload}</li>))
+class Chatbox extends React.Component {
+    state = {
+        newMessage: ""
+    }
+
+    submitHandler = event => {
+        event.preventDefault();
+        this.subscription.sendMessage(this.state.newMessage);
+        this.setState({ newMessage: "" })
+    }
+
+    changeHandler = event => {
+        this.setState({
+            newMessage: event.target.value
+        })
+    }
+
+    renderMessages = () => {
+        if (this.props.messages !== undefined) {
+            return (this.props.messages.map((message, index) => <li key={index}>{message.username}: {message.payload}</li>))
         } 
         // we can add time stamps to messages if we want
     }
 
-    return (
-        <>
-            <ul>
-                {renderMessages()}
-            </ul>
-            <form onSubmit={props.submitHandler}>
-                <input type="textarea" onChange={props.changeHandler} value={props.newMessage}/>
-                <input type="submit" value="send"/>
-            </form>
-        </>
-    )
+    render() {
+        return (
+            <>
+                <ul>
+                    {this.renderMessages()}
+                </ul>
+                <form onSubmit={this.submitHandler}>
+                    <input type="textarea" onChange={this.changeHandler} value={this.state.newMessage}/>
+                    <input type="submit" value="send"/>
+                </form>
+            </>
+        )
+    }
 }
 
 export default Chatbox

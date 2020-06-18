@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Console from './Console';
+import GameConsole from './GameConsole';
 
 class GameBoard extends React.Component {
     renderPlayerCards = user => {
@@ -46,7 +46,6 @@ class GameBoard extends React.Component {
                 <ul>
                     {this.renderPlayers()}<br/>
                     {this.renderCommunityCards()}<br/>
-                    <Console />
                 </ul>
             </>
         )

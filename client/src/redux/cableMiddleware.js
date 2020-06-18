@@ -1,5 +1,4 @@
 import ActionCable from 'actioncable';
-import Console from '../components/Console';
 
 export default function cableMiddleware() {
   // const cable = ActionCable.createConsumer(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
@@ -15,10 +14,7 @@ export default function cableMiddleware() {
       room,
       leave,
     } = action;
-    // let { received } = action;
-    // console.log("in middleware");
-    // console.log(action);
-    // console.log(cable.subscriptions)
+    const token = localStorage.getItem('token')
 
     if (!channel) {
       return next(action);
@@ -26,7 +22,7 @@ export default function cableMiddleware() {
 
     if (leave) {
         // console.log(cable.subscriptions)
-        const subscription = cable.subscriptions.subscriptions.find(sub => sub.identifier === JSON.stringify({ channel, room }))
+        const subscription = cable.subscriptions.subscriptions.find(sub => sub.identifier === JSON.stringify({ channel, room, token }))
         // console.log(subscription)
     //   _.find(
     //     cable.subscriptions.subscriptions,
@@ -43,6 +39,7 @@ export default function cableMiddleware() {
     // }
 
     const received = result => {
+        console.log(result)
         switch (result.type) {
             case 'current_room':
                 dispatch({ type: 'SET_ROOM', room: result.room });
@@ -67,7 +64,6 @@ export default function cableMiddleware() {
       })
     }
 
-    const token = localStorage.getItem('token')
 
     // return cable.subscriptions.create({ channel, room }, { received });
     return cable.subscriptions.create({ channel, room, token }, { received, sendMessage });

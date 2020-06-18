@@ -23,3 +23,29 @@ input[type="text"]{
 input[type="password"]{
     font-family: inherit;
 }
+
+#console {
+    background: #111;
+    /* font-family:Khula; */
+    font-size:1em;
+    text-align:left;
+    width: 600px;
+    color: white;
+    /* height:200px; */
+    /* width:600px; */
+    /* display:block; */
+    /* position:absolute; */
+    /* color:white; */
+    /* top:0; */
+    /* bottom:0; */
+    /* left:0; */
+    /* right:0; */
+    /* margin:auto; */
+}
+
+#console-underscore {
+    display:inline-block;
+    position:relative;
+    top:-0.14em;
+    left:10px;
+ }
