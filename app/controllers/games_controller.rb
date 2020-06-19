@@ -17,7 +17,7 @@ class GamesController < ApplicationController
             game.start
             game.save
 
-            
+            ActionCable.server.broadcast("room_#{room.id}", { type: "set_game", game: game })
             render json: game
         end
     end
