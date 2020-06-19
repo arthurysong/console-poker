@@ -24,6 +24,15 @@ input[type="password"]{
     font-family: inherit;
 }
 
+.terminal,
+.terminal-output > :not(.raw),
+.cmd {
+    font-family: 'atari_classicchunky' !important;
+    /*font-family: FreeMono, monospace; this don't work on Android */
+    font-size: 12px;
+    line-height: 15px;
+}
+
 /* #jterminal { */
     /* font-family: inherit !important;  */
     /* font-size: 40em; */
