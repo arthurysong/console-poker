@@ -23,7 +23,7 @@ class Game extends React.Component {
     }
 
     createAndStartGame = () => {
-        this.props.startGame(this.props.room.id);
+        this.props.startGame(this.props.room.id); //this action needs to rebroadcast to everyone streaming from room
     }
 
     renderButton = () => {

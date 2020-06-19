@@ -21,7 +21,9 @@ class UsersController < ApplicationController
     end
 
     def make_move
-        
+        current_user
+        # binding.pry
+        current_user.make_move(params["command"])
     end
 
     private

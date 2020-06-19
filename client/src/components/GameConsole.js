@@ -3,7 +3,8 @@ import { findDOMNode } from 'react-dom';
 import $ from 'jquery';
 import terminal from 'jquery.terminal';
 import 'jquery.terminal/css/jquery.terminal.css';
-import fetchWithToken from '../utilities/fetchWithToken';
+import { postMoveWithToken } from '../utilities/fetchWithToken';
+
 
 class GameConsole extends React.Component {
     state = {
@@ -17,17 +18,7 @@ class GameConsole extends React.Component {
         this.term = $(div).terminal([
             {
                 fold: function(){
-                    console.log('fold');
-                    const body = JSON.stringify({ command: 'fold' });
-                    const options = {
-                        method: "POST",
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body
-                    }
-                    fetchWithToken(`http://localhost:3001/users/make_move`, options);
+                    postMoveWithToken({ command: 'fold' })
                     // this equals terminal
                 },
                 check: function() {
