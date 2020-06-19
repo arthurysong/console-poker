@@ -17,9 +17,6 @@ export default function cableMiddleware() {
     } = action;
     const token = localStorage.getItem('token')
     const identifier = Object.assign({}, action, { token } )
-    // console.log(identifier);
-    console.log(identifier);
-    console.log(cable.subscriptions);
 
     if (!channel) {
       return next(action);

@@ -1,5 +1,5 @@
-export const setGameAndConnect = roomId => {
-    return dispatch => {
+export const setGame = roomId => dispatch => 
+    new Promise((res, err) => {
         const token = localStorage.getItem("token");
         if (token) {
             fetch(`http://localhost:3001/rooms/${roomId}/games`, {
@@ -9,17 +9,16 @@ export const setGameAndConnect = roomId => {
             })
                 .then(resp => resp.json())
                 .then(json => {
-                    console.log(json);
-                    if (!json.error) {
-                        dispatch({ type: 'SET_GAME', game: json})
-                        dispatch(subscribeGame(json.id))
+                    if (!json.error){
+                        dispatch({ type: 'SET_GAME', game: json })
                     }
-                })
+                    res(json);
+                });
         }
     }
-}
+)
 
-export const startGameAndConnect = roomId => {
+export const startGame = roomId => {
     return dispatch => {
         const token = localStorage.getItem("token");
         if (token) {

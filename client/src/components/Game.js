@@ -2,11 +2,19 @@ import React from 'react';
 import GameBoard from './GameBoard';
 import GameConsole from './GameConsole'
 import { connect } from 'react-redux';
-import { setGameAndConnect, startGameAndConnect, unsubscribeGame } from '../redux/gameActions';
+import { setGame, startGame, subscribeGame, unsubscribeGame } from '../redux/gameActions';
 
 class Game extends React.Component {
     componentDidMount() {
-        this.props.setGameAndConnect(this.props.room.id);
+        this.props.setGame(this.props.room.id)
+            .then(json => {
+                console.log(json);
+                if (!json.error) {
+                    this.subscription = this.props.subscribeGame(json.id);
+                    this.forceUpdate(); // update the game component once subscribed. so that game console has access to subscription.
+                }
+            });
+        
     }
 
     componentWillUnmount(){
@@ -15,7 +23,7 @@ class Game extends React.Component {
     }
 
     createAndStartGame = () => {
-        this.props.startGameAndConnect(this.props.room.id);
+        this.props.startGame(this.props.room.id);
     }
 
     renderButton = () => {
@@ -29,7 +37,7 @@ class Game extends React.Component {
             return (
                 <>
                     <GameBoard round={this.props.game.active_round} />
-                    <GameConsole round={this.props.game.active_round} />
+                    <GameConsole round={this.props.game.active_round} user={this.props.user}/>
                 </>
             )
         }
@@ -47,14 +55,16 @@ class Game extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        game: state.game
+        game: state.game,
+        user: state.user
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        setGameAndConnect: roomId => dispatch(setGameAndConnect(roomId)),
-        startGameAndConnect: roomId => dispatch(startGameAndConnect(roomId)),
+        setGame: roomId => dispatch(setGame(roomId)),
+        startGame: roomId => dispatch(startGame(roomId)),
+        subscribeGame: gameId => dispatch(subscribeGame(gameId)),
         unsubscribeGame: gameId => dispatch(unsubscribeGame(gameId))
     }
 }
