@@ -16,6 +16,8 @@ class GamesController < ApplicationController
             game = Game.create(room: room)
             game.start
             game.save
+
+            
             render json: game
         end
     end

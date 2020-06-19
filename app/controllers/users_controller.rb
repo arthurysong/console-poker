@@ -26,6 +26,8 @@ class UsersController < ApplicationController
         current_user.make_move(params["command"])
 
         ActionCable.server.broadcast("game_#{game.id}", { type: "update_status", status: current_user.round.status })
+
+        render json: { message: "Move Success" }
     end
 
     private
