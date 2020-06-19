@@ -77,6 +77,7 @@ switch (action.type) {
             game: undefined
         }
     case 'SET_STATUS':
+        console.log(action.status);
         return {
             ...state,
             status: action.status

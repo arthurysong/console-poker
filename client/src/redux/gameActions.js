@@ -35,6 +35,7 @@ export const startGame = roomId => {
                 .then(json => {
                     console.log(json);
                     dispatch({ type: 'SET_GAME', game: json })
+                    dispatch({ type: 'SET_STATUS', status: json.active_round.status })
                 })
         }
     }
