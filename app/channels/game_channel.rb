@@ -7,7 +7,7 @@ class GameChannel < ApplicationCable::Channel
     # I need to make sure a game gets created when room gets created?
     @user = find_verified_user
     @game = Game.find(params["game"])
-    binding.pry
+    # binding.pry
     stream_from "game_#{@game.id}"
   end
 

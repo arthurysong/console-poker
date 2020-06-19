@@ -11,6 +11,10 @@ class RoomChannel < ApplicationCable::Channel
     @user.save
 
     ActionCable.server.broadcast("room_#{@room.id}", { type: "current_room", room: @room })
+
+    #need to rebroadcast this to all roomlist subscribers because number of users of a room will change.
+    rooms = Room.all
+    ActionCable.server.broadcast("rooms", { type: "current_rooms", rooms: rooms }) 
   end
 
   def create_message(data)

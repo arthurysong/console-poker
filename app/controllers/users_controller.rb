@@ -20,6 +20,10 @@ class UsersController < ApplicationController
         # binding.pry
     end
 
+    def make_move
+        
+    end
+
     private
 
     def user_params
