@@ -18,7 +18,16 @@ class GameConsole extends React.Component {
             {
                 fold: function(){
                     console.log('fold');
-                    fetchWithToken(`http://localhost:3001/users/make_move`);
+                    const body = JSON.stringify({ command: 'fold' });
+                    const options = {
+                        method: "POST",
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body
+                    }
+                    fetchWithToken(`http://localhost:3001/users/make_move`, options);
                     // this equals terminal
                 },
                 check: function() {
@@ -39,9 +48,10 @@ class GameConsole extends React.Component {
                 }
     
             },
-        (cmd, t) => {
-            t.echo('user said ' + cmd);
-        }], {
+        // (cmd, t) => {
+        //     t.echo('user said ' + cmd);
+        // }
+    ], {
             greetings: 'Game Terminal:'
         })
         this.props.round.status.forEach(s => this.term.echo(s))
