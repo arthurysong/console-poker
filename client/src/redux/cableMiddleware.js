@@ -65,14 +65,12 @@ export default function cableMiddleware() {
       const received = result => {
         console.log(result)
         switch (result.type) {
-            // case 'current_room':
-            //     dispatch({ type: 'SET_ROOM', room: result.room });
-            //     break;
-            // case 'new_message':
-            //     dispatch({ type: 'NEW_MESSAGE', message: result.message });
-            //     break;
-            default:
-                break;
+          case 'update_status':
+            console.log(result);
+            dispatch({type: 'UPDATE_STATUS', status: result.status })
+            break;
+          default:
+            break;
         }
       }
 

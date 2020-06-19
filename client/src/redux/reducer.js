@@ -75,6 +75,14 @@ switch (action.type) {
             ...state,
             game: undefined
         }
+    case 'UPDATE_STATUS':
+        return {
+            ...state,
+            game: {
+                ...state.game,
+                status: action.status
+            }
+        }
     default:
         return state;
 }
