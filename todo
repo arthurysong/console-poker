@@ -1,8 +1,9 @@
 TODO:
 Scrolling box for Chatbox
 Play through a game using the client
+Start Game button needs to rebroadcast the started game to all its streamers
 ? User validations
 ? REGEX expression for handleAuthRedirect for /rooms url
 ? Sign in via Google drive?
 
-CREATE A MACRO FETCH WITH TOKEN FUNCTION
+CREATE A MACRO FETCH WITH TOKEN FUNCTION X
