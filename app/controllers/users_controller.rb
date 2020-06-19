@@ -27,7 +27,7 @@ class UsersController < ApplicationController
         current_user.make_move(params["command"])
         new_status_messages = game.status[old_status.length..game.status.length-1]
 
-        ActionCable.server.broadcast("game_#{game.id}", { type: "update_status", new_status_messages: new_status_messages })
+        ActionCable.server.broadcast("game_#{game.id}", { type: "update_status", status: game.status })
     end
 
     private
