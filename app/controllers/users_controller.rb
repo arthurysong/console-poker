@@ -21,13 +21,13 @@ class UsersController < ApplicationController
     end
 
     def make_move
-        current_user
-        # binding.pry
-        current_user.make_move(params["command"])
-        # here I need to rebroadcast the game to subscribers.
-        # binding.pry
         game = current_user.game
-        ActionCable.server.broadcast("game_#{game.id}", { type: "update_status", status: game.active_round.status })
+
+        old_status = game.status        
+        current_user.make_move(params["command"])
+        new_status_messages = game.status[old_status.length..game.status.length-1]
+
+        ActionCable.server.broadcast("game_#{game.id}", { type: "update_status", new_status_messages: new_status_messages })
     end
 
     private

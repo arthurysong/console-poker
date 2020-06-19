@@ -7,10 +7,6 @@ import { postMoveWithToken } from '../utilities/fetchWithToken';
 
 
 class GameConsole extends React.Component {
-    state = {
-        command: ""
-    }
-
     componentDidMount() {
         const div = findDOMNode(this.refs.jterminal);
         const userId = this.props.user.id
