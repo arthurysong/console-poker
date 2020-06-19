@@ -10,6 +10,7 @@ class Room extends React.Component {
     }
 
     componentDidMount() {
+        // this needs to rebroadcast to the list so that list updates.
         this.subscription = this.props.subscribeRoom(this.props.match.params.id);
     }
 
