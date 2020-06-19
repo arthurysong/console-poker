@@ -12,25 +12,29 @@ export default function cableMiddleware() {
     const {
       channel,
       room,
+      game,
       leave
     } = action;
     const token = localStorage.getItem('token')
     const identifier = Object.assign({}, action, { token } )
     // console.log(identifier);
+    console.log(identifier);
+    console.log(cable.subscriptions);
 
     if (!channel) {
       return next(action);
     }
 
-    if (leave) {
-        const subscription = cable.subscriptions.subscriptions.find(sub => sub.identifier === JSON.stringify(identifier))
+    if (room) {
+      if(leave) {
+        const subscription = cable.subscriptions.subscriptions.find(sub => sub.identifier === JSON.stringify({ channel, room, token }))
         cable.subscriptions.remove(subscription);
         dispatch({ type: 'DELETE_ROOM' })
         dispatch({ type: 'CLEAR_MESSAGES' })
-        return 
-    }
+        return;
+      }
 
-    const received = result => {
+      const received = result => {
         console.log(result)
         switch (result.type) {
             case 'current_room':
@@ -42,14 +46,43 @@ export default function cableMiddleware() {
             default:
                 break;
         }
+      }
+
+      const sendMessage = function(message) {
+          this.perform('create_message', {
+              content: message
+          });
+      }
+
+      return cable.subscriptions.create( identifier, { received, sendMessage });
     }
 
-    const sendMessage = function(message) {
-        this.perform('create_message', {
-            content: message
-        });
+    if (game) {
+      if(leave) {
+        const subscription = cable.subscriptions.subscriptions.find(sub => sub.identifier === JSON.stringify({ channel, game, token }))
+        cable.subscriptions.remove(subscription);
+        dispatch({ type: 'DELETE_GAME' })
+        return;
+      }
+
+      const received = result => {
+        console.log(result)
+        switch (result.type) {
+            // case 'current_room':
+            //     dispatch({ type: 'SET_ROOM', room: result.room });
+            //     break;
+            // case 'new_message':
+            //     dispatch({ type: 'NEW_MESSAGE', message: result.message });
+            //     break;
+            default:
+                break;
+        }
+      }
+
+      return cable.subscriptions.create( identifier, { received });
     }
 
-    return cable.subscriptions.create( identifier, { received, sendMessage });
+
+    
   };
 }

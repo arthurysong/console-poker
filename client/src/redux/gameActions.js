@@ -40,8 +40,6 @@ export const startGameAndConnect = roomId => {
     }
 }
 
-export const deleteGame = () => ({ type: 'DELETE_GAME' })
-
 export function subscribeGame(gameId) {
     return {
       channel: 'GameChannel',
@@ -49,7 +47,7 @@ export function subscribeGame(gameId) {
     }
 }
 
-export function unsubscribeGoom(gameId) {
+export function unsubscribeGame(gameId) {
     return {
       channel: 'GameChannel',
       game: `${gameId}`,
