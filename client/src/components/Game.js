@@ -6,19 +6,10 @@ import { setGame, startGame, subscribeGame, unsubscribeGame } from '../redux/gam
 
 class Game extends React.Component {
     componentDidMount() {
-        this.props.setGame(this.props.room.id)
-            .then(json => {
-                console.log(json);
-                if (!json.error) {
-                    this.props.subscribeGame(json.id);
-                    // this.forceUpdate(); // update the game component once subscribed. so that game console has access to subscription.
-                }
-            });
-        
+        this.props.setGame(this.props.room.id);
     }
 
     componentWillUnmount(){
-        // this.props.deleteGame();
         this.props.unsubscribeGame(this.props.game.id);
     }
 

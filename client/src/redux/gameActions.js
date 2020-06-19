@@ -1,23 +1,21 @@
-export const setGame = roomId => dispatch => 
-    new Promise((res, err) => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            fetch(`http://localhost:3001/rooms/${roomId}/games`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
+export const setGame = roomId => dispatch => {
+    const token = localStorage.getItem("token");
+    if (token) {
+        fetch(`http://localhost:3001/rooms/${roomId}/games`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(resp => resp.json())
+            .then(json => {
+                if (!json.error){
+                    dispatch({ type: 'SET_GAME', game: json });
+                    dispatch({ type: 'SET_STATUS', status: json.active_round.status })
+                    dispatch(subscribeGame());
                 }
-            })
-                .then(resp => resp.json())
-                .then(json => {
-                    if (!json.error){
-                        dispatch({ type: 'SET_GAME', game: json });
-                        dispatch({ type: 'SET_STATUS', status: json.active_round.status })
-                    }
-                    res(json);
-                });
-        }
+            });
     }
-)
+}
 
 export const startGame = roomId => {
     return dispatch => {
@@ -36,6 +34,7 @@ export const startGame = roomId => {
                     console.log(json);
                     dispatch({ type: 'SET_GAME', game: json })
                     dispatch({ type: 'SET_STATUS', status: json.active_round.status })
+                    dispatch(subscribeGame());
                 })
         }
     }
