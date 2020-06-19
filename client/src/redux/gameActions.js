@@ -10,7 +10,8 @@ export const setGame = roomId => dispatch =>
                 .then(resp => resp.json())
                 .then(json => {
                     if (!json.error){
-                        dispatch({ type: 'SET_GAME', game: json })
+                        dispatch({ type: 'SET_GAME', game: json });
+                        dispatch({ type: 'SET_STATUS', status: json.active_round.status })
                     }
                     res(json);
                 });

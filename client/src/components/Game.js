@@ -10,8 +10,8 @@ class Game extends React.Component {
             .then(json => {
                 console.log(json);
                 if (!json.error) {
-                    this.subscription = this.props.subscribeGame(json.id);
-                    this.forceUpdate(); // update the game component once subscribed. so that game console has access to subscription.
+                    this.props.subscribeGame(json.id);
+                    // this.forceUpdate(); // update the game component once subscribed. so that game console has access to subscription.
                 }
             });
         
