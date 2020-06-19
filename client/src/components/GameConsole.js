@@ -18,7 +18,7 @@ class GameConsole extends React.Component {
             {
                 fold: function(){
                     console.log('fold');
-                    // fetchWithToken(`http://localhost:3001/users/make_move`);
+                    fetchWithToken(`http://localhost:3001/users/make_move`);
                     // this equals terminal
                 },
                 check: function() {
