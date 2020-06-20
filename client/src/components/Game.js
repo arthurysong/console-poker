@@ -7,8 +7,6 @@ import { startGame, subscribeGame, unsubscribeGame } from '../redux/gameActions'
 class Game extends React.Component {
     componentDidMount() {
         this.props.subscribeGame(this.props.gameId);
-        //when user subscribes they should be added to game.users?
-        //and rebroadcast to everybody?
     }
 
     componentWillUnmount(){
@@ -20,7 +18,7 @@ class Game extends React.Component {
     }
 
     renderButton = () => {
-        if (this.props.game.active_round !== undefined) {
+        if (!this.props.game.active_round) {
             return <button onClick={this.startGame}>Start Game</button>
         }
     }
