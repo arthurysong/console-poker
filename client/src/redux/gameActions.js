@@ -1,21 +1,21 @@
-export const setGame = roomId => dispatch => {
-    const token = localStorage.getItem("token");
-    if (token) {
-        fetch(`http://localhost:3001/rooms/${roomId}/games`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then(resp => resp.json())
-            .then(json => {
-                if (!json.error){
-                    dispatch({ type: 'SET_GAME', game: json });
-                    dispatch({ type: 'SET_STATUS', status: json.active_round.status })
-                    dispatch(subscribeGame());
-                }
-            });
-    }
-}
+// export const setGame = roomId => dispatch => {
+//     const token = localStorage.getItem("token");
+//     if (token) {
+//         fetch(`http://localhost:3001/rooms/${roomId}/games`, {
+//             headers: {
+//                 Authorization: `Bearer ${token}`
+//             }
+//         })
+//             .then(resp => resp.json())
+//             .then(json => {
+//                 if (!json.error){
+//                     dispatch({ type: 'SET_GAME', game: json });
+//                     dispatch({ type: 'SET_STATUS', status: json.active_round.status })
+//                     dispatch(subscribeGame());
+//                 }
+//             });
+//     }
+// }
 
 // export const startGame = roomId => {
 //     return dispatch => {

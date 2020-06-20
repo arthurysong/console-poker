@@ -2,12 +2,11 @@ import React from 'react';
 import GameBoard from './GameBoard';
 import GameConsole from './GameConsole'
 import { connect } from 'react-redux';
-import { setGame, subscribeGame, unsubscribeGame } from '../redux/gameActions';
+import { startGame, subscribeGame, unsubscribeGame } from '../redux/gameActions';
 
 class Game extends React.Component {
     componentDidMount() {
         this.props.subscribeGame(this.props.gameId);
-
         //when user subscribes they should be added to game.users?
         //and rebroadcast to everybody?
     }
@@ -16,15 +15,15 @@ class Game extends React.Component {
         this.props.unsubscribeGame(this.props.game.id);
     }
 
-    // createAndStartGame = () => {
-    //     this.props.startGame(this.props.room.id); //this action needs to rebroadcast to everyone streaming from room
-    // }
+    startGame = () => {
+        this.props.startGame(this.props.room.id); //this action needs to rebroadcast to everyone streaming from room
+    }
 
-    // renderButton = () => {
-    //     if (this.props.game === undefined) {
-    //         return <button onClick={this.createAndStartGame}>Start Game</button>
-    //     }
-    // }
+    renderButton = () => {
+        if (this.props.game.active_round !== undefined) {
+            return <button onClick={this.StartGame}>Start Game</button>
+        }
+    }
 
     // renderGame = () => {
     //     if (this.props.game.active_round !== undefined) {
@@ -41,7 +40,7 @@ class Game extends React.Component {
         return (
             <>
     {/* //             {this.renderGame()} */}
-    {/* //             {this.renderButton()} */}
+                {this.renderButton()}
             </>
         )
     }
@@ -58,7 +57,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         // setGame: roomId => dispatch(setGame(roomId)),
-        // startGame: roomId => dispatch(startGame(roomId)),
+        startGame: roomId => dispatch(startGame(roomId)),
         subscribeGame: gameId => dispatch(subscribeGame(gameId)),
         unsubscribeGame: gameId => dispatch(unsubscribeGame(gameId))
     }
