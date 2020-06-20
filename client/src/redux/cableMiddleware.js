@@ -37,10 +37,6 @@ export default function cableMiddleware() {
             case 'current_room':
               dispatch({ type: 'SET_ROOM', room: result.room });
               break;
-            // case 'set_game':
-            //   dispatch({ type: 'SET_GAME', game: result.game });
-            //   dispatch({ type: 'SET_STATUS', status: result.game.active_round.status })
-            //   break;
             case 'new_message':
                 dispatch({ type: 'NEW_MESSAGE', message: result.message });
                 break;
@@ -85,8 +81,5 @@ export default function cableMiddleware() {
 
       return cable.subscriptions.create( identifier, { received });
     }
-
-
-    
   };
 }

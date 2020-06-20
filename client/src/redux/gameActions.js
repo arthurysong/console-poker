@@ -1,44 +1,26 @@
-// export const setGame = roomId => dispatch => {
-//     const token = localStorage.getItem("token");
-//     if (token) {
-//         fetch(`http://localhost:3001/rooms/${roomId}/games`, {
-//             headers: {
-//                 Authorization: `Bearer ${token}`
-//             }
-//         })
-//             .then(resp => resp.json())
-//             .then(json => {
-//                 if (!json.error){
-//                     dispatch({ type: 'SET_GAME', game: json });
-//                     dispatch({ type: 'SET_STATUS', status: json.active_round.status })
-//                     dispatch(subscribeGame());
-//                 }
-//             });
-//     }
-// }
+import {fetchWithToken} from '../utilities/fetchWithToken'
 
-export const startGame = roomId => {
+export const startGame = gameId => {
     return dispatch => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            fetch(`http://localhost:3001/rooms/${roomId}/games`, {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-                .then(resp => resp.json())
-                .then(json => {
-                    console.log(json);
-                    dispatch({ type: 'SET_GAME', game: json })
-                    dispatch({ type: 'SET_STATUS', status: json.active_round.status })
-                    dispatch(subscribeGame());
-                })
+        const options = {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
         }
+        fetchWithToken(`http://localhost:3001/games/${gameId}/start`, options )
+            .then(resp => resp.json())
+            .then(json => {
+                console.log(json);
+                // set game
+                // set status
+                dispatch({ type: 'SET_GAME', game: json.game })
+                dispatch({ type: 'SET_STATUS', status: json.game.status })
+            })
     }
 }
+
 
 export function subscribeGame(gameId) {
     return {

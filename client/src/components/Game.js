@@ -16,30 +16,30 @@ class Game extends React.Component {
     }
 
     startGame = () => {
-        this.props.startGame(this.props.room.id); //this action needs to rebroadcast to everyone streaming from room
+        this.props.startGame(this.props.game.id); //this action needs to rebroadcast to everyone streaming from room
     }
 
     renderButton = () => {
         if (this.props.game.active_round !== undefined) {
-            return <button onClick={this.StartGame}>Start Game</button>
+            return <button onClick={this.startGame}>Start Game</button>
         }
     }
 
-    // renderGame = () => {
-    //     if (this.props.game.active_round !== undefined) {
-    //         return (
-    //             <>
-    //                 <GameBoard round={this.props.game.active_round} />
-    //                 <GameConsole status={this.props.status} user={this.props.user}/>
-    //             </>
-    //         )
-    //     }
-    // }
+    renderGame = () => {
+        if (this.props.game.active_round !== undefined) {
+            return (
+                <>
+                    <GameBoard round={this.props.game.active_round} />
+                    <GameConsole status={this.props.status} user={this.props.user}/>
+                </>
+            )
+        }
+    }
     
     render() {
         return (
             <>
-    {/* //             {this.renderGame()} */}
+                {this.renderGame()}
                 {this.renderButton()}
             </>
         )
@@ -56,7 +56,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        // setGame: roomId => dispatch(setGame(roomId)),
         startGame: roomId => dispatch(startGame(roomId)),
         subscribeGame: gameId => dispatch(subscribeGame(gameId)),
         unsubscribeGame: gameId => dispatch(unsubscribeGame(gameId))
