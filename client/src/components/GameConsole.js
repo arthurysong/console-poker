@@ -15,7 +15,6 @@ class GameConsole extends React.Component {
             {
                 fold: function(){
                     postMoveWithToken({ command: 'fold' })
-                    // this equals terminal
                 },
                 check: function() {
                     console.log('check');

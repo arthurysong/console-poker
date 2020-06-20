@@ -15,8 +15,7 @@ export const startGame = gameId => {
                 console.log(json);
                 // set game
                 // set status
-                dispatch({ type: 'SET_GAME', game: json.game })
-                dispatch({ type: 'SET_STATUS', status: json.game.status })
+                dispatch({ type: 'SET_GAME', game: json })
             })
     }
 }

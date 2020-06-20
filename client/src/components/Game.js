@@ -18,7 +18,7 @@ class Game extends React.Component {
     }
 
     renderButton = () => {
-        if (!this.props.game.active_round) {
+        if (!this.props.game.active_round || this.props.game.active_round.is_playing === false) {
             return <button onClick={this.startGame}>Start Game</button>
         }
     }

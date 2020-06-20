@@ -13,12 +13,6 @@ class Game < ApplicationRecord
     end
 
     def start
-        # self.room.users.each do |user|
-        #     user.game_id = self.id
-        #     user.save
-        # end
-        # this will happen when a user successfully subscribes.
-
         self.rounds.build.tap do |new_round|
             new_round.save
             new_round.start
