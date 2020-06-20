@@ -1,6 +1,7 @@
 TODO:
 Scrolling box for Chatbox
 Play through a game using the client
+When user subscribes to game they should be added to game.users? Not when game starts.
 Start Game button needs to rebroadcast the started game to all its streamers
 ? User validations
 ? REGEX expression for handleAuthRedirect for /rooms url

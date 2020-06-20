@@ -9,6 +9,12 @@ class GamesController < ApplicationController
             end
         end
     end
+    
+    def start
+        game = params[:id]
+        game.start
+        game.save
+    end
 
     # def create
     #     if params[:room_id]
