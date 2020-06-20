@@ -10,7 +10,7 @@ class GameChannel < ApplicationCable::Channel
 
     stream_from "game_#{@game.id}"
 
-    ActionCable.server.broadcast("game_#{@game.id}", { type: "current_game", game: @game })
+    ActionCable.server.broadcast("game_#{@game.id}", { type: "set_game", game: @game })
   end
 
   def unsubscribed
