@@ -39,4 +39,5 @@ messages = Message.create([
     {chatbox: chatbox, user: users[3], payload: "supppp, i'm down for the forest"}
 ])
 
-# game = Game.create(room_id: room.id)
+game = Game.create(room_id: room.id)
+game2 = Game.create(room_id: room2.id)

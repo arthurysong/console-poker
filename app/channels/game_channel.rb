@@ -9,6 +9,8 @@ class GameChannel < ApplicationCable::Channel
     @game = Game.find(params["game"])
     # binding.pry
     stream_from "game_#{@game.id}"
+
+    ActionCable.server.broadcast("game_#{@game.id}", { type: "current_game", game: @game })
   end
 
   def unsubscribed

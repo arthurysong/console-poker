@@ -37,10 +37,10 @@ export default function cableMiddleware() {
             case 'current_room':
               dispatch({ type: 'SET_ROOM', room: result.room });
               break;
-            case 'set_game':
-              dispatch({ type: 'SET_GAME', game: result.game });
-              dispatch({ type: 'SET_STATUS', status: result.game.active_round.status })
-              break;
+            // case 'set_game':
+            //   dispatch({ type: 'SET_GAME', game: result.game });
+            //   dispatch({ type: 'SET_STATUS', status: result.game.active_round.status })
+            //   break;
             case 'new_message':
                 dispatch({ type: 'NEW_MESSAGE', message: result.message });
                 break;
@@ -69,6 +69,11 @@ export default function cableMiddleware() {
       const received = result => {
         console.log(result)
         switch (result.type) {
+          case 'current_game':
+            console.log(result);
+            dispatch({ type: 'SET_GAME', game: result.game });
+            dispatch({ type: 'SET_STATUS', status: result.game.status })
+            break;
           case 'update_status':
             console.log(result);
             dispatch({type: 'UPDATE_STATUS', status: result.status })

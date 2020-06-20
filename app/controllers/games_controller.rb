@@ -10,15 +10,15 @@ class GamesController < ApplicationController
         end
     end
 
-    def create
-        if params[:room_id]
-            room = Room.find(params[:room_id])
-            game = Game.create(room: room)
-            game.start
-            game.save
+    # def create
+    #     if params[:room_id]
+    #         room = Room.find(params[:room_id])
+    #         game = Game.create(room: room)
+    #         game.start
+    #         game.save
 
-            ActionCable.server.broadcast("room_#{room.id}", { type: "set_game", game: game })
-            render json: game
-        end
-    end
+            # ActionCable.server.broadcast("room_#{room.id}", { type: "set_game", game: game })
+    #         render json: game
+    #     end
+    # end
 end

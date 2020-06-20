@@ -36,9 +36,10 @@ class Room extends React.Component {
         }
     }
 
+
     renderGameComp = () => {
         if (this.props.room) {
-            return (<Game room={this.props.room}/>)
+            return (<Game gameId={this.props.room.game.id}/>)
         }
     }
 
