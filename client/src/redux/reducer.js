@@ -6,7 +6,7 @@ export default function resourceReducer (state = {
     room: undefined,
     messages: [],
     game: {}, //this will be used by gameboard
-    status: [] //this will be used by gameconsole, I need them separate becaue I don't want the console to
+    // status: [] //this will be used by gameconsole, I need them separate becaue I don't want the console to
 }, action
 ) {
 switch (action.type) {
