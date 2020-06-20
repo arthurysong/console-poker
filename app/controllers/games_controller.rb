@@ -14,6 +14,8 @@ class GamesController < ApplicationController
         game = params[:id]
         game.start
         game.save
+
+        ActionCable.server.broadcast("game_#{game.id}", { type: "set_game", game: game })
     end
 
     # def create
