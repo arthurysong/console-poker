@@ -12,9 +12,9 @@ class Game extends React.Component {
         //and rebroadcast to everybody?
     }
 
-    // componentWillUnmount(){
-    //     this.props.unsubscribeGame(this.props.game.id);
-    // }
+    componentWillUnmount(){
+        this.props.unsubscribeGame(this.props.game.id);
+    }
 
     // createAndStartGame = () => {
     //     this.props.startGame(this.props.room.id); //this action needs to rebroadcast to everyone streaming from room
