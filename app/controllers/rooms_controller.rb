@@ -8,6 +8,10 @@ class RoomsController < ApplicationController
 
     def create
         room = Room.create(room_params)
+
+        game = room.game.build
+        game.save
+        
         render json: room
     end
 
