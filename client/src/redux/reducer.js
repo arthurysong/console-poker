@@ -76,25 +76,19 @@ switch (action.type) {
             ...state,
             game: undefined
         }
-    case 'UPDATE_STATUS':
+    case 'UPDATE_ROUND':
         console.log({
             ...state,
             game: {
                 ...state.game,
-                active_round: {
-                    ...state.game.active_round,
-                    status: action.status
-                }
+                active_round: action.round
             }
         })
         return {
             ...state,
             game: {
                 ...state.game,
-                active_round: {
-                    ...state.game.active_round,
-                    status: action.status
-                }
+                active_round: action.round
             }
         }
     default:

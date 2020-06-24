@@ -54,7 +54,7 @@ export default function cableMiddleware() {
       return cable.subscriptions.create( identifier, { received, sendMessage });
     }
 
-    if (game) {
+    if (game) { // game subscription.
       if(leave) {
         const subscription = cable.subscriptions.subscriptions.find(sub => sub.identifier === JSON.stringify({ channel, game, token }))
         cable.subscriptions.remove(subscription);
@@ -68,8 +68,8 @@ export default function cableMiddleware() {
           case 'set_game':
             dispatch({ type: 'SET_GAME', game: result.game });
             break;
-          case 'update_status':
-            dispatch({type: 'UPDATE_STATUS', status: result.status })
+          case 'update_round':
+            dispatch({type: 'UPDATE_ROUND', round: result.round })
             break;
           default:
             break;
