@@ -63,15 +63,12 @@ export default function cableMiddleware() {
       }
 
       const received = result => {
-        console.log(result)
+        console.log(result);
         switch (result.type) {
           case 'set_game':
-            console.log(result);
             dispatch({ type: 'SET_GAME', game: result.game });
-            // dispatch({ type: 'SET_STATUS', status: result.game.active_round.status })
             break;
           case 'update_status':
-            console.log(result);
             dispatch({type: 'UPDATE_STATUS', status: result.status })
             break;
           default:

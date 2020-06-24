@@ -77,11 +77,24 @@ switch (action.type) {
             game: undefined
         }
     case 'UPDATE_STATUS':
+        console.log({
+            ...state,
+            game: {
+                ...state.game,
+                active_round: {
+                    ...state.game.active_round,
+                    status: action.status
+                }
+            }
+        })
         return {
             ...state,
             game: {
                 ...state.game,
-                status: action.status
+                active_round: {
+                    ...state.game.active_round,
+                    status: action.status
+                }
             }
         }
     default:

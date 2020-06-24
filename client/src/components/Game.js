@@ -25,6 +25,8 @@ class Game extends React.Component {
 
     renderGame = () => {
         if (this.props.game.active_round !== undefined) {
+            console.log(this.props.game);
+            console.log(this.props.game.active_round.status)
             return (
                 <>
                     <GameBoard round={this.props.game.active_round} />
@@ -48,6 +50,7 @@ const mapStateToProps = state => {
     return {
         game: state.game,
         user: state.user
+        // status: state.game.active_round.status
         // status: state.status
     }
 }
