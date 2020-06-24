@@ -30,7 +30,7 @@ class Game extends React.Component {
             return (
                 <>
                     <GameBoard round={this.props.game.active_round} />
-                    <GameConsole status={this.props.game.active_round.status} user={this.props.user}/>
+                    <GameConsole roundId={this.props.game.active_round.id} status={this.props.game.active_round.status} user={this.props.user}/>
                 </>
             )
         }
@@ -50,8 +50,6 @@ const mapStateToProps = state => {
     return {
         game: state.game,
         user: state.user
-        // status: state.game.active_round.status
-        // status: state.status
     }
 }
 

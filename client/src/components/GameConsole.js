@@ -44,6 +44,9 @@ class GameConsole extends React.Component {
     }
 
     shouldComponentUpdate(nextProps) {
+        if (this.props.roundId !== nextProps.roundId) {
+            nextProps.status.forEach(s => this.term.echo(s));
+        }
         const newStatusMessages = nextProps.status.slice(this.props.status.length)
         newStatusMessages.forEach(s => this.term.echo(s))
 
