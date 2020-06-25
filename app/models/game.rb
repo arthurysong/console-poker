@@ -14,7 +14,7 @@ class Game < ApplicationRecord
 
     def start
         last_blind_index = self.active_round.small_blind_index
-        new_index = (last_blind_index == self.users.count - 1 ? 0 : last_blind_index + 1)
+        new_index = (last_blind_index + 1) % self.users.count
 
         self.rounds.build(small_blind_index: new_index).tap do |new_round|
             new_round.save

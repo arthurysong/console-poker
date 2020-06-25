@@ -35,10 +35,8 @@ class Round < ApplicationRecord
     end
 
     def dealer_id
-        dealer_index = small_blind_index + 2
-        if dealer_index > self.users.length - 1
-            dealer_index = dealer_index % self.users.length
-        end
+        dealer_index = self.small_blind_index + 2
+        dealer_index = dealer_index % self.users.length
         self.users[dealer_index].id
     end
 
