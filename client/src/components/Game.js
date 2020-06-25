@@ -24,7 +24,7 @@ class Game extends React.Component {
     }
 
     renderGame = () => {
-        if (this.props.game.active_round !== undefined) {
+        if (this.props.game.active_round) {
             console.log(this.props.game);
             console.log(this.props.game.active_round.status)
             return (
@@ -40,7 +40,7 @@ class Game extends React.Component {
             )
         }
     }
-    
+
     render() {
         return (
             <>

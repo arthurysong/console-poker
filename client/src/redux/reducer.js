@@ -75,7 +75,7 @@ switch (action.type) {
     case 'DELETE_GAME':
         return {
             ...state,
-            game: undefined
+            game: {}
         }
     case 'UPDATE_ROUND':
         console.log({
