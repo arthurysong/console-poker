@@ -30,11 +30,12 @@ class GameBoard extends React.Component {
         )
     }
 
-    renderCommunityCards = () => {
+    renderCardsAndPot = () => {
         return (
             <>
-                Community Cards:<br/>
-                {this.props.round.access_community_cards}
+                Community Cards: {this.props.round.access_community_cards === "" ? "<PREFLOP>" : this.props.round.access_community_cards}<br/>
+                Pot: {this.props.round.pot}<br/>
+                Bet: {this.props.round.highest_bet_for_phase}<br/>
             </>
         )
     }
@@ -45,7 +46,7 @@ class GameBoard extends React.Component {
                 Players:
                 <ul>
                     {this.renderPlayers()}<br/>
-                    {this.renderCommunityCards()}<br/>
+                    {this.renderCardsAndPot()}<br/>
                 </ul>
             </>
         )
