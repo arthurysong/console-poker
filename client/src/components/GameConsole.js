@@ -45,10 +45,6 @@ class GameConsole extends React.Component {
 
     shouldComponentUpdate(nextProps) {
         if (this.props.roundId !== nextProps.roundId) {
-            this.term.echo('');
-            this.term.echo('==============================');
-            this.term.echo('==============================');
-            this.term.echo('==============================');
             nextProps.status.forEach(s => this.term.echo(s));
         } else if (nextProps.gameErrors) {
             this.term.echo(nextProps.gameErrors);
