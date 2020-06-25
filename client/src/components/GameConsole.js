@@ -21,20 +21,16 @@ class GameConsole extends React.Component {
                     postMoveWithToken({ command: 'fold' })
                 },
                 check: function() {
-                    console.log('check');
-                    // this.props.subscription.make_move('check')
+                    postMoveWithToken({ command: 'check' })
                 },
                 call: function() {
-                    console.log('call')
-                    // this.props.subscription.make_move('call')
+                    postMoveWithToken({ command: 'call' })
                 },
                 raise: function(x) {
-                    console.log('raise ', x)
-                    // this.props.subscription.make_move('raise')
+                    postMoveWithToken({ command: 'raise', amount: x })
                 },
                 allin: function() {
-                    console.log('allin')
-                    // this.props.subscription.make_move('allin')
+                    postMoveWithToken({ command: 'allin' })
                 }
     
             },
