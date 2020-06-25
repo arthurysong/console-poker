@@ -23,9 +23,9 @@ class UsersController < ApplicationController
     def make_move
         game = current_user.game
 
-        current_user.make_move(params["command"])
+        current_user.make_move(params["command"], params["amount"])
 
-        ActionCable.server.broadcast("game_#{game.id}", { type: "update_status", status: current_user.round.status })
+        ActionCable.server.broadcast("game_#{game.id}", { type: "update_round", round: current_user.round })
 
         render json: { message: "Move Success." }
     end

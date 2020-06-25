@@ -12,10 +12,16 @@ class GamesController < ApplicationController
     
     def start
         game = Game.find(params[:id])
-        game.start
-        game.save
+        if !game.active_round.is_playing
+            game.start
+            game.save
 
-        ActionCable.server.broadcast("game_#{game.id}", { type: "set_game", game: game })
+            ActionCable.server.broadcast("game_#{game.id}", { type: "set_game", game: game })
+        else
+            ActionCable.server.broadcast("game_#{game.id}", { type: "errors", error: "Round is still playing." })
+        end
+
+        
 
         render json: game
     end

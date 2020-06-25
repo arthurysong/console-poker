@@ -67,7 +67,6 @@ class Round < ApplicationRecord
     end
 
     def players_have_bet?
-        #check all players self.current_bet to be equal to highest bet
         self.active_players.each do |player|
             if player.round_bet < self.highest_bet_for_phase
                 return false
@@ -77,7 +76,12 @@ class Round < ApplicationRecord
     end
 
     def start
-        self.status << "Round starting..."
+        self.status << " "
+        self.status << "================================="
+        self.status << "================================="
+        self.status << "================================="
+        self.status << " "
+        self.status << "...Round starting..."
         self.game.users.each do |player| 
             player.playing = true 
             player.round_id = self.id
@@ -93,7 +97,7 @@ class Round < ApplicationRecord
     end
 
     def set_cards
-        self.status << "Dealing cards..."
+        self.status << "...Dealing cards..."
         deck = []
         ['c', 'd', 'h', 's'].each do |color|
             [2, 3, 4, 5, 6, 7, 8, 9, 'T', 'J', 'Q', 'K', 'A'].each do |number|
@@ -125,13 +129,17 @@ class Round < ApplicationRecord
     def start_betting_round
         case self.phase
         when PRE_FLOP
-            self.status << "Pre-flop:"
+            self.status << " "
+            self.status << "XXXXXXXXX Pre-flop XXXXXXXXX"
         when FLOP
-            self.status << "Flop:"
+            self.status << " "
+            self.status << "XXXXXXXXX Flop XXXXXXXXX"
         when TURN
-            self.status << "Turn:"
+            self.status << " "
+            self.status << "XXXXXXXXX Turn XXXXXXXXX"
         when RIVER
-            self.status << "River:"
+            self.status << " "
+            self.status << "XXXXXXXXX River XXXXXXXXX"
         end
 
         self.active_players.each do |player| 
@@ -290,6 +298,7 @@ class Round < ApplicationRecord
             end
         end
         
+        self.status << " "
         if best_players.count == 1
             self.status << "#{best_players[0].username} has the best hand with #{best_hands[0]}"
             self.status << "#{best_players[0].username} wins #{self.pot}!"
