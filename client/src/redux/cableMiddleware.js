@@ -38,10 +38,10 @@ export default function cableMiddleware() {
               dispatch({ type: 'SET_ROOM', room: result.room });
               break;
             case 'new_message':
-                dispatch({ type: 'NEW_MESSAGE', message: result.message });
-                break;
+              dispatch({ type: 'NEW_MESSAGE', message: result.message });
+              break;
             default:
-                break;
+              break;
         }
       }
 
@@ -73,6 +73,7 @@ export default function cableMiddleware() {
             break;
           case 'errors':
             dispatch({type: 'GAME_ERRORS', error: result.error })
+            break;
           default:
             break;
         }

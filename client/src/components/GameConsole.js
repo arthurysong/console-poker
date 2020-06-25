@@ -10,7 +10,6 @@ class GameConsole extends React.Component {
     componentDidMount() {
         const div = findDOMNode(this.refs.jterminal);
         const gameId = this.props.gameId
-        const userId = this.props.user.id
         terminal(window, $);
         this.term = $(div).terminal([
             {

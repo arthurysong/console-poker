@@ -35,7 +35,6 @@ class Game extends React.Component {
                         roundId={this.props.game.active_round.id} 
                         status={this.props.game.active_round.status} 
                         gameErrors={this.props.gameErrors}
-                        user={this.props.user}
                         clearGameErrors={this.props.clearGameErrors}/>
                 </>
             )
