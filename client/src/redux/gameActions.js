@@ -35,3 +35,9 @@ export function unsubscribeGame(gameId) {
       leave: true
     }
 }   
+
+export function clearGameErrors() {
+    return {
+        type: 'CLEAR_GAME_ERRORS'
+    }
+}

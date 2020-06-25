@@ -2,7 +2,7 @@ import React from 'react';
 import GameBoard from './GameBoard';
 import GameConsole from './GameConsole'
 import { connect } from 'react-redux';
-import { startGame, subscribeGame, unsubscribeGame } from '../redux/gameActions';
+import { startGame, subscribeGame, unsubscribeGame, clearGameErrors } from '../redux/gameActions';
 
 class Game extends React.Component {
     componentDidMount() {
@@ -35,7 +35,8 @@ class Game extends React.Component {
                         roundId={this.props.game.active_round.id} 
                         status={this.props.game.active_round.status} 
                         gameErrors={this.props.gameErrors}
-                        user={this.props.user}/>
+                        user={this.props.user}
+                        clearGameErrors={this.props.clearGameErrors}/>
                 </>
             )
         }
@@ -63,7 +64,8 @@ const mapDispatchToProps = dispatch => {
     return {
         startGame: roomId => dispatch(startGame(roomId)),
         subscribeGame: gameId => dispatch(subscribeGame(gameId)),
-        unsubscribeGame: gameId => dispatch(unsubscribeGame(gameId))
+        unsubscribeGame: gameId => dispatch(unsubscribeGame(gameId)),
+        clearGameErrors: () => dispatch(clearGameErrors())
     }
 }
 // export default Game;
