@@ -7,7 +7,7 @@ class Chatbox extends React.Component {
 
     submitHandler = event => {
         event.preventDefault();
-        this.subscription.sendMessage(this.state.newMessage);
+        this.props.subscription.sendMessage(this.state.newMessage);
         this.setState({ newMessage: "" })
     }
 
@@ -21,7 +21,6 @@ class Chatbox extends React.Component {
         if (this.props.messages !== undefined) {
             return (this.props.messages.map((message, index) => <li key={index}>{message.username}: {message.payload}</li>))
         } 
-        // we can add time stamps to messages if we want
     }
 
     render() {
