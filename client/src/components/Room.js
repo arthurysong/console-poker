@@ -10,7 +10,6 @@ class Room extends React.Component {
     }
 
     componentDidMount() {
-        // this needs to rebroadcast to the list so that list updates.
         this.subscription = this.props.subscribeRoom(this.props.match.params.id);
     }
 
@@ -26,8 +25,7 @@ class Room extends React.Component {
         if (this.props.room !== undefined) {
             return (
                 <>
-                    {this.props.room.name}<br/>
-                    <button onClick={this.leaveRoom}>Leave</button>
+                    {this.props.room.name} <button onClick={this.leaveRoom}>Leave</button>
                     <ul>
                         {this.props.room.users.map((user, index) => <li key={index}>{user.username}</li>)}
                     </ul>
