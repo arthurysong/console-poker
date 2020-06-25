@@ -71,6 +71,8 @@ export default function cableMiddleware() {
           case 'update_round':
             dispatch({type: 'UPDATE_ROUND', round: result.round })
             break;
+          case 'errors':
+            dispatch({type: 'GAME_ERRORS', error: result.error })
           default:
             break;
         }

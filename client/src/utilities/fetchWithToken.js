@@ -21,3 +21,15 @@ export function postMoveWithToken(commandObj) {
     }
     fetchWithToken(`http://localhost:3001/users/make_move`, options);
 }
+
+export function startNewRound(gameId) {
+    const options = {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+
+    fetchWithToken(`http://localhost:3001/games/${gameId}/start`, options);
+}
