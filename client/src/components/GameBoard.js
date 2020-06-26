@@ -15,7 +15,7 @@ class GameBoard extends React.Component {
     }
     
     renderDealerButton = user => {
-        if (user.id === this.props.round.dealer_id) {
+        if (user.dealer) {
             return "(D)"
         }
     }

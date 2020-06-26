@@ -21,6 +21,9 @@ export default function cableMiddleware() {
     if (!channel) {
       return next(action);
     }
+    
+    console.log(action);
+    console.log(cable);
 
     if (room) {
       if(leave) {
@@ -56,6 +59,7 @@ export default function cableMiddleware() {
 
     if (game) { // game subscription.
       if(leave) {
+        console.log(cable.subscriptions)
         const subscription = cable.subscriptions.subscriptions.find(sub => sub.identifier === JSON.stringify({ channel, game, token }))
         cable.subscriptions.remove(subscription);
         dispatch({ type: 'DELETE_GAME' })

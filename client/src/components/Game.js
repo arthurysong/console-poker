@@ -10,7 +10,7 @@ class Game extends React.Component {
     }
 
     componentWillUnmount(){
-        this.props.unsubscribeGame(this.props.game.id);
+        this.props.unsubscribeGame(this.props.gameId);
     }
 
     startGame = () => {
