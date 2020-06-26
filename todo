@@ -2,7 +2,7 @@ TODO:
 Scrolling box for Chatbox
 Scrolling box for Terminal
 Handle user's joining game and leaving midgame
-Rotate small_blind_index as we go
+Starting a game after a player has left... The game still has the player that left for some reason.
 
 ? User validations
 ? REGEX expression for handleAuthRedirect for /rooms url

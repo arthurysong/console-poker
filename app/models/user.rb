@@ -9,7 +9,7 @@ class User < ApplicationRecord
     #chips
     #playing
     #cards
-    #total_bet
+    #dealer
 
     def is_move_valid?
         self.round && self.round.turn == self
@@ -19,5 +19,9 @@ class User < ApplicationRecord
         if is_move_valid?
             self.round.make_player_move(move, amount, blinds)
         end
+    end
+
+    def leave_round
+        self.round.player_has_left(self.id)
     end
 end

@@ -14,6 +14,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.integer :round_bet
       t.integer :chips, :default => 100000
       t.string :cards
+      t.boolean :dealer, :default => false
 
       t.timestamps
     end

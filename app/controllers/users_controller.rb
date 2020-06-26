@@ -16,18 +16,20 @@ class UsersController < ApplicationController
         else 
             render json: { errors: user.errors.full_messages }, status: 400
         end
-        
-        # binding.pry
     end
 
     def make_move
         game = current_user.game
 
-        current_user.make_move(params["command"], params["amount"])
+        if current_user.round
+            current_user.make_move(params["command"], params["amount"])
 
-        ActionCable.server.broadcast("game_#{game.id}", { type: "update_round", round: current_user.round })
+            ActionCable.server.broadcast("game_#{game.id}", { type: "update_round", round: current_user.round })
 
-        render json: { message: "Move Success." }
+            render json: { message: "Move Success." }
+        else
+            render json: { error: "User is not in current round."}
+        end
     end
 
     private

@@ -27,18 +27,22 @@ class Round < ApplicationRecord
     BIG_BLIND = 400
 
     def as_json(options = {})
-        super(only: [:id, :status, :pot, :highest_bet_for_phase, :is_playing], methods: [:access_community_cards, :ordered_users, :dealer_id])
+        super(only: [:id, :status, :pot, :highest_bet_for_phase, :is_playing], methods: [:access_community_cards, :ordered_users])
     end 
 
     def ordered_users
         self.users.sort{|a,b| a.id <=> b.id}
     end
 
-    def dealer_id
-        dealer_index = self.small_blind_index + 2
-        dealer_index = dealer_index % self.users.length
-        self.users[dealer_index].id
-    end
+    # def dealer_id
+    #     if self.users.count == 0
+    #         return nil
+    #     end
+
+    #     dealer_index = self.small_blind_index + 2
+    #     dealer_index = dealer_index % self.users.length
+    #     self.ordered_users[dealer_index].id
+    # end
 
     def turn 
         active_players[self.turn_index]
@@ -82,16 +86,60 @@ class Round < ApplicationRecord
         self.status << "...Round starting..."
         self.game.users.each do |player| 
             player.playing = true 
+            player.dealer = false
             player.round_id = self.id
             player.round_bet = 0
             player.save
         end
 
+        dealer_index = self.small_blind_index + 2
+        dealer_index = dealer_index % self.users.length
+        self.ordered_users[dealer_index].dealer = true
+        
         self.is_playing = true
         self.save
 
         set_cards
         start_betting_round
+    end
+
+    def player_has_left(user_id)
+        user = self.active_players.detect {|u| u.id == user_id}
+
+        self.status << "#{user.username} has left the game."
+        self.save
+        if self.turn == user
+            self.make_player_move('fold')
+        else
+            
+            user.playing = false
+            user.round_id = nil
+            user.round_bet = 0
+            user.cards = ""
+            user.save
+
+            self.turn_count += 1 #need to update turn count..
+            if self.turn_index == 0
+                self.turn_index = self.active_players.count-1
+            else
+                self.turn_index -= 1
+            end
+
+            self.small_blind_index = self.small_blind_index % self.active_players.count #if small_blindi_index is last player
+            #we need to reset small_blind_index to first person.
+
+            self.save
+
+            if check_if_over #check if game is over or next phase should happen.
+                # binding.pry
+                end_game_by_fold
+            end
+        end
+
+        if self.active_players.count == 0
+            self.is_playing = false
+            self.save
+        end
     end
 
     def set_cards
@@ -167,7 +215,7 @@ class Round < ApplicationRecord
         end
 
         unless blinds
-            self.status << "#{turn.username}'s turn."
+            self.status << "#{turn.username}'s turn." unless phase_finished?
             self.turn_count += 1 unless blinds
         end
     end
@@ -183,7 +231,10 @@ class Round < ApplicationRecord
                 self.turn_index = 0
             end
             
-            self.status << "#{turn.username}'s turn..."
+            #what if last person is the small_blind_index and they fold?
+            self.small_blind_index = self.small_blind_index % self.active_players.count
+
+            self.status << "#{turn.username}'s turn..." unless check_if_over
             self.turn_count += 1
             self.save
         elsif command == "check"
@@ -329,7 +380,6 @@ class Round < ApplicationRecord
         self.is_playing = false
         self.status << "#{last_player.username} wins #{self.pot}!"
         self.save
-    
     end
 
     def check_if_over
