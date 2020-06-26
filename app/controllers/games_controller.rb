@@ -12,18 +12,22 @@ class GamesController < ApplicationController
     
     def start
         game = Game.find(params[:id])
-        if !game.active_round
-            game.start
-            ActionCable.server.broadcast("game_#{game.id}", { type: "set_game", game: game })
-        else
-            if !game.active_round.is_playing
+        if game.users.count > 1
+            if !game.active_round
                 game.start
-                # game.save
-
                 ActionCable.server.broadcast("game_#{game.id}", { type: "set_game", game: game })
             else
-                ActionCable.server.broadcast("game_#{game.id}", { type: "errors", error: "Round is still playing." })
+                if !game.active_round.is_playing
+                    game.start
+                    # game.save
+
+                    ActionCable.server.broadcast("game_#{game.id}", { type: "set_game", game: game })
+                else
+                    ActionCable.server.broadcast("game_#{game.id}", { type: "errors", error: "Round is still playing." })
+                end
             end
+        else
+            ActionCable.server.broadcast("game_#{game.id}", { type: "errors", error: "Game must have more than one player." })
         end
 
         

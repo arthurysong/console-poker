@@ -13,7 +13,6 @@ class GameChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    puts "I AM LEAVING GAME..."
     user = find_verified_user
     game = Game.find(params["game"])
 
@@ -25,8 +24,6 @@ class GameChannel < ApplicationCable::Channel
     end
     
     game.users.delete(user)
-    puts 'XXXXXXXXXXXXXXXXXXXXX'
-    puts game.users
     user.save
 
 

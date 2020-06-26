@@ -1,8 +1,7 @@
 TODO:
 Scrolling box for Chatbox
 Scrolling box for Terminal
-Handle user's joining game and leaving midgame
-Starting a game after a player has left... The game still has the player that left for some reason.
+Cannot start if game only has one player.
 
 ? User validations
 ? REGEX expression for handleAuthRedirect for /rooms url
