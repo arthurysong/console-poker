@@ -4,7 +4,7 @@ class Game < ApplicationRecord
     has_many :rounds
 
     def as_json(options = {})
-        super(only: [:id], methods: [:active_round])
+        super(only: [:id], methods: [:active_round], include: [:users])
         # super(only: [:id])
     end 
 

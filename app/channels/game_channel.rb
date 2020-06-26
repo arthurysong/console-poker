@@ -17,9 +17,16 @@ class GameChannel < ApplicationCable::Channel
     user = find_verified_user
     game = Game.find(params["game"])
 
-    user.leave_round
+    #when user joins a game and they haven't played a game 
+    if user.round #if user is in a round
+      if user.round.is_playing #if user is in a round and is playing..
+        user.leave_round
+      end
+    end
     
     game.users.delete(user)
+    puts 'XXXXXXXXXXXXXXXXXXXXX'
+    puts game.users
     user.save
 
 
