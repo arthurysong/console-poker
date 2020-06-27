@@ -7,6 +7,13 @@ class Chatbox extends React.Component {
         newMessage: ""
     }
 
+    componentDidUpdate(prevProps){
+        if (prevProps.messages !== this.props.messages) {
+            const scrollable = document.getElementById('messages_container');
+            scrollable.scrollTop = scrollable.scrollHeight;
+        }
+    }
+
     submitHandler = event => {
         event.preventDefault();
         this.props.subscription.sendMessage(this.state.newMessage);
