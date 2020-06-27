@@ -132,6 +132,7 @@ class Round < ApplicationRecord
         end
 
         if self.active_players.count == 0
+            self.status << "Everyone has left. Game ending."
             self.is_playing = false
             self.save
         end

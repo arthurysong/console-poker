@@ -25,7 +25,8 @@ class Chatbox extends React.Component {
 
     render() {
         return (
-            <>
+            <div>
+            {/* <div className="nes-container"> */}
                 <ul>
                     {this.renderMessages()}
                 </ul>
@@ -33,7 +34,7 @@ class Chatbox extends React.Component {
                     <input type="textarea" onChange={this.changeHandler} value={this.state.newMessage}/>
                     <input type="submit" value="send"/>
                 </form>
-            </>
+            </div>
         )
     }
 }

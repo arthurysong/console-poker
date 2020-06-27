@@ -1,7 +1,5 @@
 TODO:
-Scrolling box for Chatbox
-Scrolling box for Terminal
-Cannot start if game only has one player.
+Scrolling box for Chatbox, Textarea for chatbox.
 
 ? User validations
 ? REGEX expression for handleAuthRedirect for /rooms url
