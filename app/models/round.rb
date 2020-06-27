@@ -34,18 +34,18 @@ class Round < ApplicationRecord
         self.users.sort{|a,b| a.id <=> b.id}
     end
 
-    # def dealer_id
-    #     if self.users.count == 0
-    #         return nil
-    #     end
-
-    #     dealer_index = self.small_blind_index + 2
-    #     dealer_index = dealer_index % self.users.length
-    #     self.ordered_users[dealer_index].id
-    # end
-
     def turn 
         active_players[self.turn_index]
+    end
+
+    def turn= (user)
+        self.active_players.each_with_index do |u, i|
+            if user == u
+                self.turn_index = i
+                self.save
+                break
+            end
+        end
     end
 
     def active_players
@@ -105,7 +105,7 @@ class Round < ApplicationRecord
 
     def player_has_left(user_id)
         user = self.active_players.detect {|u| u.id == user_id}
-
+        
         self.status << "#{user.username} has left the game."
         self.save
         if self.turn == user
@@ -113,20 +113,15 @@ class Round < ApplicationRecord
         else
             
             user.playing = false
-            user.round_id = nil
             user.round_bet = 0
             user.cards = ""
             user.save
 
-            self.turn_count += 1 #need to update turn count..
-            if self.turn_index == 0
-                self.turn_index = self.active_players.count-1
-            else
-                self.turn_index -= 1
-            end
+            self.no_players_for_phase -= 1
 
-            self.small_blind_index = self.small_blind_index % self.active_players.count #if small_blindi_index is last player
-            #we need to reset small_blind_index to first person.
+            reset_turn_index 
+            self.turn_index += self.turn_count - 1
+            self.turn_index = self.turn_index % self.active_players.count
 
             self.save
 
@@ -172,6 +167,20 @@ class Round < ApplicationRecord
         end
     end
 
+    def reset_turn_index
+        #this is responsible for finding first person to go in each round.
+        i = self.small_blind_index
+        while true 
+            i = i % self.ordered_users.count
+            if self.ordered_users[i].playing
+                self.turn = self.ordered_users[i] #turn= will use user to set turn_index
+                break
+            end
+            i += 1
+        end
+        self.save
+    end
+
     def start_betting_round
         case self.phase
         when PRE_FLOP
@@ -192,9 +201,10 @@ class Round < ApplicationRecord
             player.round_bet = 0
             player.save
         end 
+
+        reset_turn_index
         self.no_players_for_phase = active_players.count
         self.highest_bet_for_phase = 0
-        self.turn_index = self.small_blind_index
         self.turn_count = 1
         self.save
 
@@ -232,7 +242,7 @@ class Round < ApplicationRecord
             end
             
             #what if last person is the small_blind_index and they fold?
-            self.small_blind_index = self.small_blind_index % self.active_players.count
+            # self.small_blind_index = self.small_blind_index % self.active_players.count
 
             self.status << "#{turn.username}'s turn..." unless check_if_over
             self.turn_count += 1
