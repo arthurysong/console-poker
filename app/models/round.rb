@@ -16,8 +16,6 @@ class Round < ApplicationRecord
     #all_in
     #status
 
-    #make sure players are at least greater than 2 before starting...
-
     PRE_FLOP = 0
     FLOP = 1
     TURN = 2

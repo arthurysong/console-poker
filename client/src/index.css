@@ -1,5 +1,5 @@
 body {
-    font-family: 'atari_classicchunky';
+    font-family: 'atari_classicchunky' !important;
 } 
 
 ul {
@@ -28,7 +28,6 @@ input[type="password"]{
 .terminal-output > :not(.raw),
 .cmd {
     font-family: 'atari_classicchunky' !important;
-    /*font-family: FreeMono, monospace; this don't work on Android */
     font-size: 12px;
     line-height: 15px;
 }
@@ -38,6 +37,5 @@ input[type="password"]{
     height: 400px;
     overflow: auto; 
     text-align:justify; 
-
 }
 

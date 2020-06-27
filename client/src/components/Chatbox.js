@@ -1,4 +1,6 @@
 import React from 'react';
+import "nes.css/css/nes.min.css";
+
 
 class Chatbox extends React.Component {
     state = {
@@ -25,8 +27,10 @@ class Chatbox extends React.Component {
 
     render() {
         return (
-            <div>
-            {/* <div className="nes-container"> */}
+            // <div>
+            <div className="nes-container">
+                Hello???
+                <p>
                 <ul>
                     {this.renderMessages()}
                 </ul>
@@ -34,6 +38,7 @@ class Chatbox extends React.Component {
                     <input type="textarea" onChange={this.changeHandler} value={this.state.newMessage}/>
                     <input type="submit" value="send"/>
                 </form>
+                </p>
             </div>
         )
     }
