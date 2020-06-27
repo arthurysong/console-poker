@@ -1,5 +1,7 @@
 TODO:
-Scrolling box for Chatbox, Textarea for chatbox.
+Manage user token when token expires??
+Alert for when user's token has expired??
+
 
 ? User validations
 ? REGEX expression for handleAuthRedirect for /rooms url
