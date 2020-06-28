@@ -22,25 +22,25 @@ class Register extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="user_form">
                 <Errors />
                 <form onSubmit={this.submitHandler} >
                     <label>
                         Username
-                    <input type="text" name="username" value={this.state.username} onChange={this.changeHandler}/><br/>
-                    </label>
+                    <input type="text" name="username" value={this.state.username} onChange={this.changeHandler}/>
+                    </label><br/>
                     <label>
                         Email
-                    <input type="text" name="email" value={this.state.email} onChange={this.changeHandler}/><br/>
-                    </label>
+                    <input type="text" name="email" value={this.state.email} onChange={this.changeHandler}/>
+                    </label><br/>
                     <label>
                         Password
-                    <input type="password" name="password" value={this.state.password} onChange={this.changeHandler}/><br/>
-                    </label>
+                    <input type="password" name="password" value={this.state.password} onChange={this.changeHandler}/>
+                    </label><br/>
                     <label>
                         Password Confirmation
-                    <input type="password" name="password_confirmation" value={this.state.password_confirmation} onChange={this.changeHandler}/><br/>
-                    </label>
+                    <input type="password" name="password_confirmation" value={this.state.password_confirmation} onChange={this.changeHandler}/>
+                    </label><br/>
                     <input type="submit" value="Create Account"/><br/>
                 </form>
             </div>

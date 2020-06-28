@@ -31,17 +31,17 @@ class LoginForm extends React.Component {
     }
     render() {
         return(
-            <div>
+            <div className="user_form">
                 <Errors />
                 <form onSubmit={this.submitHandler}>
                     <label>
                         Email
-                    <input onChange={this.changeHandler} type="text" name="email" value={this.state.email}/><br/>
-                    </label>
+                    <input onChange={this.changeHandler} type="text" name="email" value={this.state.email}/>
+                    </label><br/>
                     <label>
                         Password
-                    <input onChange={this.changeHandler} type="password" name="password" value={this.state.password}/><br/>
-                    </label>
+                    <input onChange={this.changeHandler} type="password" name="password" value={this.state.password}/>
+                    </label><br/>
                     <input type="submit" value="login"/><br/>
                     {this.renderRegister()}
                 </form>

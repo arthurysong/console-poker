@@ -33,6 +33,7 @@ input[type="password"]{
 }
 
 #main {
+    margin: 50px;
     text-align: center;
 }
 
@@ -85,3 +86,9 @@ input[type="password"]{
 .user_item {
     display: inline;
 }
+
+/* .user_form {
+    width: 800px;
+    display: inline-block;
+    text-align: justify;
+} */
