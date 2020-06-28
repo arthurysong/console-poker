@@ -3,6 +3,7 @@ import Chatbox from './Chatbox';
 import Game from './Game';
 import { connect } from 'react-redux';
 import { subscribeRoom, unsubscribeRoom } from '../redux/roomActions';
+import { hashStringToColor } from '../utilities/colorHash'
 
 class Room extends React.Component {
     state = {
@@ -27,7 +28,7 @@ class Room extends React.Component {
                 <>
                     {this.props.room.name} <button onClick={this.leaveRoom}>Leave</button>
                     <ul id="user_list">
-                        {this.props.room.users.map((user, index) => <li className="user_item" key={index}>{user.username} </li>)}
+                        {this.props.room.users.map((user, index) => <li className="user_item" style={{color: `${hashStringToColor(user.username)}`}} key={index}>{user.username} </li>)}
                     </ul>
                 </>
             )
