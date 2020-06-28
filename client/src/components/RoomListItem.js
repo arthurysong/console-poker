@@ -9,7 +9,7 @@ const RoomListItem = ({ room }) => {
     }
 
     return (
-        <li>{room.name}<br/>{room.no_users}/8 {renderJoinButton()}
+        <li className="room_li">{room.name}<br/>{room.no_users}/8 {renderJoinButton()}
         </li>
     )
 }

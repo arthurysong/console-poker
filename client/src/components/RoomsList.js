@@ -64,9 +64,9 @@ class Rooms extends React.Component {
         return (
             <div>
                 {this.renderUser()}&nbsp;
-                <button onClick={this.clickHandler}>Log Out</button><br/>
+                <button onClick={this.clickHandler}>Log Out</button><br/><br/>
 
-                <Link to="/rooms/new">Create Room</Link>
+                <Link to="/rooms/new">Create Room</Link><br/><br/>
                 <ul>
                     {this.renderRooms()}
                 </ul>

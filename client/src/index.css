@@ -87,8 +87,6 @@ input[type="password"]{
     display: inline;
 }
 
-/* .user_form {
-    width: 800px;
-    display: inline-block;
-    text-align: justify;
-} */
+.room_li {
+    padding: 8px;
+}
