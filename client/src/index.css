@@ -59,8 +59,6 @@ input[type="password"]{
     margin: 24px;
     display: inline-block;
     vertical-align: top;
-    /* display: inline-block; */
-    /* float: left !important; */
 }
 
 #messages_container {

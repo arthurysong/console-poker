@@ -39,8 +39,8 @@ class NewRoomForm extends React.Component {
                 <form onSubmit={this.submitHandler}>
                     <label>
                         Name&nbsp;
-                    <input type="text" name="name" onChange={this.changeHandler} value={this.state.name} /><br/>
-                    </label>
+                    <input type="text" name="name" onChange={this.changeHandler} value={this.state.name} />
+                    </label>&nbsp;
                     <input type="submit" value="Create" />
                 </form>
             </div>

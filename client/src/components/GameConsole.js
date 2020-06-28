@@ -51,7 +51,7 @@ class GameConsole extends React.Component {
     ], {
             greetings: 'Game Terminal:'
         })
-        this.props.status.forEach(s => this.term.echo(s))
+        if (this.props.playing) {this.props.status.forEach(s => this.term.echo(s))}
     }
 
     shouldComponentUpdate(nextProps) {
