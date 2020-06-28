@@ -1,5 +1,6 @@
 body {
     font-family: 'atari_classicchunky' !important;
+    word-break: break-all;
 } 
 
 ul {
@@ -70,10 +71,15 @@ input[type="password"]{
 }
 
 #new_message_form {
+    width: 528px;
     margin: auto;
     position: absolute;
     bottom: 24px;
     left: 32px;
+}
+
+#textarea_field {
+    margin-bottom: 8px;
 }
 
 #game_container {
@@ -89,4 +95,8 @@ input[type="password"]{
 
 .room_li {
     padding: 8px;
+}
+
+.room_li_desc{
+    font-size: 12px;
 }

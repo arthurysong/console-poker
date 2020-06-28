@@ -14,7 +14,6 @@ class App extends React.Component {
     return (
       <div id="main">
       <Router>
-        {/* <User user={this.props.user}/> */}
         {console.log(this.props.user)}
         <Route path="/" render={routerProps => <Home {...routerProps} setLogin={this.props.setLogin}/>}/>
         
@@ -23,7 +22,6 @@ class App extends React.Component {
           <Route path="/rooms/new" render={routerProps => 
             <NewRoomForm 
               {...routerProps}
-              // createRoom={this.props.createRoom}
               />}/>
 
           <Route path={`/rooms/:id`} render={routerProps => 
