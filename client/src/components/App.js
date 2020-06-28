@@ -15,9 +15,10 @@ class App extends React.Component {
     return (
       <div id="main">
       <Router>
-        <User user={this.props.user}/>
+        {/* <User user={this.props.user}/> */}
         {console.log(this.props.user)}
         <Route path="/" render={routerProps => <Home {...routerProps} setLogin={this.props.setLogin}/>}/>
+        
         <Switch>
           <Route path="/login" render={routerProps => <LoginForm {...routerProps}/>}/>
           <Route path="/rooms/new" render={routerProps => 
@@ -29,7 +30,8 @@ class App extends React.Component {
           <Route path={`/rooms/:id`} render={routerProps => 
             <Room {...routerProps}/>}/>
           <Route path="/rooms" render={routerProps => 
-            <RoomsList {...routerProps} 
+            <RoomsList {...routerProps}
+              user={this.props.user} 
               logOut={this.props.logOut} 
               isLoggedIn={this.props.isLoggedIn}
               />}/>
@@ -54,7 +56,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     isLoggedIn: state.isLoggedIn,
-    usser: state.user
+    user: state.user
   }
 }
 

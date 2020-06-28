@@ -55,16 +55,22 @@ class Rooms extends React.Component {
     }
 
     renderRooms = () => (this.state.rooms.map((room) => <RoomListItem key={room.id} room={room} wsSubscribeRoom={this.props.wsSubscribeRoom}/>))
-
+    renderUser = () => {
+        if (this.props.user) {
+            return this.props.user.username
+        }
+    }
     render () {
         return (
             <div>
-                Rooms<br/>
+                {this.renderUser()}&nbsp;
+                <button onClick={this.clickHandler}>Log Out</button><br/>
+
                 <Link to="/rooms/new">Create Room</Link>
                 <ul>
                     {this.renderRooms()}
                 </ul>
-                <button onClick={this.clickHandler}>Log Out</button>
+                
             </div>
         )
     }

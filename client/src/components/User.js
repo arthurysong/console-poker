@@ -1,10 +1,13 @@
 import React from 'react';
 
 const User = ({ user }) => {
+    const clickHandler = () => {
+        this.props.logOut(this.props.history)
+    }
 
     const renderUser = () => {
         if (user) {
-            return (<>{user.username}</>)
+            return (<>{user.username} <button onClick={clickHandler}>Log Out</button></>)
         }
     }
 
