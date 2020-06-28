@@ -32,6 +32,10 @@ input[type="password"]{
     line-height: 15px;
 }
 
+#main {
+    text-align: center;
+}
+
 #console {
     width: 600px;
     height: 300px;

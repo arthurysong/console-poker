@@ -13,6 +13,7 @@ import User from './User';
 class App extends React.Component {
   render() {
     return (
+      <div id="main">
       <Router>
         <User user={this.props.user}/>
         {console.log(this.props.user)}
@@ -36,6 +37,7 @@ class App extends React.Component {
           <Route path="/register" render={routerProps => <Register {...routerProps} register={this.props.register}/>}/>
         </Switch>
       </Router>
+      </div>
     )
   }
 }
