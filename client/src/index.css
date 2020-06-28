@@ -93,6 +93,7 @@ input[type="password"]{
 
 .board_user_chips {
     font-size: 10px;
+    color: #006400;
 }
 
 #phase {
