@@ -42,7 +42,7 @@ class GameBoard extends React.Component {
     render() {
         return(
             <>
-                Players:
+                {/* Players: */}
                 <ul>
                     {this.renderPlayers()}<br/>
                     {this.renderCardsAndPot()}<br/>
