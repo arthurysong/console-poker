@@ -43,10 +43,10 @@ class Game extends React.Component {
 
     render() {
         return (
-            <>
+            <div id="game_container">
                 {this.renderGame()}
                 {this.renderButton()}
-            </>
+            </div>
         )
     }
 }

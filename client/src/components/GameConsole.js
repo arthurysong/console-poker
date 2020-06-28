@@ -77,7 +77,7 @@ class GameConsole extends React.Component {
 
     render(){
         return (
-            <div id={"console"}>
+            <div id="console">
                 <div ref="jterminal" id="jterminal">
                 </div> 
             </div>

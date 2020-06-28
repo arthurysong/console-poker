@@ -32,6 +32,11 @@ input[type="password"]{
     line-height: 15px;
 }
 
+/* #main {
+    width: 1000px;
+    margin: auto;
+} */
+
 #console {
     width: 600px;
     height: 400px;
@@ -39,9 +44,15 @@ input[type="password"]{
     text-align:justify; 
 }
 
+#room_container {
+    width: 1200px;
+    margin: auto;
+}
+
 #chatbox_container {
     width: 600px;
     height: 400px;
+    float: left !important;
 }
 
 #messages_container {
@@ -55,4 +66,8 @@ input[type="password"]{
     position: absolute;
     bottom: 0;
     left: 0;
+}
+
+#game_container {
+    float: left;
 }
