@@ -26,8 +26,8 @@ class Room extends React.Component {
             return (
                 <>
                     {this.props.room.name} <button onClick={this.leaveRoom}>Leave</button>
-                    <ul>
-                        {this.props.room.users.map((user, index) => <li key={index}>{user.username}</li>)}
+                    <ul id="user_list">
+                        {this.props.room.users.map((user, index) => <li className="user_item" key={index}>{user.username} </li>)}
                     </ul>
                 </>
             )
