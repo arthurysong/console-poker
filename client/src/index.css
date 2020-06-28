@@ -32,11 +32,6 @@ input[type="password"]{
     line-height: 15px;
 }
 
-/* #main {
-    width: 1000px;
-    margin: auto;
-} */
-
 #console {
     width: 600px;
     height: 400px;
@@ -45,18 +40,22 @@ input[type="password"]{
 }
 
 #room_container {
-    width: 1200px;
-    margin: auto;
+    text-align: center;
 }
 
 #chatbox_container {
     width: 600px;
-    height: 400px;
-    float: left !important;
+    height: 600px;
+    margin: 24px;
+    display: inline-block;
+    vertical-align: top;
+    /* display: inline-block; */
+    /* float: left !important; */
 }
 
 #messages_container {
-    height: 250px;
+    height: 450px;
+    width: 100%;
     overflow: auto;
     text-align: justify;
 }
@@ -64,10 +63,14 @@ input[type="password"]{
 #new_message_form {
     margin: auto;
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 24px;
+    left: 32px;
 }
 
 #game_container {
-    float: left;
+    margin: 24px;
+    vertical-align: top;
+    display: inline-block;
+    text-align: justify;
+    /* float: left; */
 }
