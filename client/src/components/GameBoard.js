@@ -24,7 +24,7 @@ class GameBoard extends React.Component {
         return (
             <>
                 {this.props.round.ordered_users.map((user,index) => 
-                    <li key={index}>{user.username} ({user.chips}): {this.renderPlayerCards(user)} {this.renderDealerButton(user)}</li>)}
+                    <li className="board_user" key={index}>{user.username}<span className="board_user_chips">({user.chips})</span> {this.renderPlayerCards(user)} {this.renderDealerButton(user)}</li>)}
             </>
         )
     }
@@ -32,9 +32,9 @@ class GameBoard extends React.Component {
     renderCardsAndPot = () => {
         return (
             <>
-                Community Cards: {this.props.round.access_community_cards === "" ? "<PREFLOP>" : this.props.round.access_community_cards}<br/>
-                Pot: {this.props.round.pot}<br/>
-                Bet: {this.props.round.highest_bet_for_phase}<br/>
+                <span id="phase">{this.props.round.access_community_cards === "" ? "<PREFLOP>" : this.props.round.access_community_cards}</span><br/>
+                Pot {this.props.round.pot}<br/>
+                Bet {this.props.round.highest_bet_for_phase}<br/>
             </>
         )
     }

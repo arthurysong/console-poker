@@ -87,6 +87,19 @@ input[type="password"]{
     text-align: justify;
 }
 
+.board_user {
+    margin: 8px 0px;
+}
+
+.board_user_chips {
+    font-size: 10px;
+}
+
+#phase {
+    font-size: 18px;
+    margin: 8px;
+}
+
 .user_item {
     display: inline;
 }
