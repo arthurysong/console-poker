@@ -1,7 +1,14 @@
 TODO:
-Manage user token when token expires??
-Alert for when user's token has expired??
+Devise and Doorkeeper to manage refresh token?
 
+For now, just set tokens to last forever, that way token won't expire during playing.
+Use stripe to accept payments.
+Generate Terms and Conditions
+Rooms with password feature
+Setting blinds on a game
+All players must be able to afford blinds before playing? What is minimum chips to play??
+Oauth using Google.
+If phase is last phase then reveal every player's cards.
 
 ? User validations
 ? REGEX expression for handleAuthRedirect for /rooms url
