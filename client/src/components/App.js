@@ -8,6 +8,7 @@ import { setLogin, logOut, register } from '../redux/dispatchActions';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import Register from './Register';
+import Deposit from './Deposit';
 
 class App extends React.Component {
   render() {
@@ -18,6 +19,7 @@ class App extends React.Component {
         <Route path="/" render={routerProps => <Home {...routerProps} setLogin={this.props.setLogin}/>}/>
         
         <Switch>
+          <Route path="/deposit" render={routerProps => <Deposit {...routerProps} />}/>
           <Route path="/login" render={routerProps => <LoginForm {...routerProps}/>}/>
           <Route path="/rooms/new" render={routerProps => 
             <NewRoomForm 
