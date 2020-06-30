@@ -3,7 +3,7 @@ import RoomListItem from './RoomListItem';
 import Cable from 'actioncable';
 import { Link } from 'react-router-dom';
 
-class Rooms extends React.Component {
+class RoomsList extends React.Component {
     state = {
         rooms: [],
         newForm: false
@@ -60,11 +60,16 @@ class Rooms extends React.Component {
             return this.props.user.username
         }
     }
+
+    redirectToDeposits = () => {
+        this.props.history.push(`/deposit`);
+    }
     render () {
         return (
             <div>
                 {this.renderUser()}&nbsp;
                 <button onClick={this.clickHandler}>Log Out</button><br/><br/>
+                <button onClick={this.redirectToDeposits}>Deposit</button><br/>
 
                 <Link to="/rooms/new">Create Room</Link><br/><br/>
                 <ul>
@@ -76,4 +81,4 @@ class Rooms extends React.Component {
     }
 }
 
-export default Rooms
+export default RoomsList;
