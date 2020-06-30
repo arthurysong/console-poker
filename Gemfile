@@ -26,6 +26,7 @@ gem 'holdem'
 gem 'shotgun'
 gem 'foreman'
 gem 'jwt'
+gem 'stripe'
 gem 'simple_command'
 gem 'rack-cors'
 
