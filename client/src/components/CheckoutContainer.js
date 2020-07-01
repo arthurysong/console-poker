@@ -132,6 +132,7 @@ class CheckoutContainer extends React.Component{
                         <span className="label">Full Name *</span><br/>
                         <input 
                         className="nes-input" 
+                        placeholder="Pacman"
                         type="text" 
                         name="name" 
                         value={this.state.name} 
@@ -140,6 +141,7 @@ class CheckoutContainer extends React.Component{
                     <label>
                         <span className="label">Card Details</span><br/>
                     <CheckoutForm 
+                    
                         clearMessages={this.clearMessages}
                         handleErrors={this.handleErrors} 
                         handleSuccess={this.handleSuccess}

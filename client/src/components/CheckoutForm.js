@@ -12,7 +12,7 @@ const CARD_ELEMENT_OPTIONS = {
         // fontFamily: 'Times New Roman',
         // fontFamily: "atari_classicchunky",
         // fontFamily: 'Times New Roman',
-        fontFamily: 'Atari',
+        // fontFamily: 'Atari',
         fontSmoothing: "antialiased",
         fontSize: "16px",
         "::placeholder": {
@@ -30,7 +30,7 @@ const CheckoutForm = props => {
     const stripe = useStripe();
     const elements = useElements();
     const validateAmount = amount => {
-      const cents = parseFloat(props.amount.replace(/,/g, ''))*100
+      const cents = parseFloat(amount.replace(/,/g, ''))*100
       if (cents >= 50 || cents <= 99999999){
         return true
       }
@@ -40,7 +40,7 @@ const CheckoutForm = props => {
     const submitHandler = async (event) => {
         event.preventDefault();
         props.clearMessages();
-        
+
         if (!stripe || !elements) {
             // Stripe.js has not yet loaded.
             // Make sure to disable form submission until Stripe.js has loaded.
@@ -89,16 +89,10 @@ const CheckoutForm = props => {
     return(
         <div>
             <form onSubmit={submitHandler}>
-                <label>
-                    {/* Card details */}
-                    <CardElement className="nes-input" options={CARD_ELEMENT_OPTIONS}/>
-                    {/* <CardElement /> */}
-
-                    {/* <CardNumberElement /> */}
-                    {/* <CardExpiryElement /> */}
-                    {/* <CardCvcElement /> */}
-                </label><br/>
-                <button 
+              <CardElement options={CARD_ELEMENT_OPTIONS}/>
+              {/* <CardElement classes={{base: 'nes-input'}}/> */}
+              <br/>
+                <button
                 // validates the stripe is loaded, name is not empty, and amount is valid, otherwise button is disabled.
                   className={`nes-btn ${!stripe || props.name === "" || !validateAmount(props.amount) ? 'is-disabled' : 'is-primary'}`} 
                   type="submit" 
