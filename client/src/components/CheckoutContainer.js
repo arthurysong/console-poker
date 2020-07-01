@@ -7,7 +7,8 @@ import { addChips, fetchChips, unsetChips } from '../redux/dispatchActions';
 
 class CheckoutContainer extends React.Component{
     state = {
-        amount: 0
+        amount: 0,
+        name: ""
     }
 
     componentDidMount() {
@@ -21,7 +22,7 @@ class CheckoutContainer extends React.Component{
 
     changeHandler = event => {
         this.setState({
-            amount: event.target.value
+            [event.target.name]: event.target.value
         })
     }
 
@@ -32,9 +33,13 @@ class CheckoutContainer extends React.Component{
 
                 1 USD = 10000 Chips<br/>
                 <label>
-                $<CurrencyInput value={this.state.amount} onChangeEvent={this.changeHandler}/>
+                $<CurrencyInput name="amount" value={this.state.amount} onChangeEvent={this.changeHandler}/>
+                </label><br/>
+                <label>
+                    Full Name&nbsp;
+                    <input type="text" name="name" value={this.state.name} onChange={this.changeHandler}/>
                 </label>
-                <CheckoutForm amount={this.state.amount} user={this.props.user} addChips={this.props.addChips}/>
+                <CheckoutForm amount={this.state.amount} name={this.state.name} user={this.props.user} addChips={this.props.addChips}/>
             </div>
         )
     }

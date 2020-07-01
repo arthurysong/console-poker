@@ -43,11 +43,12 @@ const CheckoutForm = props => {
         const resp = await fetch(`http://localhost:3001/secret/${props.amount*100}`)
         const secret = await resp.json()
         // console.log(secret);
+        console.log(props.name);
         const result = await stripe.confirmCardPayment(secret.client_secret, {
         payment_method: {
             card: elements.getElement(CardElement),
             billing_details: {
-            name: 'Jenny Rosen',
+            name: props.name,
             },
         }
         });
