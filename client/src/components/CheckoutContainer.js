@@ -122,13 +122,18 @@ class CheckoutContainer extends React.Component{
                 <div>
                     <label>
                         {/* name must not be blank. */}
-                        <span className="label">Full Name</span><br/>
+                        <span className="label">Full Name *</span><br/>
                         <input className="nes-input" type="text" name="name" value={this.state.name} onChange={this.changeHandler}/>
                     </label><br/>
                     <label>
                         <span className="label">Card Details</span><br/>
-                    <CheckoutForm handleErrors={this.handleErrors} handleSuccess={this.handleSuccess}
-                    amount={this.state.amount} name={this.state.name} user={this.props.user} addChips={this.props.addChips}/>
+                    <CheckoutForm 
+                        handleErrors={this.handleErrors} 
+                        handleSuccess={this.handleSuccess}
+                        amount={this.state.amount} 
+                        name={this.state.name} 
+                        user={this.props.user} 
+                        addChips={this.props.addChips}/>
                     </label>
                 </div>
             </div>

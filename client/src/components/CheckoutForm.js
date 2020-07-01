@@ -29,6 +29,13 @@ const CARD_ELEMENT_OPTIONS = {
 const CheckoutForm = props => {
     const stripe = useStripe();
     const elements = useElements();
+    const validateAmount = amount => {
+      const cents = parseFloat(props.amount.replace(/,/g, ''))*100
+      if (cents >= 50 || cents <= 99999999){
+        return true
+      }
+      return false
+    }
 
     const submitHandler = async (event) => {
         event.preventDefault();
@@ -90,8 +97,13 @@ const CheckoutForm = props => {
                     {/* <CardExpiryElement /> */}
                     {/* <CardCvcElement /> */}
                 </label><br/>
-                <button className="nes-btn is-primary" type="submit" disabled={!stripe} value="Exchange Chips!">Exchange Chips!</button>
-                {/* <input type="submit" disabled={!stripe} value="Exchange Chips!"/> */}
+                <button 
+                // validates the stripe is loaded, name is not empty, and amount is valid, otherwise button is disabled.
+                  className={`nes-btn ${!stripe || props.name === "" || !validateAmount(props.amount) ? 'is-disabled' : 'is-primary'}`} 
+                  type="submit" 
+                  value="Exchange Chips!">
+                    Exchange Chips!
+                </button>
             </form>
         </div>
     )
