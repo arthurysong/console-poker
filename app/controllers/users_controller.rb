@@ -32,6 +32,15 @@ class UsersController < ApplicationController
         end
     end
 
+    def show
+        puts 'why are you routing to show action??!?!'
+    end
+
+    def get_chips
+        chips = current_user.chips
+        render json: { chips: chips }, status: 200
+    end
+
     def add_chips
         current_user.chips += params[:amount]
         render json: { message: "#{params[:amount]} chips successfully added to #{current_user.username}'s account!" }, status: :accepted

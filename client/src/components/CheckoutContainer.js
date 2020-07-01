@@ -13,7 +13,7 @@ class CheckoutContainer extends React.Component{
 
     componentDidMount() {
         // get user's current amount.
-        fetchWithToken(`http://localhost:3001/users/chips`)
+        fetchWithToken(`http://localhost:3001/users/get_chips`)
             .then(resp => resp.json())
             .then(json => {
                 console.log(json)
