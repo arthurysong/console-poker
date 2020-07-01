@@ -7,7 +7,8 @@ import { addChips, fetchChips, unsetChips } from '../redux/dispatchActions';
 
 class CheckoutContainer extends React.Component{
     state = {
-        amount: 0,
+        amount: "",
+        amountError: "",
         name: "",
         errors: "",
         success: ""
@@ -26,6 +27,30 @@ class CheckoutContainer extends React.Component{
         this.setState({
             [event.target.name]: event.target.value
         })
+    }
+
+    handleAmountChange = event => {
+        this.setState({
+            amount: event.target.value
+        })
+        this.validateAmount();
+    }
+
+    validateAmount = () => {
+        const cents = parseFloat(this.state.amount.replace(/,/g, ''))*100
+        if (cents < 50 ) {
+            this.setState({
+                amountError: 'Amount must be at least .50'
+            })
+        } else if (cents > 99999999) {
+            this.setState({
+                amountError: 'Amount must be no more than 999,999.99'
+            })
+        } else {
+            this.setState({
+                amountError: null
+            })
+        }
     }
 
     renderUser = () => {
@@ -78,14 +103,25 @@ class CheckoutContainer extends React.Component{
 
                 {this.renderErrors()}
                 {this.renderSuccess()}
+
                 1 USD = 10000 Chips<br/>
                 <label> 
                     {/* input must be at least .50 */}
-                <CurrencyInput className="nes-input" name="amount" value={this.state.amount} onChangeEvent={this.changeHandler}/>
-                </label><br/><br/>
+                    {/* amount must be no more than 999,999.99 */}
+                    <CurrencyInput 
+                    className={`nes-input ${this.state.amountError ? 'is-error' : ''}`} 
+                    name="amount" 
+                    value={this.state.amount} 
+                    onChangeEvent={this.handleAmountChange}
+                    onBlur={this.validateAmount}
+                    />
+                </label><br/>
+                <div className="nes-text is-error">{this.state.amountError}</div>
+                <br/>
 
                 <div>
                     <label>
+                        {/* name must not be blank. */}
                         <span className="label">Full Name</span><br/>
                         <input className="nes-input" type="text" name="name" value={this.state.name} onChange={this.changeHandler}/>
                     </label><br/>
