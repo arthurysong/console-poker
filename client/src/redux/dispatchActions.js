@@ -117,3 +117,11 @@ export const addChips = amount => {
             .then(json => console.log(json));
     }
 }
+
+export const fetchChips = () => {
+    return dispatch => {
+        fetchWithToken(`http://localhost:3001/users/chips`)
+            .then(resp => resp.json())
+            .then(json => console.log(json))
+    }
+}

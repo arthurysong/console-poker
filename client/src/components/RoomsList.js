@@ -62,8 +62,9 @@ class RoomsList extends React.Component {
     }
 
     redirectToDeposits = () => {
-        this.props.history.push(`/deposit`); // should i have route to something like /users/:id/deposit??
+        this.props.history.push(`/users/${this.props.user.id}/deposit`); // should i have route to something like /users/:id/deposit??
     }
+    
     render () {
         return (
             <div>

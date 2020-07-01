@@ -10,6 +10,11 @@ class CheckoutContainer extends React.Component{
         error: false
     }
 
+    componentDidMount() {
+        // get user's current amount.
+        
+    }
+
     changeHandler = event => {
         this.setState({
             amount: event.target.value
