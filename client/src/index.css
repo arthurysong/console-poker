@@ -109,6 +109,14 @@ input[type="password"]{
     padding: 8px;
 }
 
+.nes-btn.smaller-btn {
+    padding: 2px;
+}
+
+/* #test {
+    padding: 0px;
+} */
+
 .room_li_desc{
     font-size: 12px;
 }
