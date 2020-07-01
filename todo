@@ -2,6 +2,7 @@ TODO:
 Devise and Doorkeeper to manage refresh token?
 
 For now, just set tokens to last forever, that way token won't expire during playing.
+Make sure to protect deposit route, so only logged in user can get to it.
 Use stripe to accept payments.
 Generate Terms and Conditions
 Rooms with password feature
