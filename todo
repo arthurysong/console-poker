@@ -10,6 +10,7 @@ Setting blinds on a game
 All players must be able to afford blinds before playing? What is minimum chips to play??
 Oauth using Google.
 If phase is last phase then reveal every player's cards.
+Generate new hash for the colors for each time component mounts?
 
 ? User validations
 ? REGEX expression for handleAuthRedirect for /rooms url

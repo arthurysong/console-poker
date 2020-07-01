@@ -83,7 +83,7 @@ const CheckoutForm = props => {
                     {/* <CardExpiryElement /> */}
                     {/* <CardCvcElement /> */}
                 </label><br/>
-                <input type="submit" value="Exchange Chips!"/>
+                <input type="submit" disabled={!stripe} value="Exchange Chips!"/>
             </form>
         </div>
     )

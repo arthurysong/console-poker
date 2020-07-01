@@ -114,17 +114,22 @@ export const addChips = (amount, userId) => {
         }
         fetchWithToken(`http://localhost:3001/users/${userId}/add_chips`, options)
             .then(resp => resp.json())
-            .then(json => console.log(json));
+            .then(json => {
+                console.log(json)
+                dispatch({ type: 'SET_CHIPS', chips: json.chips })
+            });
     }
 }
 
-// export const fetchChips = () => dispatch => {
-//     return Promise((res, err) => {
-//         fetchWithToken(`http://localhost:3001/users/chips`)
-//             .then(resp => resp.json())
-//             .then(json => {
-//                 console.log(json)
-//                 res(json)
-//             })
-//     })
-// }
+export const fetchChips = userId => {
+    return dispatch => {
+        fetchWithToken(`http://localhost:3001/users/${userId}/get_chips`)
+            .then(resp => resp.json())
+            .then(json => {
+                console.log(json)
+                dispatch({ type: 'SET_CHIPS', chips: json.chips })
+            })
+    }
+}
+
+export const unsetChips = () => ({ type: 'UNSET_CHIPS' })

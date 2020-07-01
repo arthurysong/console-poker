@@ -2,26 +2,17 @@ import React from 'react';
 import CheckoutForm from './CheckoutForm'
 import CurrencyInput from 'react-currency-input';
 import { connect } from 'react-redux';
-import { addChips } from '../redux/dispatchActions';
-import { fetchWithToken } from '../utilities/fetchWithToken';
+import { addChips, fetchChips, unsetChips } from '../redux/dispatchActions';
+// import { fetchWithToken } from '../utilities/fetchWithToken';
 
 class CheckoutContainer extends React.Component{
     state = {
-        chips: 0,
         amount: 0
     }
 
     componentDidMount() {
         // get user's current amount.
-        console.log(this.props.match);
-        fetchWithToken(`http://localhost:3001/users/${this.props.match.params.id}/get_chips`)
-            .then(resp => resp.json())
-            .then(json => {
-                console.log(json)
-                this.setState({
-                    chips: json.chips
-                })
-            })
+        this.props.fetchChips();
     }
 
     changeHandler = event => {
@@ -33,7 +24,7 @@ class CheckoutContainer extends React.Component{
     render(){
         return(
             <div>
-                Your Account: {this.state.chips} Chips<br/><br/>
+                Your Account: {this.props.chips} Chips<br/><br/>
 
                 1 USD = 10000 Chips<br/>
                 <label>
@@ -45,10 +36,18 @@ class CheckoutContainer extends React.Component{
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
     return {
-        addChips: (amount, userId) => dispatch(addChips(amount, userId))
+        chips: state.chips
     }
 }
 
-export default connect(null, mapDispatchToProps)(CheckoutContainer);
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchChips: userId => dispatch(fetchChips(userId)),
+        addChips: (amount, userId) => dispatch(addChips(amount, userId)),
+        unsetChips: () => dispatch(unsetChips())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutContainer);

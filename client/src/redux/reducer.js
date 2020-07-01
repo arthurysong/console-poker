@@ -6,8 +6,9 @@ export default function resourceReducer (state = {
     room: undefined,
     messages: [],
     game: {},
-    gameErrors: undefined //this will be used by gameboard
+    gameErrors: undefined, //this will be used by gameboard
     // status: [] //this will be used by gameconsole, I need them separate becaue I don't want the console to
+    chips: undefined
 }, action
 ) {
 switch (action.type) {
@@ -101,6 +102,18 @@ switch (action.type) {
         return {
             ...state,
             gameErrors: undefined
+        }
+
+    case 'SET_CHIPS': // only for use on deposit page.
+        return {
+            ...state,
+            chips: action.chips
+
+        }
+    case 'UNSET_CHIPS':
+        return {
+            ...state,
+            chips: undefined
         }
     default:
         return state;
