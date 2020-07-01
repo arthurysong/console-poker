@@ -17,9 +17,18 @@ const stripePromise = loadStripe("pk_test_51GqNn2Kj8jVe4aIu3gu8fP0a3Y8ltGdN66FAP
 
 window.store = store;
 
+// const fonts = [
+//   {
+//     src: ("https://db.onlinewebfonts.com/t/1481ee4d30d9e1d35c84e09e69e14e92.woff"),
+//     family: "Atari",
+//     style: "normal"
+//   }
+// ]
+
 ReactDOM.render(
   <Provider store={store}>
     <Elements stripe={stripePromise}>
+    {/* <Elements stripe={stripePromise} options={{fonts: fonts}}> */}
       <App />
     </Elements>
   </Provider>,
