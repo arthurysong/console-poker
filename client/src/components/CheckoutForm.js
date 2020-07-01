@@ -43,6 +43,7 @@ const CheckoutForm = props => {
         const resp = await fetch(`http://localhost:3001/secret/${props.amount*100}`)
         const secret = await resp.json()
         // console.log(secret);
+        // console.log(secret);
         console.log(props.name);
         const result = await stripe.confirmCardPayment(secret.client_secret, {
         payment_method: {
@@ -56,6 +57,7 @@ const CheckoutForm = props => {
         if (result.error) {
         // Show error to your customer (e.g., insufficient funds)
         console.log(result.error.message);
+        props.handleErrors(result.error.message);
         } else {
         // The payment has been processed!
         if (result.paymentIntent.status === 'succeeded') {
@@ -66,6 +68,7 @@ const CheckoutForm = props => {
             // execution. Set up a webhook or plugin to listen for the
             // payment_intent.succeeded event that handles any business critical
             // post-payment actions.
+          props.handleSucess();
           console.log("PAYMENT SUCCESS");
             // send post request to add chips to person's account.
         }
@@ -77,14 +80,15 @@ const CheckoutForm = props => {
             <form onSubmit={submitHandler}>
                 <label>
                     {/* Card details */}
-                    <CardElement options={CARD_ELEMENT_OPTIONS}/>
+                    <CardElement className="nes-input" options={CARD_ELEMENT_OPTIONS}/>
                     {/* <CardElement /> */}
 
                     {/* <CardNumberElement /> */}
                     {/* <CardExpiryElement /> */}
                     {/* <CardCvcElement /> */}
                 </label><br/>
-                <input type="submit" disabled={!stripe} value="Exchange Chips!"/>
+                <button className="nes-btn is-primary" type="submit" disabled={!stripe} value="Exchange Chips!">Exchange Chips!</button>
+                {/* <input type="submit" disabled={!stripe} value="Exchange Chips!"/> */}
             </form>
         </div>
     )
