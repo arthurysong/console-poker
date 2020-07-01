@@ -15,6 +15,10 @@ class CheckoutContainer extends React.Component{
         this.props.fetchChips();
     }
 
+    componentWillUnmount(){
+        this.props.unsetChips();
+    }
+
     changeHandler = event => {
         this.setState({
             amount: event.target.value
