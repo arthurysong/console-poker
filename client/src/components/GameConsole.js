@@ -11,6 +11,7 @@ class GameConsole extends React.Component {
         const div = findDOMNode(this.refs.jterminal);
         const scrollable = document.getElementById('console');
         const gameId = this.props.gameId
+        const userId = this.props.userId
         terminal(window, $);
         this.term = $(div).terminal([
             {
@@ -19,23 +20,23 @@ class GameConsole extends React.Component {
                     scrollable.scrollTop = scrollable.scrollHeight;
                 },
                 fold: function(){
-                    postMoveWithToken({ command: 'fold' }, this.props.user.id);
+                    postMoveWithToken({ command: 'fold' }, userId);
                     scrollable.scrollTop = scrollable.scrollHeight;
                 },
                 check: function() {
-                    postMoveWithToken({ command: 'check' }, this.props.user.id)
+                    postMoveWithToken({ command: 'check' }, userId)
                     scrollable.scrollTop = scrollable.scrollHeight;
                 },
                 call: function() {
-                    postMoveWithToken({ command: 'call' }, this.props.user.id)
+                    postMoveWithToken({ command: 'call' }, userId)
                     scrollable.scrollTop = scrollable.scrollHeight;
                 },
                 raise: function(x) {
-                    postMoveWithToken({ command: 'raise', amount: x }, this.props.user.id)
+                    postMoveWithToken({ command: 'raise', amount: x }, userId)
                     scrollable.scrollTop = scrollable.scrollHeight;
                 },
                 allin: function() {
-                    postMoveWithToken({ command: 'allin' }, this.props.user.id)
+                    postMoveWithToken({ command: 'allin' }, userId)
                     scrollable.scrollTop = scrollable.scrollHeight;
                 },
                 help: function() {

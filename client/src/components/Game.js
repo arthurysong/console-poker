@@ -24,12 +24,12 @@ class Game extends React.Component {
     }
 
     renderGame = () => {
-        if (this.props.game.active_round) {
+        if (this.props.game.active_round && this.props.user) {
             console.log(this.props.game);
             console.log(this.props.game.active_round.status)
             return (
                 <>
-                    <GameBoard round={this.props.game.active_round} />
+                    <GameBoard round={this.props.game.active_round} user={this.props.user} />
                     <GameConsole 
                         gameId={this.props.game.id}
                         user={this.props.user}

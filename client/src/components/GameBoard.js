@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { hashStringToColor } from '../utilities/colorHash'
 import { colorCard } from '../utilities/colorCards'
 
@@ -68,10 +67,5 @@ class GameBoard extends React.Component {
         )
     }
 }
-const mapStateToProps = state => {
-    return {
-        user: state.user
-    }
-}
 
-export default connect(mapStateToProps)(GameBoard);
+export default GameBoard;
