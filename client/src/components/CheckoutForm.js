@@ -39,8 +39,11 @@ const CheckoutForm = props => {
             return;
         }
 
-
-        const resp = await fetch(`http://localhost:3001/secret/${props.amount*100}`)
+        // console.log(props.amount);
+        const cents = parseFloat(props.amount.replace(/,/g, ''))*100
+        // console.log(parseFloat(props.amount.replace(/,/g, '')))
+        // console.log(cents);
+        const resp = await fetch(`http://localhost:3001/secret/${cents}`)
         const secret = await resp.json()
         // console.log(secret);
         // console.log(secret);

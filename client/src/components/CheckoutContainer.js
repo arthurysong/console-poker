@@ -79,7 +79,8 @@ class CheckoutContainer extends React.Component{
                 {this.renderErrors()}
                 {this.renderSuccess()}
                 1 USD = 10000 Chips<br/>
-                <label>
+                <label> 
+                    {/* input must be at least .50 */}
                 <CurrencyInput className="nes-input" name="amount" value={this.state.amount} onChangeEvent={this.changeHandler}/>
                 </label><br/><br/>
 
