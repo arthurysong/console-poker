@@ -39,7 +39,8 @@ const CheckoutForm = props => {
 
     const submitHandler = async (event) => {
         event.preventDefault();
-
+        props.clearMessages();
+        
         if (!stripe || !elements) {
             // Stripe.js has not yet loaded.
             // Make sure to disable form submission until Stripe.js has loaded.
@@ -78,7 +79,7 @@ const CheckoutForm = props => {
             // execution. Set up a webhook or plugin to listen for the
             // payment_intent.succeeded event that handles any business critical
             // post-payment actions.
-          props.handleSucess();
+          props.handleSuccess();
           console.log("PAYMENT SUCCESS");
             // send post request to add chips to person's account.
         }

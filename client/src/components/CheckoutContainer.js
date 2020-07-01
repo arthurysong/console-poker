@@ -10,12 +10,11 @@ class CheckoutContainer extends React.Component{
         amount: "",
         amountError: "",
         name: "",
-        errors: "",
+        error: "",
         success: ""
     }
 
     componentDidMount() {
-        // get user's current amount.
         this.props.fetchChips();
     }
 
@@ -63,18 +62,18 @@ class CheckoutContainer extends React.Component{
         }
     }
 
-    handleErrors = errors => {
+    handleErrors = error => {
         this.setState({
-            errors: errors
+            error: error
         })
 
     }
 
     renderErrors = () => {
-        if (this.state.errors) {
+        if (this.state.error) {
             return (
                 <span className="nes-text is-error">
-                    {this.state.errors}
+                    {this.state.error}<br/>
                 </span>
             )
         }
@@ -90,11 +89,19 @@ class CheckoutContainer extends React.Component{
         if (this.state.success) {
             return(
                 <span className="nes-text is-success">
-                    {this.state.success}
+                    {this.state.success}<br/>
                 </span>
             )
         }
     }
+
+    clearMessages = () => {
+        this.setState({
+            success: "",
+            errors: ""
+        })
+    }
+
     render(){
         return(
             <div id="checkout_form">
@@ -123,11 +130,17 @@ class CheckoutContainer extends React.Component{
                     <label>
                         {/* name must not be blank. */}
                         <span className="label">Full Name *</span><br/>
-                        <input className="nes-input" type="text" name="name" value={this.state.name} onChange={this.changeHandler}/>
+                        <input 
+                        className="nes-input" 
+                        type="text" 
+                        name="name" 
+                        value={this.state.name} 
+                        onChange={this.changeHandler}/>
                     </label><br/>
                     <label>
                         <span className="label">Card Details</span><br/>
                     <CheckoutForm 
+                        clearMessages={this.clearMessages}
                         handleErrors={this.handleErrors} 
                         handleSuccess={this.handleSuccess}
                         amount={this.state.amount} 
