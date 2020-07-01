@@ -75,7 +75,7 @@ const CheckoutForm = props => {
         <div>
             <form onSubmit={submitHandler}>
                 <label>
-                    Card details
+                    {/* Card details */}
                     <CardElement options={CARD_ELEMENT_OPTIONS}/>
                     {/* <CardElement /> */}
 
@@ -83,7 +83,7 @@ const CheckoutForm = props => {
                     {/* <CardExpiryElement /> */}
                     {/* <CardCvcElement /> */}
                 </label><br/>
-                <input type="submit" value="Deposit 10 Dollars"/>
+                <input type="submit" value="Exchange Chips!"/>
             </form>
         </div>
     )

@@ -19,7 +19,10 @@ class CheckoutContainer extends React.Component{
     render(){
         return(
             <div>
-                <CurrencyInput value={this.state.amount} onChangeEvent={this.changeHandler}/>
+                1 USD = 10000 Chips<br/>
+                <label>
+                $<CurrencyInput value={this.state.amount} onChangeEvent={this.changeHandler}/>
+                </label>
                 <CheckoutForm amount={this.state.amount} addChips={this.props.addChips}/>
             </div>
         )
