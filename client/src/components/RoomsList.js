@@ -1,7 +1,7 @@
 import React from 'react';
 import RoomListItem from './RoomListItem';
 import Cable from 'actioncable';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 class RoomsList extends React.Component {
     state = {
@@ -73,10 +73,10 @@ class RoomsList extends React.Component {
         return (
             <div>
                 {this.renderUser()}&nbsp;
-                <button onClick={this.clickHandler}>Log Out</button>&nbsp;
-                <button onClick={this.redirectToDeposits}>Deposit</button><br/><br/>
-
-                <Link to="/rooms/new">Create Room</Link><br/><br/>
+                <button className="nes-btn" onClick={this.clickHandler}>Log Out</button>&nbsp;
+                <button className="nes-btn is-success" onClick={this.redirectToDeposits}>Deposit</button><br/><br/>
+                <div className="ne"></div>
+                <NavLink to="/rooms/new" className="nes-btn is-primary">Create Room</NavLink><br/><br/>
                 <ul>
                     {this.renderRooms()}
                 </ul>

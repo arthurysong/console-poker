@@ -35,14 +35,14 @@ class LoginForm extends React.Component {
                 <Errors />
                 <form onSubmit={this.submitHandler}>
                     <label>
-                        Email
-                    <input onChange={this.changeHandler} type="text" name="email" value={this.state.email}/>
+                        Email&nbsp;
+                    <input className="nes-input" onChange={this.changeHandler} type="text" name="email" value={this.state.email}/>
                     </label><br/>
                     <label>
-                        Password
-                    <input onChange={this.changeHandler} type="password" name="password" value={this.state.password}/>
+                        Password&nbsp;
+                    <input className="nes-input" onChange={this.changeHandler} type="password" name="password" value={this.state.password}/>
                     </label><br/>
-                    <input type="submit" value="login"/><br/>
+                    <button className="nes-btn" type="submit" value="login">Log In</button><br/>
                     {this.renderRegister()}
                 </form>
             </div>
