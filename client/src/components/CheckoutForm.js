@@ -40,7 +40,7 @@ const CheckoutForm = props => {
         }
 
 
-        const resp = await fetch(`http://localhost:3001/secret/${props.amount}`)
+        const resp = await fetch(`http://localhost:3001/secret/${props.amount*100}`)
         const secret = await resp.json()
         // console.log(secret);
         const result = await stripe.confirmCardPayment(secret.client_secret, {
@@ -58,6 +58,7 @@ const CheckoutForm = props => {
         } else {
         // The payment has been processed!
         if (result.paymentIntent.status === 'succeeded') {
+          console.log(result.paymentIntent.amount);
             // Show a success message to your customer
             // There's a risk of the customer closing the window before callback
             // execution. Set up a webhook or plugin to listen for the

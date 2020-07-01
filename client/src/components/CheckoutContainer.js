@@ -12,7 +12,6 @@ class CheckoutContainer extends React.Component{
         this.setState({
             amount: event.target.value
         })
-        // if (this.state.amount !+ )
     }
 
     render(){
