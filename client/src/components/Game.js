@@ -19,7 +19,7 @@ class Game extends React.Component {
 
     renderButton = () => {
         if (!this.props.game.active_round) {
-            return <button onClick={this.startGame}>Start Game</button>
+            return <button className="nes-btn is-primary" onClick={this.startGame}>Start Game</button>
         }
     }
 

@@ -53,7 +53,7 @@ class Chatbox extends React.Component {
                 this.createNewArray().map((bubble, index) => 
                     <section key={index} className="message -left">
                         <span style={{color: `${hashStringToColor(bubble.username)}`}}>{bubble.username}</span>&nbsp;
-                        <div className="nes-balloon from-left">
+                        <div className="nes-balloon from-left tight-balloon">
                             {bubble.messages.map((message, index2) => <div key={index2}>{message.payload}<br/></div>)}
                         </div>
                     </section>
@@ -64,7 +64,9 @@ class Chatbox extends React.Component {
     render() {
         return (
             <div id="chatbox_container" className="nes-container">
+            {/* <div id="chatbox_container"> */}
                 <div id="messages_container" className="nes-container">
+                {/* <div id="messages_container"> */}
 
                     <section className="message-list">
                         {this.renderMessages()}
@@ -73,7 +75,7 @@ class Chatbox extends React.Component {
                 </div>
                 <form id="new_message_form" onSubmit={this.submitHandler}>
                     <input type="textarea" id="textarea_field" className="nes-textarea" onChange={this.changeHandler} value={this.state.newMessage}/>
-                    <input type="submit" value="send"/>
+                    <button className="nes-btn smaller-btn" type="submit" value="send">Send</button>
                 </form>
             </div>
         )
