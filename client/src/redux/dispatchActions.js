@@ -1,4 +1,5 @@
 import handleAuthRedirect from './handleAuthRedirect';
+import { fetchWithToken } from '../utilities/fetchWithToken';
 
 const authenticate_user = (state, history, dispatch) => { // abstracted this out because I also need in my register action
     const body = JSON.stringify(state)
@@ -97,5 +98,22 @@ export const register = (state, history) => {
                     dispatch({type: 'ADD_ERRORS', errors: json.errors })
                 }
             })
+    }
+}
+
+export const addChips = amount => {
+    return dispatch => {
+        const body = JSON.stringify({ amount })
+        const options = {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body
+        }
+        fetchWithToken(`http://localhost:3001/users/add_chips`, options)
+            .then(resp => resp.json())
+            .then(json => console.log(json));
     }
 }
