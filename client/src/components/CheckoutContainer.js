@@ -26,20 +26,37 @@ class CheckoutContainer extends React.Component{
         })
     }
 
+    renderUser = () => {
+        if (this.props.user) {
+            return (
+                <>
+                    {this.props.user.username} ({this.props.chips})
+                </>
+            )
+        }
+    }
+
     render(){
         return(
-            <div>
-                Your Account: {this.props.chips} Chips<br/><br/>
+            <div id="checkout_form">
+                {this.renderUser()}<br/><br/>
+                {/* {this.props.user.username} ({this.props.chips})<br/><br/> */}
 
                 1 USD = 10000 Chips<br/>
                 <label>
-                $<CurrencyInput name="amount" value={this.state.amount} onChangeEvent={this.changeHandler}/>
+                <CurrencyInput name="amount" value={this.state.amount} onChangeEvent={this.changeHandler}/> $
                 </label><br/>
-                <label>
-                    Full Name&nbsp;
-                    <input type="text" name="name" value={this.state.name} onChange={this.changeHandler}/>
-                </label>
-                <CheckoutForm amount={this.state.amount} name={this.state.name} user={this.props.user} addChips={this.props.addChips}/>
+
+                <div>
+                    <label>
+                        <span className="label">Full Name</span><br/>
+                        <input type="text" name="name" value={this.state.name} onChange={this.changeHandler}/>
+                    </label><br/>
+                    <label>
+                        <span className="label">Card Details</span><br/>
+                    <CheckoutForm amount={this.state.amount} name={this.state.name} user={this.props.user} addChips={this.props.addChips}/>
+                    </label>
+                </div>
             </div>
         )
     }

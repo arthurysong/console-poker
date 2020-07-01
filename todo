@@ -11,6 +11,7 @@ All players must be able to afford blinds before playing? What is minimum chips 
 Oauth using Google.
 If phase is last phase then reveal every player's cards.
 Generate new hash for the colors for each time component mounts?
+RoomsList should display current chips of user.
 
 ? User validations
 ? REGEX expression for handleAuthRedirect for /rooms url
