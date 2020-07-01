@@ -2,7 +2,8 @@ import React from 'react';
 import CheckoutForm from './CheckoutForm'
 import CurrencyInput from 'react-currency-input';
 import { connect } from 'react-redux';
-import { addChips, fetchChips } from '../redux/dispatchActions';
+import { addChips } from '../redux/dispatchActions';
+import { fetchWithToken } from '../utilities/fetchWithToken';
 
 class CheckoutContainer extends React.Component{
     state = {
@@ -12,9 +13,11 @@ class CheckoutContainer extends React.Component{
 
     componentDidMount() {
         // get user's current amount.
-        fetchChips().then(json => this.setState({
-            chips: json.chips
-        }))
+        fetchWithToken(`http://localhost:3001/users/chips`)
+            .then(resp => resp.json())
+            .then(json => {
+                console.log(json)
+            })
     }
 
     changeHandler = event => {
@@ -38,7 +41,6 @@ class CheckoutContainer extends React.Component{
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchChips: () => dispatch(fetchChips()),
         addChips: amount => dispatch(addChips(amount))
     }
 }
