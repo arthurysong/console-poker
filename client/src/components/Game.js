@@ -32,6 +32,7 @@ class Game extends React.Component {
                     <GameBoard round={this.props.game.active_round} />
                     <GameConsole 
                         gameId={this.props.game.id}
+                        user={this.props.user}
                         roundId={this.props.game.active_round.id} 
                         playing={this.props.game.active_round.is_playing}
                         status={this.props.game.active_round.status} 

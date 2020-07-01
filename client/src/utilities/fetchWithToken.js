@@ -9,7 +9,7 @@ export function fetchWithToken(url, options = {}){
     })
 }
 
-export function postMoveWithToken(commandObj) {
+export function postMoveWithToken(commandObj, userId) {
     const body = JSON.stringify(commandObj);
     const options = {
         method: "POST",
@@ -19,7 +19,7 @@ export function postMoveWithToken(commandObj) {
         },
         body
     }
-    fetchWithToken(`http://localhost:3001/users/make_move`, options);
+    fetchWithToken(`http://localhost:3001/users/${userId}/make_move`, options);
 }
 
 export function startNewRound(gameId) {

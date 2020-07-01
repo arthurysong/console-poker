@@ -19,23 +19,23 @@ class GameConsole extends React.Component {
                     scrollable.scrollTop = scrollable.scrollHeight;
                 },
                 fold: function(){
-                    postMoveWithToken({ command: 'fold' });
+                    postMoveWithToken({ command: 'fold' }, this.props.user.id);
                     scrollable.scrollTop = scrollable.scrollHeight;
                 },
                 check: function() {
-                    postMoveWithToken({ command: 'check' })
+                    postMoveWithToken({ command: 'check' }, this.props.user.id)
                     scrollable.scrollTop = scrollable.scrollHeight;
                 },
                 call: function() {
-                    postMoveWithToken({ command: 'call' })
+                    postMoveWithToken({ command: 'call' }, this.props.user.id)
                     scrollable.scrollTop = scrollable.scrollHeight;
                 },
                 raise: function(x) {
-                    postMoveWithToken({ command: 'raise', amount: x })
+                    postMoveWithToken({ command: 'raise', amount: x }, this.props.user.id)
                     scrollable.scrollTop = scrollable.scrollHeight;
                 },
                 allin: function() {
-                    postMoveWithToken({ command: 'allin' })
+                    postMoveWithToken({ command: 'allin' }, this.props.user.id)
                     scrollable.scrollTop = scrollable.scrollHeight;
                 },
                 help: function() {
