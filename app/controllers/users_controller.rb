@@ -32,10 +32,6 @@ class UsersController < ApplicationController
         end
     end
 
-    def show
-        puts 'why are you routing to show action??!?!'
-    end
-
     def get_chips
         chips = current_user.chips
         render json: { chips: chips }, status: 200

@@ -13,10 +13,14 @@ class CheckoutContainer extends React.Component{
 
     componentDidMount() {
         // get user's current amount.
-        fetchWithToken(`http://localhost:3001/users/get_chips`)
+        console.log(this.props.match);
+        fetchWithToken(`http://localhost:3001/users/${this.props.match.params.id}/get_chips`)
             .then(resp => resp.json())
             .then(json => {
                 console.log(json)
+                this.setState({
+                    chips: json.chips
+                })
             })
     }
 
@@ -29,6 +33,8 @@ class CheckoutContainer extends React.Component{
     render(){
         return(
             <div>
+                Your Account: {this.state.chips} Chips<br/><br/>
+
                 1 USD = 10000 Chips<br/>
                 <label>
                 $<CurrencyInput value={this.state.amount} onChangeEvent={this.changeHandler}/>
