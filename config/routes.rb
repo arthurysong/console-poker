@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get '/set_login', to: 'authentication#set_login'
 
   #payments
-  get '/secret', to: 'payments#secret'
+  get '/secret/:amount', to: 'payments#secret'
 
   mount ActionCable.server => '/cable'
 end
