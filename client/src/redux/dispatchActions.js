@@ -101,7 +101,7 @@ export const register = (state, history) => {
     }
 }
 
-export const addChips = amount => {
+export const addChips = (amount, userId) => {
     return dispatch => {
         const body = JSON.stringify({ amount })
         const options = {
@@ -112,7 +112,7 @@ export const addChips = amount => {
             },
             body
         }
-        fetchWithToken(`http://localhost:3001/users/add_chips`, options)
+        fetchWithToken(`http://localhost:3001/users/${userId}/add_chips`, options)
             .then(resp => resp.json())
             .then(json => console.log(json));
     }

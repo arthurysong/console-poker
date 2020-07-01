@@ -19,7 +19,7 @@ class App extends React.Component {
         <Route path="/" render={routerProps => <Home {...routerProps} setLogin={this.props.setLogin}/>}/>
         
         <Switch>
-          <Route path="/users/:id/deposit" render={routerProps => <CheckoutContainer {...routerProps}/>}/> 
+          <Route path="/users/:id/deposit" render={routerProps => <CheckoutContainer {...routerProps} user={this.props.user}/>}/> 
           <Route path="/login" render={routerProps => <LoginForm {...routerProps}/>}/>
           <Route path="/rooms/new" render={routerProps => 
             <NewRoomForm 

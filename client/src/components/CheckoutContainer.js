@@ -39,7 +39,7 @@ class CheckoutContainer extends React.Component{
                 <label>
                 $<CurrencyInput value={this.state.amount} onChangeEvent={this.changeHandler}/>
                 </label>
-                <CheckoutForm amount={this.state.amount} addChips={this.props.addChips}/>
+                <CheckoutForm amount={this.state.amount} user={this.props.user} addChips={this.props.addChips}/>
             </div>
         )
     }
@@ -47,7 +47,7 @@ class CheckoutContainer extends React.Component{
 
 const mapDispatchToProps = dispatch => {
     return {
-        addChips: amount => dispatch(addChips(amount))
+        addChips: (amount, userId) => dispatch(addChips(amount, userId))
     }
 }
 

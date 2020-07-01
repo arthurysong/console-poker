@@ -59,7 +59,7 @@ const CheckoutForm = props => {
         // The payment has been processed!
         if (result.paymentIntent.status === 'succeeded') {
           console.log(result.paymentIntent.amount);
-          props.addChips(result.paymentIntent.amount*100)
+          props.addChips(result.paymentIntent.amount*100, props.user.id)
             // Show a success message to your customer
             // There's a risk of the customer closing the window before callback
             // execution. Set up a webhook or plugin to listen for the
