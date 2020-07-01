@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :users
 
   post '/users/make_move', to: 'users#make_move'
+  post '/users/add_chips', to: 'users#add_chips'
   post '/games/:id/start', to: 'games#start'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

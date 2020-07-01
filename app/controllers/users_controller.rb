@@ -32,6 +32,11 @@ class UsersController < ApplicationController
         end
     end
 
+    def add_chips
+        current_user.chips += params[:amount]
+        render json: { message: "#{amount} chips successfully added!" }, status: :accepted
+    end
+
     private
 
     def user_params
