@@ -2,12 +2,13 @@ import React from 'react';
 
 class NewRoomForm extends React.Component {
     state = {
-        name: ""
+        name: "",
+        password: "" 
     }
 
     changeHandler = event => {
         this.setState({
-            name: event.target.value
+            [event.target.name]: event.target.value
         })
     }
 
@@ -40,6 +41,10 @@ class NewRoomForm extends React.Component {
                     <label>
                         Name&nbsp;
                     <input type="text" name="name" onChange={this.changeHandler} value={this.state.name} />
+                    </label>&nbsp;
+                    <label>
+                        Password&nbsp;
+                    <input type="password" name="password" onChange={this.changeHandler} value={this.state.password} />
                     </label>&nbsp;
                     <input type="submit" value="Create" />
                 </form>
