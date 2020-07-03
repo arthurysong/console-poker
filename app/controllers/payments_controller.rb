@@ -7,8 +7,11 @@ class PaymentsController < ApplicationController
     def secret
         # puts params[:amount]
         # puts params[:amount].gsub(/[,.]/,'').to_i
+        puts params[:amount]
+        amount = params[:amount].delete(',').to_i
+        puts amount
         intent = Stripe::PaymentIntent.create({
-            amount: params[:amount],
+            amount: amount,
             currency: 'usd',
             # Verify your integration in this guide by including this parameter
             metadata: {integration_check: 'accept_a_payment'},
