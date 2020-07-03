@@ -21,6 +21,7 @@ const RoomListItem = ({ room, history }) => {
             .then(json => {
                 if (json.error) {
                     //display error
+                    alert("Unauthorized")
                 } else {
                     history.push(`/rooms/${room.id}`)
                 }
