@@ -1,9 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import lock from '../lock-icon.png';
+import { fetchWithToken } from '../utilities/fetchWithToken';
 
-const RoomListItem = ({ room }) => {
+const RoomListItem = ({ room, history }) => {
+    function clickHandler() {
+        const password = prompt("Please Enter Password!")
+        const body = JSON.stringify({ password });
+        const options = {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body
+        }
+
+        fetchWithToken(`http://localhost:3001/rooms/${room.id}/authenticate`, options)
+            .then(resp => resp.json())
+            .then(json => {
+                if (json.error) {
+                    //display error
+                } else {
+                    history.push(`/rooms/${room.id}`)
+                }
+            })
+    }
+
     function renderJoinButton() {
+        if (room.has_password) {
+            return (<button onClick={clickHandler}>join</button>)
+        }
         if (room.no_users < 8){
             return (<Link to={`/rooms/${room.id}`}>join</Link>)
         }
