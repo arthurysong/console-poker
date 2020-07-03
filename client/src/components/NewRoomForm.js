@@ -40,13 +40,23 @@ class NewRoomForm extends React.Component {
                 <form onSubmit={this.submitHandler}>
                     <label>
                         Name&nbsp;
-                    <input type="text" name="name" onChange={this.changeHandler} value={this.state.name} />
+                    <input 
+                    type="text" 
+                    name="name" 
+                    className="nes-input"
+                    onChange={this.changeHandler} 
+                    value={this.state.name} />
                     </label>&nbsp;
                     <label>
                         Password&nbsp;
-                    <input type="password" name="password" onChange={this.changeHandler} value={this.state.password} />
+                    <input 
+                    type="password" 
+                    name="password" 
+                    className="nes-input"
+                    onChange={this.changeHandler} 
+                    value={this.state.password} />
                     </label>&nbsp;
-                    <input type="submit" value="Create" />
+                    <button type="submit" className="nes-btn is-primary smaller-btn" >Create</button>
                 </form>
             </div>
         )

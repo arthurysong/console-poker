@@ -115,6 +115,10 @@ input[type="password"]{
     padding: 8px;
 }
 
+#lock_img {
+    width: 18px;
+}
+
 .nes-btn.smaller-btn {
     padding: 2px;
 }
