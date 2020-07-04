@@ -14,6 +14,7 @@ class Game extends React.Component {
     }
 
     startGame = () => {
+        this.props.clearGameErrors();
         this.props.startGame(this.props.game.id); //this action needs to rebroadcast to everyone streaming from room
     }
 
