@@ -1,11 +1,10 @@
 TODO:
 Use Custom Checkout form for stripe payments.
 
-Deploy application:
+Deploy application using Heroku:
 Oauth using Google. (Need to deploy app before I can do this...)
 Generate Terms and Conditions
+Use atari font for checkoutform.
 
 Setting blinds on a game
 All players must be able to afford blinds before playing? What is minimum chips to play??
-
-? User validations
