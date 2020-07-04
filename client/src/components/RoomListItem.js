@@ -1,13 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import lock from '../lock-icon.png';
 import lock2 from '../lock-icon-dark.png';
 import { fetchWithToken } from '../utilities/fetchWithToken';
 
-const RoomListItem = ({ room, history, index }) => {
-    function clickHandler() {
-        const password = prompt("Please Enter Password!")
-        const body = JSON.stringify({ password });
+class RoomListItem extends React.Component {
+    state = {
+        password: ""
+    }
+
+    showDialog = () => {
+        // console.log(this.props.room.id);
+        document.getElementById(`dialog-dark-rounded-${this.props.room.id}`).showModal();
+    }
+
+    authenticatePassword = () => {
+        const body = JSON.stringify(this.state);
         const options = {
             method: "POST",
             headers: {
@@ -17,46 +24,73 @@ const RoomListItem = ({ room, history, index }) => {
             body
         }
 
-        fetchWithToken(`http://localhost:3001/rooms/${room.id}/authenticate`, options)
+        fetchWithToken(`http://localhost:3001/rooms/${this.props.room.id}/authenticate`, options)
             .then(resp => resp.json())
             .then(json => {
+                // console.log(json);
                 if (json.error) {
-                    alert("Unauthorized")
+                    document.getElementById(`dialog-dark-rounded-alert`).showModal();
                 } else {
-                    history.push(`/rooms/${room.id}`)
+                    this.props.history.push(`/rooms/${this.props.room.id}`)
                 }
             })
     }
 
-    function redirect() {
-        history.push(`/rooms/${room.id}`)
+    redirect = () =>  {
+        this.props.history.push(`/rooms/${this.props.room.id}`)
     }
 
-    function renderJoinButton() {
-        if (room.has_password) {
-            return (<button onClick={clickHandler}>join</button>)
+    renderJoinButton = () => {
+        if (this.props.room.has_password) {
+            return (<button onClick={this.showDialog}>join</button>)
         }
-        if (room.no_users < 8){
-            return (<button onClick={redirect}>join</button>)
+        if (this.props.room.no_users < 8){
+            return (<button onClick={this.redirect}>join</button>)
         }
     }
 
-    function renderLock() {
-        if (room.has_password) {
-            if (index % 2 == 0) {
+    renderLock = () => {
+        if (this.props.room.has_password) {
+            if (this.props.index % 2 === 0) {
                 return (<img className="lock_img" src={lock} alt="Lock" />)
             }
             return (<img className="lock_img" src={lock2} alt="Lock2" />)
         }
     }
+    
+    handleChange = event => {
+        this.setState({
+            password: event.target.value
+        })
+    }
 
-    return (
-        <div className={`nes-container room_container is-rounded ${index % 2 == 0 ? 'is-dark' : ''}`}>
-            {console.log(index)}
-            <li className="room_li">{room.name} {renderLock()}<br/><span className="room_li_desc">{room.no_users}/8 {renderJoinButton()}</span>
+    render() {
+        return (
+            <div className={`nes-container room_container is-rounded ${this.props.index % 2 === 0 ? 'is-dark' : ''}`}>
+                {console.log(this.props.index)}
+            <li className="room_li">{this.props.room.name} {this.renderLock()}<br/><span className="room_li_desc">{this.props.room.no_users}/8 {this.renderJoinButton()}</span>
             </li>
-        </div>
-    )
+                <dialog  className="nes-dialog is-dark is-rounded" id={`dialog-dark-rounded-${this.props.room.id}`}>
+                    <form onSubmit={this.authenticatePassword} method="dialog">
+                    {/* <p class="title">Dark dialog</p> */}
+                        <p>Please enter password!</p>
+                        <menu className="dialog-menu">
+                            <input type="password" className="nes-input" name="password" onChange={this.handleChange} value={this.state.password}/>
+                            <button type="submit" className="nes-btn is-primary">Confirm</button>
+                        </menu>
+                    </form>
+                </dialog>
+                <dialog className="nes-dialog is-dark is-rounded" id={`dialog-dark-rounded-alert`}>
+                    <form method="dialog">
+                        <p>Invalid Password, Not Authorized.</p>
+                        <menu className="dialog-menu">
+                            <button className="nes-btn">Okay</button>
+                        </menu>
+                    </form>
+                </dialog>
+            </div>
+        )
+    }
 }
 
 export default RoomListItem;

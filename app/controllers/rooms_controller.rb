@@ -22,6 +22,8 @@ class RoomsController < ApplicationController
 
     def authenticate
         room = Room.find(params["id"])
+        puts params
+        
         if room.authenticate(params["password"])
             render json: room
         else
