@@ -77,7 +77,7 @@ class RoomsList extends React.Component {
         return (
             <div id="rooms_component">
                 {this.renderUser()}<br/>
-                <button className="nes-btn smaller-btn" id="test" onClick={this.clickHandler}>Log Out</button>&nbsp;
+                <button className="nes-btn smaller-btn is-error" id="test" onClick={this.clickHandler}>Log Out</button>&nbsp;
                 <button className="nes-btn is-success smaller-btn" onClick={this.redirectToDeposits}>Deposit</button><br/><br/><br/><br/>
                 {/* <div className="ne"></div> */}
                 <NavLink to="/rooms/new" className="nes-btn is-primary smaller-btn">Create Room</NavLink><br/><br/>

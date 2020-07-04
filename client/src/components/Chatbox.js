@@ -47,15 +47,40 @@ class Chatbox extends React.Component {
         return temp
     }
 
+    renderUserAndMessage = (bubble) => {
+        if (bubble.username === this.props.user.username) {
+            return (
+                <div style={{textAlign: 'right'}}>
+                    <div className={`nes-balloon ${ bubble.username === this.props.user.username ? 'from-right' : 'from-left'} tight-balloon`}>
+                        {bubble.messages.map((message, index2) => <div key={index2}>{message.payload}<br/></div>)}
+                    </div>&nbsp;
+                    <span style={{color: `${hashStringToColor(bubble.username, this.props.colorHash)}`}}>{bubble.username}</span>
+                </div>
+            )
+        } else {
+            return (
+                <>
+                    {console.log('from left')}
+                    {console.log(this.props.user.username)}
+                    {console.log(this.props.username)}
+                    {console.log(bubble.username)}
+                    <span style={{color: `${hashStringToColor(bubble.username, this.props.colorHash)}`}}>{bubble.username}</span>&nbsp;
+                    <div className={`nes-balloon ${ bubble.username === this.props.user.username ? 'from-right' : 'from-left'} tight-balloon`}>
+                        {bubble.messages.map((message, index2) => <div key={index2}>{message.payload}<br/></div>)}
+                    </div>
+                </>
+            )
+        }
+    }
+
     renderMessages = () => {
+        console.log(this.createNewArray());
         if (this.props.messages !== undefined) {
             return (
                 this.createNewArray().map((bubble, index) => 
                     <section key={index} className="message -left">
-                        <span style={{color: `${hashStringToColor(bubble.username, this.props.colorHash)}`}}>{bubble.username}</span>&nbsp;
-                        <div className="nes-balloon from-left tight-balloon">
-                            {bubble.messages.map((message, index2) => <div key={index2}>{message.payload}<br/></div>)}
-                        </div>
+                        {console.log(bubble.username)}
+                        {this.renderUserAndMessage(bubble)}
                     </section>
             ))
         } 
