@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import lock from '../lock-icon.png';
+import lock2 from '../lock-icon-dark.png';
 import { fetchWithToken } from '../utilities/fetchWithToken';
 
 const RoomListItem = ({ room, history, index }) => {
@@ -42,7 +43,10 @@ const RoomListItem = ({ room, history, index }) => {
 
     function renderLock() {
         if (room.has_password) {
-            return (<img id="lock_img" src={lock} alt="Lock" />)
+            if (index % 2 == 0) {
+                return (<img className="lock_img" src={lock} alt="Lock" />)
+            }
+            return (<img className="lock_img" src={lock2} alt="Lock2" />)
         }
     }
 

@@ -124,7 +124,7 @@ input[type="password"]{
 }
 
 
-#lock_img {
+.lock_img {
     width: 18px;
 }
 
