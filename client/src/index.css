@@ -115,6 +115,15 @@ input[type="password"]{
     padding: 8px;
 }
 
+
+.room_container{
+    text-align: center;
+    width: 250px;
+    padding: 8px !important;
+    margin: 14px auto !important;
+}
+
+
 #lock_img {
     width: 18px;
 }
@@ -123,9 +132,6 @@ input[type="password"]{
     padding: 2px;
 }
 
-/* #test {
-    padding: 0px;
-} */
 
 .room_li_desc{
     font-size: 12px;
@@ -140,3 +146,4 @@ input[type="password"]{
 #checkout_form .label {
     font-size: 10px;
 }
+

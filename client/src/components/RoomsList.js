@@ -54,13 +54,17 @@ class RoomsList extends React.Component {
         this.props.logOut(this.props.history)
     }
 
-    renderRooms = () => (this.state.rooms.map((room) => <RoomListItem key={room.id} room={room} wsSubscribeRoom={this.props.wsSubscribeRoom} history={this.props.history}/>))
+    renderRooms = () => (this.state.rooms.map((room,index) => <RoomListItem key={index} index={index} room={room} wsSubscribeRoom={this.props.wsSubscribeRoom} history={this.props.history}/>))
     renderUser = () => {
         if (this.props.user) {
             return (
-                <>
-                {this.props.user.username} ({this.props.user.chips})
-                </>
+                // <a href="#" id="user_badge" className="nes-badge">
+                    /* <span className="is-primary"> */
+                    <>
+                        {this.props.user.username} ({this.props.user.chips})
+                    </>
+                    /* </span> */
+                // </a>
             )
         }
     }
@@ -71,13 +75,13 @@ class RoomsList extends React.Component {
     
     render () {
         return (
-            <div>
-                {this.renderUser()}&nbsp;
+            <div id="rooms_component">
+                {this.renderUser()}<br/>
                 <button className="nes-btn smaller-btn" id="test" onClick={this.clickHandler}>Log Out</button>&nbsp;
                 <button className="nes-btn is-success smaller-btn" onClick={this.redirectToDeposits}>Deposit</button><br/><br/><br/><br/>
                 {/* <div className="ne"></div> */}
                 <NavLink to="/rooms/new" className="nes-btn is-primary smaller-btn">Create Room</NavLink><br/><br/>
-                <ul>
+                <ul id="rooms_ul">
                     {this.renderRooms()}
                 </ul>
                 

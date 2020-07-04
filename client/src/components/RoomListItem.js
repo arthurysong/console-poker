@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import lock from '../lock-icon.png';
 import { fetchWithToken } from '../utilities/fetchWithToken';
 
-const RoomListItem = ({ room, history }) => {
+const RoomListItem = ({ room, history, index }) => {
     function clickHandler() {
         const password = prompt("Please Enter Password!")
         const body = JSON.stringify({ password });
@@ -47,8 +47,11 @@ const RoomListItem = ({ room, history }) => {
     }
 
     return (
-        <li className="room_li">{room.name} {renderLock()}<br/><span className="room_li_desc">{room.no_users}/8 {renderJoinButton()}</span>
-        </li>
+        <div className={`nes-container room_container is-rounded ${index % 2 == 0 ? 'is-dark' : ''}`}>
+            {console.log(index)}
+            <li className="room_li">{room.name} {renderLock()}<br/><span className="room_li_desc">{room.no_users}/8 {renderJoinButton()}</span>
+            </li>
+        </div>
     )
 }
 
