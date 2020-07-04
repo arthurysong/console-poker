@@ -24,5 +24,9 @@ Rails.application.routes.draw do
   #payments
   get '/secret/:amount', to: 'payments#secret'
 
+  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
+    !request.xhr? && request.format.html?
+  end
+
   mount ActionCable.server => '/cable'
 end
