@@ -2,19 +2,19 @@ TODO:
 Devise and Doorkeeper to manage refresh token?
 
 Use Custom Checkout form for stripe payments.
+
+Deploy application:
+Oauth using Google. (Need to deploy app before I can do this...)
 Generate Terms and Conditions
+
 Setting blinds on a game
 All players must be able to afford blinds before playing? What is minimum chips to play??
-
-Oauth using Google.
-
 If phase is last phase then reveal every player's cards.
 Make sure to colorize flop cards.
+
 Generate new hash for the colors for each time component mounts?
-RoomsList should display current chips of user.
+
 Add badges to room names and user names
 Make sure room's game starts/Disable start button if room does not have more than 1 player.
 
 ? User validations
-? REGEX expression for handleAuthRedirect for /rooms url
-? Sign in via Google drive?

@@ -44,6 +44,7 @@ class LoginForm extends React.Component {
                     </label><br/>
                     <button className="nes-btn" type="submit" value="login">Log In</button><br/>
                     {this.renderRegister()}
+                    <p>Log In via <Link to="/auth/google_oauth2">Google</Link></p>
                 </form>
             </div>
         )
