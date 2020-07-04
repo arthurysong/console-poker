@@ -96,6 +96,7 @@ const CheckoutForm = props => {
                 // validates the stripe is loaded, name is not empty, and amount is valid, otherwise button is disabled.
                   className={`nes-btn ${!stripe || props.name === "" || !validateAmount(props.amount) ? 'is-disabled' : 'is-primary'}`} 
                   type="submit" 
+                  onClick={submitHandler}
                   value="Exchange Chips!">
                     Exchange Chips!
                 </button>

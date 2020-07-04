@@ -98,7 +98,7 @@ class CheckoutContainer extends React.Component{
     clearMessages = () => {
         this.setState({
             success: "",
-            errors: ""
+            error: ""
         })
     }
 
