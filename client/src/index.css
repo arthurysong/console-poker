@@ -104,7 +104,10 @@ input[type="password"]{
 
 #phase {
     font-size: 18px;
-    margin: 8px;
+    padding: 8px;
+    text-align: center;
+    /* margin: 8px auto */
+    
 }
 
 .user_item {

@@ -36,7 +36,7 @@ class GameBoard extends React.Component {
             <>
                 {this.props.round.ordered_users.map((user,index) => 
                     <li className="board_user" key={index}>
-                        <span style={{color: `${hashStringToColor(user.username)}`}}>{user.username}
+                        <span style={{color: `${hashStringToColor(user.username, this.props.colorHash)}`}}>{user.username}
                         </span>
                         <span className="board_user_chips">({user.chips})
                         </span>&nbsp;
@@ -45,10 +45,14 @@ class GameBoard extends React.Component {
         )
     }
 
+    renderBoardCards = () => {
+        return (this.styleCards(this.props.round.access_community_cards))
+    }
+
     renderCardsAndPot = () => {
         return (
             <>
-                <span id="phase">{this.props.round.access_community_cards === "" ? "<PREFLOP>" : this.props.round.access_community_cards}</span><br/>
+                <div id="phase">{this.props.round.access_community_cards === "" ? "<PREFLOP>" : this.renderBoardCards()}</div><br/>
                 Pot {this.props.round.pot}<br/>
                 Bet {this.props.round.highest_bet_for_phase}<br/>
             </>

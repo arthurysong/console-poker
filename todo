@@ -9,7 +9,6 @@ Setting blinds on a game
 All players must be able to afford blinds before playing? What is minimum chips to play??
 If phase is last phase then reveal every player's cards.
 Make sure to colorize flop cards.
-
-Generate new hash for the colors for each time component mounts?
+Make sure to clear errors when game starts so that we don't have error message
 
 ? User validations

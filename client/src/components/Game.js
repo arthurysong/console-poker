@@ -30,7 +30,7 @@ class Game extends React.Component {
             console.log(this.props.game.active_round.status)
             return (
                 <>
-                    <GameBoard round={this.props.game.active_round} user={this.props.user} />
+                    <GameBoard round={this.props.game.active_round} user={this.props.user} colorHash={this.props.colorHash}/>
                     <GameConsole 
                         gameId={this.props.game.id}
                         user={this.props.user}
