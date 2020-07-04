@@ -16,7 +16,7 @@ class App extends React.Component {
       <div id="main">
       <Router>
         {console.log(this.props.user)}
-        <Route path="/" render={routerProps => <Home {...routerProps} setLogin={this.props.setLogin}/>}/>
+        <Route path="/" render={routerProps => <Home {...routerProps} isLoggedin={this.props.isLoggedIn} setLogin={this.props.setLogin}/>}/>
         
         <Switch>
           <Route path="/users/:id/deposit" render={routerProps => <CheckoutContainer {...routerProps} user={this.props.user}/>}/> 

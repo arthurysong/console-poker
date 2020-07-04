@@ -20,7 +20,6 @@ const RoomListItem = ({ room, history }) => {
             .then(resp => resp.json())
             .then(json => {
                 if (json.error) {
-                    //display error
                     alert("Unauthorized")
                 } else {
                     history.push(`/rooms/${room.id}`)
@@ -28,12 +27,16 @@ const RoomListItem = ({ room, history }) => {
             })
     }
 
+    function redirect() {
+        history.push(`/rooms/${room.id}`)
+    }
+
     function renderJoinButton() {
         if (room.has_password) {
             return (<button onClick={clickHandler}>join</button>)
         }
         if (room.no_users < 8){
-            return (<Link to={`/rooms/${room.id}`}>join</Link>)
+            return (<button onClick={redirect}>join</button>)
         }
     }
 
@@ -45,7 +48,6 @@ const RoomListItem = ({ room, history }) => {
 
     return (
         <li className="room_li">{room.name} {renderLock()}<br/><span className="room_li_desc">{room.no_users}/8 {renderJoinButton()}</span>
-        
         </li>
     )
 }
