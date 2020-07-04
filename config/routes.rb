@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
 
   resources :users
+  post '/rooms/:id/authenticate', to: 'rooms#authenticate'
 
   post '/users/:id/make_move', to: 'users#make_move'
   post '/users/:id/add_chips', to: 'users#add_chips' # do i need to have id in route?

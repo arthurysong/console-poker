@@ -7,17 +7,31 @@ class RoomsController < ApplicationController
     end
 
     def create
-        room = Room.create(room_params)
+        if room_params[:password] != ""
+            room = Room.create(room_params)
+        else
+            room = Room.create(name: room_params["name"])
+        end
 
-        game = room.game.build
-        game.save
-        
+        g = Game.create
+        g.room = room
+        g.save
+
         render json: room
+    end
+
+    def authenticate
+        room = Room.find(params["id"])
+        if room.authenticate(params["password"])
+            render json: room
+        else
+            render json: { error: "Invalid Password" }, status: 401
+        end
     end
 
     private
 
     def room_params
-        params.permit(:name)
+        params.permit(:name, :password)
     end
 end
