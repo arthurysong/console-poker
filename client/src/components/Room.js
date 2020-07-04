@@ -28,7 +28,8 @@ class Room extends React.Component {
             return (
                 <>
                     <div>
-                    {this.props.room.name} <button className="nes-btn smaller-btn" onClick={this.leaveRoom}>Leave</button>
+                    <button className="nes-btn is-error" onClick={this.leaveRoom}>{'<'}</button><br/><br/>
+                    {this.props.room.name} 
                     </div>
                     <ul id="user_list">
                         {this.props.room.users.map((user, index) => <li className="user_item" style={{color: `${hashStringToColor(user.username, this.hash)}`}} key={index}>{user.username} </li>)}

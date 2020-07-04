@@ -34,10 +34,16 @@ class NewRoomForm extends React.Component {
             .then(json => this.props.history.push(`/rooms/${json.id}`));
     }
 
+    leaveRoom = () => {
+        this.props.history.push(`/rooms`)
+    }
+
     render() {
         return (
             <div>
+                
                 <form onSubmit={this.submitHandler}>
+                    <button className="nes-btn is-error" onClick={this.leaveRoom}>{'<'}</button>&nbsp;
                     <label>
                         Name&nbsp;
                     <input 
