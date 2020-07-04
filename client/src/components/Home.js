@@ -30,12 +30,6 @@ class Home extends React.Component {
         });
     }
 
-    // refresh() {
-    //     if (this.props.history.action === "POP") {
-    //         handleAuthRedirect(this.props.isLoggedIn, this.props.history);
-    //     }
-    // }
-
     render() {
         return (
             <div>
