@@ -52,7 +52,7 @@ class Chatbox extends React.Component {
             return (
                 this.createNewArray().map((bubble, index) => 
                     <section key={index} className="message -left">
-                        <span style={{color: `${hashStringToColor(bubble.username)}`}}>{bubble.username}</span>&nbsp;
+                        <span style={{color: `${hashStringToColor(bubble.username, this.props.colorHash)}`}}>{bubble.username}</span>&nbsp;
                         <div className="nes-balloon from-left tight-balloon">
                             {bubble.messages.map((message, index2) => <div key={index2}>{message.payload}<br/></div>)}
                         </div>

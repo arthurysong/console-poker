@@ -50,7 +50,7 @@ class Room extends React.Component {
             // <div id="room_container">
             <div>
                 {this.renderRoom()}
-                <Chatbox messages={this.props.messages} subscription={this.subscription}/>
+                <Chatbox messages={this.props.messages} subscription={this.subscription} colorHash={this.hash}/>
                 {this.renderGameComp()}
             </div>
         )
