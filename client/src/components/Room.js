@@ -9,6 +9,7 @@ class Room extends React.Component {
     state = {
         newMessage: ""
     }
+    hash = Math.floor(1000 + Math.random() * 9000);
 
     componentDidMount() {
         this.subscription = this.props.subscribeRoom(this.props.match.params.id);
@@ -30,7 +31,7 @@ class Room extends React.Component {
                     {this.props.room.name} <button className="nes-btn smaller-btn" onClick={this.leaveRoom}>Leave</button>
                     </div>
                     <ul id="user_list">
-                        {this.props.room.users.map((user, index) => <li className="user_item" style={{color: `${hashStringToColor(user.username)}`}} key={index}>{user.username} </li>)}
+                        {this.props.room.users.map((user, index) => <li className="user_item" style={{color: `${hashStringToColor(user.username, this.hash)}`}} key={index}>{user.username} </li>)}
                     </ul>
                 </>
             )
