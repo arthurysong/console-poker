@@ -25,7 +25,8 @@ class RoomsList extends React.Component {
 
     // lifecycle hooks
     componentDidMount(){
-        this.cable = Cable.createConsumer(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
+        // this.cable = Cable.createConsumer(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
+        this.cable = Cable.createConsumer(`/cable?token=${localStorage.getItem('token')}`);
 
         this.subscription = this.cable.subscriptions.create({
             channel: 'RoomsListChannel'

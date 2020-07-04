@@ -1,5 +1,5 @@
 {
-  "name": "console_poker",
+  "name": "console-poker",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
@@ -8,8 +8,22 @@
     "@rails/webpacker": "4.2.2",
     "turbolinks": "^5.2.0"
   },
+  "scripts": {
+    "build": "cd client && yarn install && yarn build && cd ..",
+    "deploy": "cp -a client/build/. public/",
+    "postinstall": "yarn build && yarn deploy && echo 'Client built!'"
+  },
+  "engines": {
+    "yarn": "1.22.4",
+    "npm": "6.14.4",
+    "node": "10.19.0"
+  },
   "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"
-  }
+  },
+  "main": "index.js",
+  "repository": "git@github.com:atribecalledarty/console-poker.git",
+  "author": "Arthur Song <arth3rs0ng@gmail.com>",
+  "license": "MIT"
 }

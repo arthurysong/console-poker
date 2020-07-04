@@ -9,7 +9,8 @@ export const startGame = gameId => {
                 'Content-Type': 'application/json'
             }
         }
-        fetchWithToken(`http://localhost:3001/games/${gameId}/start`, options )
+        fetchWithToken(`/games/${gameId}/start`, options )
+        // fetchWithToken(`http://localhost:3001/games/${gameId}/start`, options )
             .then(resp => resp.json())
             .then(json => {
                 console.log(json);

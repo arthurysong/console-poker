@@ -12,7 +12,8 @@ const authenticate_user = (state, history, dispatch) => { // abstracted this out
         body
     }
     dispatch({type: 'AUTH_REQUEST'})
-    fetch(`http://localhost:3001/authenticate`, options)
+    // fetch(`http://localhost:3001/authenticate`, options)
+    fetch(`/authenticate`, options)
         .then(resp => resp.json())
         .then(json => {
             console.log("in loginUser action", json);
@@ -39,7 +40,8 @@ export const setLogin = history => {
         console.log('in setlogin');
         if (token) {
             dispatch({type: 'AUTH_REQUEST'});
-            fetch(`http://localhost:3001/set_login`, {
+            // fetch(`http://localhost:3001/set_login`, {
+            fetch(`/set_login`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -88,7 +90,8 @@ export const register = (state, history) => {
             },
             body
         }
-        fetch(`http://localhost:3001/users`, options)
+        // fetch(`http://localhost:3001/users`, options)
+        fetch(`/users`, options)
             .then(resp => resp.json())
             .then(json => {
                 console.log("in register action ", json);
@@ -112,7 +115,8 @@ export const addChips = (amount, userId) => {
             },
             body
         }
-        fetchWithToken(`http://localhost:3001/users/${userId}/add_chips`, options)
+        // fetchWithToken(`http://localhost:3001/users/${userId}/add_chips`, options)
+        fetchWithToken(`/users/${userId}/add_chips`, options)
             .then(resp => resp.json())
             .then(json => {
                 console.log(json)
@@ -123,7 +127,8 @@ export const addChips = (amount, userId) => {
 
 export const fetchChips = userId => {
     return dispatch => {
-        fetchWithToken(`http://localhost:3001/users/${userId}/get_chips`)
+        // fetchWithToken(`http://localhost:3001/users/${userId}/get_chips`)
+        fetchWithToken(`/${userId}/get_chips`)
             .then(resp => resp.json())
             .then(json => {
                 console.log(json)

@@ -2,7 +2,8 @@ import ActionCable from 'actioncable';
 
 export default function cableMiddleware() {
   // const cable = ActionCable.createConsumer(`ws://127.0.0.1:3001/cable?token=${localStorage.getItem('token')}`);
-  const cable = ActionCable.createConsumer(`ws://127.0.0.1:3001/cable`);
+  const cable = ActionCable.createConsumer(`/cable`);
+  // const cable = ActionCable.createConsumer(`ws://127.0.0.1:3001/cable`);
 
   return ({ dispatch, getState }) => next => (action) => {
     if (typeof(action) === 'function') {

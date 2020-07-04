@@ -19,7 +19,8 @@ export function postMoveWithToken(commandObj, userId) {
         },
         body
     }
-    fetchWithToken(`http://localhost:3001/users/${userId}/make_move`, options);
+    // fetchWithToken(`http://localhost:3001/users/${userId}/make_move`, options);
+    fetchWithToken(`/users/${userId}/make_move`, options);
 }
 
 export function startNewRound(gameId) {
@@ -31,5 +32,6 @@ export function startNewRound(gameId) {
         }
     }
 
-    fetchWithToken(`http://localhost:3001/games/${gameId}/start`, options);
+    // fetchWithToken(`http://localhost:3001/games/${gameId}/start`, options);
+    fetchWithToken(`/games/${gameId}/start`, options);
 }

@@ -24,7 +24,8 @@ class NewRoomForm extends React.Component {
             },
             body
         }
-        return fetch(`http://localhost:3001/rooms`, options)
+        return fetch(`/rooms`, options)
+        // return fetch(`http://localhost:3001/rooms`, options)
     }
 
     submitHandler = event => {
