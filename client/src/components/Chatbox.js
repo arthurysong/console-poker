@@ -40,7 +40,6 @@ class Chatbox extends React.Component {
                 bubble = {}
                 i = ++j
             } else {
-                // if j+1 is equal to j.. the we go to next j
                 j++
             }
         }
@@ -60,10 +59,6 @@ class Chatbox extends React.Component {
         } else {
             return (
                 <>
-                    {console.log('from left')}
-                    {console.log(this.props.user.username)}
-                    {console.log(this.props.username)}
-                    {console.log(bubble.username)}
                     <span style={{color: `${hashStringToColor(bubble.username, this.props.colorHash)}`}}>{bubble.username}</span>&nbsp;
                     <div className={`nes-balloon ${ bubble.username === this.props.user.username ? 'from-right' : 'from-left'} tight-balloon`}>
                         {bubble.messages.map((message, index2) => <div key={index2}>{message.payload}<br/></div>)}
@@ -74,7 +69,6 @@ class Chatbox extends React.Component {
     }
 
     renderMessages = () => {
-        console.log(this.createNewArray());
         if (this.props.messages !== undefined) {
             return (
                 this.createNewArray().map((bubble, index) => 
@@ -89,14 +83,10 @@ class Chatbox extends React.Component {
     render() {
         return (
             <div id="chatbox_container" className="nes-container">
-            {/* <div id="chatbox_container"> */}
                 <div id="messages_container" className="nes-container">
-                {/* <div id="messages_container"> */}
-
                     <section className="message-list">
                         {this.renderMessages()}
                     </section>
-                    
                 </div>
                 <form id="new_message_form" onSubmit={this.submitHandler}>
                     <input type="textarea" id="textarea_field" className="nes-textarea" onChange={this.changeHandler} value={this.state.newMessage}/>
