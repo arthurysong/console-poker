@@ -6,9 +6,9 @@ class ApplicationController < ActionController::Base
 
     attr_reader :current_user
 
-    def fallback_index_html
-        render :file => 'public/index.html'
-    end
+    # def fallback_index_html
+    #     render :file => 'public/index.html'
+    # end
 
     private
     
